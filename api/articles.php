@@ -1,6 +1,6 @@
 <?php
 include './api.php';
-if($_GET['mainType'] == 'articles'){
+
     include "../model/articles.php";
     switch ($_GET['secondType']){
     case 'select_article_by_id':
@@ -11,5 +11,5 @@ if($_GET['mainType'] == 'articles'){
         break;
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));
-    }
+    
 }

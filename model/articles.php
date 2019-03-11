@@ -1,5 +1,5 @@
 <?php
-include './mysql.php';
+include 'mysql.php';
     /*
     **获取文章们的图片
     */

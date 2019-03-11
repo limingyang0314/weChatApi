@@ -1,18 +1,21 @@
 <?php
 include './api.php';
-if($_GET['mainType'] == 'pictures'){
-    include "./model/pictures.php";
+
+    include "../model/pictures.php";
     switch ($_GET['secondType']){
     case 'upload_banner':
-        upload_picture('banners');
+        upload_picture('banners',$conn);
         break;
     case 'upload_item_picture':
-        upload_picture('item_pictures');
+        upload_picture('item_pictures',$conn);
         break;
     case 'upload_article_picture':
-        upload_picture('article_pictures');
+        upload_picture('article_pictures',$conn);
         break;
+    case 'get_banner':
+        //获取最近的5张banner
+        break;
+    
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));
     }
-}

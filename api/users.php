@@ -1,6 +1,6 @@
 <?php
 include "./api.php";
-if($_GET['mainType'] == 'users'){
+
     include "../user.php";
     switch ($_GET['secondType']){
     case 'get_openID':
@@ -14,4 +14,3 @@ if($_GET['mainType'] == 'users'){
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));
     }
-}

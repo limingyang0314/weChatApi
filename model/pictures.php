@@ -1,17 +1,18 @@
 <?php
-
+include 'mysql.php';
 /*
 **上传成功的图片插入数据库
 */
-function upload_into_db($type,$file){
-    include 'mysql.php';
-    $sql = "INSERT INTO {$type} ";
+function upload_into_db($type,$file_name,$conn){
+    //include 'mysql.php';
+    $sql = "INSERT INTO {$type} (b_name) VALUES ({$file_name})";
+    $conn->query($sql);
 }
 
 /*
 **处理上传的图片
 */
-function upload_picture($type){
+function upload_picture($type,$conn){
     $allowedTypes = array("banners", "item_pictures", "article_pictures");
     if(!in_array($type,$allowedTypes)){
         echo "非法上传类型!";
@@ -46,8 +47,9 @@ function upload_picture($type){
                 echo $_FILES["file"]["name"] . " 文件已经存在。 ";
             }else{
             // 如果 upload 目录不存在该文件则将文件上传到 upload 目录下
-                move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $_FILES["file"]["name"]);
+                move_uploaded_file($_FILES["file"]["tmp_name"], "../upload/{$type}/" . $_FILES["file"]["name"]);
                 echo "文件存储在: " . "upload/{$type}/" . $_FILES["file"]["name"];
+                upload_into_db($type,$_FILES["file"]["name"],$conn);
             }
         }
     }else{
