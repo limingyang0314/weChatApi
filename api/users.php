@@ -1,5 +1,5 @@
 <?php
-include "./api.php";
+include "api.php";
 
     include "../user.php";
     switch ($_GET['secondType']){

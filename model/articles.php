@@ -45,6 +45,7 @@ include 'mysql.php';
     **按作者的openID返回全部文章的简要信息
     */
     function select_article_by_author($openID, $conn){
+        //echo $_SESSION['openID'] . "hello world \n";
         $sql = "SELECT A.aid, A.title, T.type_name, U.username, A.time, U.openID FROM articles A, users U, article_types T WHERE A.openID = '$openID' AND T.type_id = A.type_id AND U.openID = A.openID ORDER BY A.time DESC";
         $result = mysqli_query($conn,$sql);
         return finish_article_select_list($result);

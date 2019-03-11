@@ -27,3 +27,19 @@ function get_item_colletion($openID, $conn){
     return finish_colletion_select($result);
 }
 
+/*
+**为当前用户添加收藏
+** type 1 文章  2 商品
+*/
+function insert_colletion($openID, $type, $id, $conn){
+    $query = "INSERT INTO colletions (openID,type,pointerID) VALUES ('{$openID}',{$type}, {$id})";
+    $result = $conn->query($query);
+    if($result){
+        return array('result' => 'insert success!');
+    }else{
+        return array('result' => 'insert fail!');
+    }
+
+
+}
+
