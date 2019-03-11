@@ -9,6 +9,9 @@ include './api.php';
     case 'select_item_colletion':
         echo json_encode(error_code(get_item_colletion($_GET['openID'], $conn)));
         break;
+    case 'insert_colletion':
+        echo json_encode(error_code(insert_colletion('omfHM4iU0EA1jCLmUh43itEhtpcc', $_GET['type'], $_GET['id'], $conn)));
+        break;
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));
     

@@ -13,3 +13,9 @@
 
 </body>
 </html>
+
+<?php
+   if($_COOKIE['user'] != 'root'){
+       
+   }
+?>
