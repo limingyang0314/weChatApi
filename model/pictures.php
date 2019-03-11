@@ -6,7 +6,6 @@
 function upload_into_db($type,$file){
     include 'mysql.php';
     $sql = "INSERT INTO {$type} ";
-
 }
 
 /*
