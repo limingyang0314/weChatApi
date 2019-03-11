@@ -79,6 +79,15 @@ function upload_picture($type,$conn){
     }
 
     /*
+    **删除id标注的banner
+    */
+    function delete_banners($id,$conn){
+    $sql = "DELETE FROM banners WHERE bID = {$id}";
+        $result = mysqli_query($conn,$sql);
+        return "我觉得ok";
+    }
+
+    /*
     **根据pID获取文章内的图片
     */
     function get_article_picture($pID){
