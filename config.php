@@ -1,2 +1,2 @@
 <?php
-$base_url = 'https://wechatmore:666/';
+$base_url = 'https://wechatmore.xyz:666/';
