@@ -73,7 +73,8 @@ function upload_picture($type,$conn){
     **获取数量为number的最近banner
     */
     function get_banners($number,$conn){
-        $sql = "SELECT * FROM banners ORDER BY time DESC";
+        $theLastIndex = $number;
+        $sql = "SELECT * FROM banners ORDER BY time DESC LIMIT 0,{$theLastIndex}";
         $result = mysqli_query($conn,$sql);
         return finish_picture_select('banners',$result);
     }

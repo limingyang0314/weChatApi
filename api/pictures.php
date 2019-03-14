@@ -14,7 +14,7 @@ include './api.php';
         break;
     case 'get_banner':
         //获取最近的5张banner
-        echo json_encode(error_code(get_banners(5,$conn)));
+        echo json_encode(error_code(get_banners($_GET['number'],$conn)));
         break;
     
     default:
