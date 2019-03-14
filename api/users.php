@@ -1,7 +1,7 @@
 <?php
 include "api.php";
 
-    include "../user.php";
+    include "../model/users.php";
     switch ($_GET['secondType']){
     case 'get_openID':
         //echo "ok";

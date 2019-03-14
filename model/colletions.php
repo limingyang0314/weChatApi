@@ -35,6 +35,19 @@ function insert_colletion($openID, $type, $id, $conn){
     $query = "INSERT INTO colletions (openID,type,pointerID) VALUES ('{$openID}',{$type}, {$id})";
     $result = $conn->query($query);
     if($result){
+        $table = null;
+        $id_name = null;
+        if($type == 1){
+            $table = "articles";
+            $id_name = "aID";
+        }
+
+        if($type == 2){
+            $table = "items";
+            $id_name = "iID";
+        }
+        $query = "UPDATE {$table} SET hot = hot + 1 WHERE {$id_name} = {$id}";
+        $conn->query($query);
         return array('result' => 'insert success!');
     }else{
         return array('result' => 'insert fail!');

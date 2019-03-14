@@ -6,8 +6,8 @@ include 'mysql.php';
     function get_article_picture($result){
         $newResult = [];
         foreach($result as $thisOne){
-            $thisOne->pictures = array('p1' => "https://127.0.0.1/upload/20190311001.jpg", 
-                                    'p2' => "https://127.0.0.1/upload/20190311001.jpg");
+            $thisOne->pictures = array(array('url' => "https://127.0.0.1/upload/20190311001.jpg"), 
+            array('url' => "https://127.0.0.1/upload/20190311002.jpg"));
             $newResult[] = $thisOne;
         }
         return $newResult;
@@ -27,7 +27,6 @@ include 'mysql.php';
     */
     function finish_article_select_list($result){
         $result = getDataAsArray($result);
-        //$result = get_article_picture($result);
         return $result;
     }
 
@@ -36,7 +35,7 @@ include 'mysql.php';
     **按文章的ID具体返回一篇文章
     */
     function select_article_by_id($aID, $conn){
-        $sql = "SELECT A.title, T.type_name, A.content, U.username, U.openID FROM articles A, users U, article_types T WHERE A.aID = {$aID} AND T.type_id = A.type_id AND U.openID = A.openID";
+        $sql = "SELECT A.title, T.type_name, A.content, A.hot, U.username, U.openID FROM articles A, users U, article_types T WHERE A.aID = {$aID} AND T.type_id = A.type_id AND U.openID = A.openID";
         $result = mysqli_query($conn,$sql);
         return finish_article_select_exactly($result);
     }
@@ -45,8 +44,7 @@ include 'mysql.php';
     **按作者的openID返回全部文章的简要信息
     */
     function select_article_by_author($openID, $conn){
-        //echo $_SESSION['openID'] . "hello world \n";
-        $sql = "SELECT A.aid, A.title, T.type_name, U.username, A.time, U.openID FROM articles A, users U, article_types T WHERE A.openID = '$openID' AND T.type_id = A.type_id AND U.openID = A.openID ORDER BY A.time DESC";
+        $sql = "SELECT A.aid, A.title, T.type_name, A.hot, U.username, A.time, U.openID FROM articles A, users U, article_types T WHERE A.openID = '$openID' AND T.type_id = A.type_id AND U.openID = A.openID ORDER BY A.time DESC";
         $result = mysqli_query($conn,$sql);
         return finish_article_select_list($result);
     }
@@ -58,6 +56,13 @@ include 'mysql.php';
         $sql = "SELECT A.aid, A.title, T.type_name, U.username, A.time, U.openID FROM articles A, users U, article_types T WHERE A.openID = '$openID' AND T.type_id = A.type_id AND U.openID = A.openID ORDER BY A.time DESC";
         $result = mysqli_query($conn,$sql);
         return finish_article_select_list($result);
+    }
+
+    /*
+    **增加一条article
+    */
+    function insert_article($openID, $article_type, $title, $content,$pictures, $conn){
+
     }
 
 

@@ -13,7 +13,18 @@ function get_openID($js_code){
 }
 
 function get_user_info($openID, $conn){
-    $sql = "SELECT U.openID, U.username, L.location_name FROM users U, locations L WHERE U.openID = {$openID} AND L.location_id = U.location_id";
-    $result = mysqli_query($conn,$sql);
+    $sql = "SELECT U.openID, U.username,U.avatar, L.location_name, S.school_name FROM users U, locations L, schools S WHERE U.openID = '{$openID}' AND L.location_id = U.location_id AND S.sID = U.school_id";
+    $sql = "SELECT * FROM users WHERE openID = '1111'";
+    if (mysqli_connect_errno($conn)) { 
+        echo "连接 MySQL 失败: " . mysqli_connect_error(); 
+    } 
+
+    //echo $sql;
+    //$conn = mysqli_connect('localhost', 'root', 'dawangba1', 'wechatapi');
+    $result = mysqli_select_db($conn,$sql);
+    //$result = $conn->query($sql);
+    //$result = getDataAsArray($result);
+    $err = mysqli_error($conn);
+    var_dump($err);
     return $result;
 }
