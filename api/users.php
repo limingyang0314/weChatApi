@@ -1,7 +1,7 @@
 <?php
-include "api.php";
+require_once "api.php";
 
-    include "../model/users.php";
+    require_once "../model/users.php";
     switch ($_GET['secondType']){
     case 'get_openID':
         //echo "ok";

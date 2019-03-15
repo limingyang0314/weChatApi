@@ -1,7 +1,7 @@
 <?php
-include './api.php';
+require_once './api.php';
 
-    include "../model/pictures.php";
+    require_once "../model/pictures.php";
     switch ($_GET['secondType']){
     case 'upload_banner':
         upload_picture('banners',$conn);

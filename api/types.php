@@ -1,7 +1,7 @@
 <?php
-include "api.php";
+require_once "api.php";
 
-    include "../model/types.php";
+    require_once "../model/types.php";
     switch ($_GET['secondType']){
     case 'get_item_types':
         $result = article_type($conn);

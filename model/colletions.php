@@ -1,5 +1,5 @@
 <?php
-include "mysql.php";
+require_once "mysql.php";
 
 /*
 **处理查询结果

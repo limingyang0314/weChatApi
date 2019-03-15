@@ -1,7 +1,7 @@
 <?php
-include './api.php';
+require_once './api.php';
 
-    include "../model/colletions.php";
+    require_once "../model/colletions.php";
     switch ($_GET['secondType']){
     case 'select_article_colletion':
         echo json_encode(error_code(get_article_colletion($_GET['openID'], $conn)));

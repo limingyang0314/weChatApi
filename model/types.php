@@ -1,5 +1,5 @@
 <?php
-include "mysql.php";
+require_once "mysql.php";
 
 /*
 **获取文章类型

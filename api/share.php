@@ -1,7 +1,7 @@
 <?php
-include "api.php";
+require_once "api.php";
 
-    include "../model/share.php";
+    require_once "../model/share.php";
     switch ($_GET['secondType']){
     case 'hotter':
         $result = hotter($_GET['type'], $_GET['id'], $conn);
