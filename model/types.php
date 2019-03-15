@@ -10,3 +10,13 @@ function article_type($conn){
     $result = getDataAsArray($result);
     return $result;
 }
+
+/*
+**获取商品类型
+*/
+function item_type($conn){
+    $query = "SELECT * FROM item_types";
+    $result = mysqli_query($conn, $query);
+    $result = getDataAsArray($result);
+    return $result;
+}
