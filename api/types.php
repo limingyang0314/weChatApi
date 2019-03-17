@@ -3,7 +3,7 @@ require_once "api.php";
 
     require_once "../model/types.php";
     switch ($_GET['secondType']){
-    case 'get_item_types':
+    case 'get_article_types':
         $result = article_type($conn);
         echo json_encode(error_code($result));
         break;
