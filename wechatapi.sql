@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50723
 File Encoding         : 65001
 
-Date: 2019-03-17 22:14:55
+Date: 2019-03-17 22:38:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -141,11 +141,13 @@ CREATE TABLE `item_types` (
   `type_id` int(11) NOT NULL AUTO_INCREMENT,
   `type_name` varchar(255) NOT NULL,
   PRIMARY KEY (`type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of item_types
 -- ----------------------------
+INSERT INTO `item_types` VALUES ('1', '旧书');
+INSERT INTO `item_types` VALUES ('2', '日用品');
 
 -- ----------------------------
 -- Table structure for locations
