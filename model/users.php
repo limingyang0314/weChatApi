@@ -2,7 +2,7 @@
 require_once "mysql.php";
 
 function get_openID($js_code){
-    $url = "https://api.weixin.qq.com/sns/jscode2session?appid=wx82ddf3eeb1f22ae2&secret=9a6c520ec952738d4c3f7bd4ea096446&js_code={$js_code}&grant_type=authorization_code";
+    $url = "https://api.weixin.qq.com/sns/jscode2session?appid=wxc24a817201be0ebc&secret=9a6c520ec952738d4c3f7bd4ea096446&js_code={$js_code}&grant_type=authorization_code";
     require_once("curl.php");
     $result = getToken($url);
     session_start();
@@ -20,4 +20,21 @@ function get_user_info($openID, $conn){
     }
     $result = getDataAsArray($result);
     return $result;
+}
+
+function login($openID){
+    session_start();
+    $_SESSION['openID'] = $openID;
+    // if(isset($_SESSION['openID'])){
+    //     echo "openID is " . $_SESSION['openID'] . "<br>";
+    // }else{
+    //     echo "not login!<br>";
+    // }
+}
+
+/*
+**是否选择了学校的验证
+*/
+function is_select_school(){
+
 }

@@ -11,6 +11,8 @@ require_once "api.php";
         //echo "ok";
         echo json_encode(error_code(get_user_info($_GET['openID'], $conn)));
         break;
+    case 'login':
+        login($_GET['openID']);
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));
     }

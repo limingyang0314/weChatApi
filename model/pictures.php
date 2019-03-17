@@ -9,11 +9,21 @@ function finish_picture_select($type, $result){
     return $result;
 }
 
+/*
+**上传成功的article or item picture插入数据库
+*/
+function other_upload_into_db($type,$pointerID,$file_name,$conn){
+    //include 'mysql.php';
+    $url = "/upload/{$type}/{$file_name}";
+    $sql = "INSERT INTO {$type} (aID, pName, pURL) VALUES ('{$pointerID}','{$file_name}','{$url}')";
+    $conn->query($sql);
+}
+
 
 /*
-**上传成功的图片插入数据库
+**上传成功的banner插入数据库
 */
-function upload_into_db($type,$file_name,$conn){
+function banners_upload_into_db($type,$file_name,$conn){
     //include 'mysql.php';
     $sql = "INSERT INTO {$type} (b_name) VALUES ('{$file_name}')";
     $conn->query($sql);
@@ -22,45 +32,51 @@ function upload_into_db($type,$file_name,$conn){
 /*
 **处理上传的图片
 */
-function upload_picture($type,$conn){
+function upload_picture($type,$conn,$file,$pointerID = null){
     $allowedTypes = array("banners", "item_pictures", "article_pictures");
     if(!in_array($type,$allowedTypes)){
         echo "非法上传类型!";
         exit;
     }
     $allowedExts = array("gif", "jpeg", "jpg", "png");
-    $temp = explode(".", $_FILES["file"]["name"]);
-    echo $_FILES["file"]["size"];
+    $temp = explode(".", $file["name"]);
+    echo $file["size"];
     $extension = end($temp);     // 获取文件后缀名
-    if ((($_FILES["file"]["type"] == "image/gif")
-       || ($_FILES["file"]["type"] == "image/jpeg")
-       || ($_FILES["file"]["type"] == "image/jpg")
-       || ($_FILES["file"]["type"] == "image/pjpeg")
-       || ($_FILES["file"]["type"] == "image/x-png")
-       || ($_FILES["file"]["type"] == "image/png"))
-       && ($_FILES["file"]["size"] < 204800)   // 小于 200 kb
+    if ((($file["type"] == "image/gif")
+       || ($file["type"] == "image/jpeg")
+       || ($file["type"] == "image/jpg")
+       || ($file["type"] == "image/pjpeg")
+       || ($file["type"] == "image/x-png")
+       || ($file["type"] == "image/png"))
+       && ($file["size"] < 204800)   // 小于 200 kb
        && in_array($extension, $allowedExts))
         {
-        if ($_FILES["file"]["error"] > 0)
+        if ($file["error"] > 0)
         {
-            echo "错误：: " . $_FILES["file"]["error"] . "<br>";
+            echo "错误：: " . $file["error"] . "<br>";
             }else{
-                echo "上传文件名: " . $_FILES["file"]["name"] . "<br>";
-                echo "文件类型: " . $_FILES["file"]["type"] . "<br>";
-                echo "文件大小: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-                echo "文件临时存储的位置: " . $_FILES["file"]["tmp_name"] . "<br>";
+                echo "上传文件名: " . $file["name"] . "<br>";
+                echo "文件类型: " . $file["type"] . "<br>";
+                echo "文件大小: " . ($file["size"] / 1024) . " kB<br>";
+                echo "文件临时存储的位置: " . $file["tmp_name"] . "<br>";
         
         // 判断当期目录下的 upload 目录是否存在该文件
         // 如果没有 upload 目录，你需要创建它，upload 目录权限为 777
         
-                $_FILES["file"]["name"] = "banner_".time().".".$extension;
-                if (file_exists("upload/{$type}/" . $_FILES["file"]["name"])){
-                    echo $_FILES["file"]["name"] . " 文件已经存在。 ";
+                $file["name"] = "banner_".time().".".$extension;
+                if (file_exists("upload/{$type}/" . $file["name"])){
+                    echo $file["name"] . " 文件已经存在。 ";
                 }else{
             // 如果 upload 目录不存在该文件则将文件上传到 upload 目录下
-                    move_uploaded_file($_FILES["file"]["tmp_name"], "../upload/{$type}/" . $_FILES["file"]["name"]);
-                    echo "文件存储在: " . "upload/{$type}/" . $_FILES["file"]["name"];
-                    upload_into_db($type,$_FILES["file"]["name"],$conn);
+                    move_uploaded_file($file["tmp_name"], "../upload/{$type}/" . $file["name"]);
+                    echo "文件存储在: " . "upload/{$type}/" . $file["name"];
+                    if($type == 'banners'){
+                        banners_upload_into_db($type,$file["name"],$conn);
+                    }else{
+                        other_upload_into_db($type,$pointerID,$file["name"],$conn);
+
+                    }
+                    
                 }
             }
         }else{

@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50724
+Source Server         : localhost
+Source Server Version : 50723
 Source Host           : localhost:3306
 Source Database       : wechatapi
 
 Target Server Type    : MYSQL
-Target Server Version : 50724
+Target Server Version : 50723
 File Encoding         : 65001
 
-Date: 2019-03-15 13:13:27
+Date: 2019-03-17 22:14:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,7 @@ CREATE TABLE `articles` (
   `aID` int(11) NOT NULL AUTO_INCREMENT,
   `type_id` varchar(255) NOT NULL,
   `openID` varchar(255) NOT NULL,
-  `title` varchar(255) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
   `content` varchar(255) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `location_id` int(11) NOT NULL,
@@ -51,11 +51,13 @@ CREATE TABLE `article_pictures` (
   `pName` varchar(255) NOT NULL,
   `pURL` varchar(255) NOT NULL,
   PRIMARY KEY (`pID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of article_pictures
 -- ----------------------------
+INSERT INTO `article_pictures` VALUES ('1', '1', 'test_001.jpg', 'test_001.jpg');
+INSERT INTO `article_pictures` VALUES ('2', '1', 'test_002.jpg', 'test_002.jpg');
 
 -- ----------------------------
 -- Table structure for article_types
@@ -121,7 +123,7 @@ CREATE TABLE `items` (
   `iID` int(11) NOT NULL AUTO_INCREMENT,
   `iType_ID` int(255) NOT NULL,
   `openID` varchar(255) NOT NULL,
-  `item_name` varchar(255) NOT NULL,
+  `item_name` varchar(255) DEFAULT NULL,
   `item_info` varchar(255) NOT NULL,
   `hot` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`iID`)
