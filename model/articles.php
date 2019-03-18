@@ -52,7 +52,27 @@ require_once 'mysql.php';
     function select_article_by_author($openID, $conn){
         $sql = "SELECT A.aid, A.content, T.type_name, A.hot, U.username, A.time, U.openID FROM articles A, users U, article_types T WHERE A.openID = '$openID' AND T.type_id = A.type_id AND U.openID = A.openID ORDER BY A.time DESC";
         $result = mysqli_query($conn,$sql);
-        return finish_article_select_list("1",$result,$conn);
+        return finish_article_select_list($result);
+    }
+
+    /*
+    **按类型ID返回n篇文章
+    **mode = 1时为按热度排序 mode = 2时为按时间排序
+    **默认按时间排序
+    */
+    function select_article_by_type($typeID, $mode = 1, $conn){
+        $descKey = null;
+        if($mode == 1){
+            $descKey = 'A.time';
+        }
+        if($mode == 2){
+            $descKey = 'A.hot';
+        }
+        $sql = "SELECT A.aid, A.content, T.type_name, A.hot, U.username, A.time, U.openID FROM articles A, users U, article_types T WHERE A.type_id = '$typeID' AND T.type_id = A.type_id AND U.openID = A.openID ORDER BY {$descKey} DESC";
+        //echo $sql;
+        $result = mysqli_query($conn,$sql);
+        //var_dump($result);
+        return finish_article_select_list($result);
     }
 
     /*
@@ -67,26 +87,40 @@ require_once 'mysql.php';
     /*
     **增加一条article
     */
-    function insert_article($openID, $article_type, $content,$pictures, $conn){
+    function insert_article($openID, $article_type, $content, $conn){
         $sql = "INSERT INTO articles (openID,type_id,content,location_id) VALUES ('{$openID}','{$article_type}','{$content}',1)";
+        
+        $result = mysqli_query($conn, $sql);
 
+        $sql = "SELECT aID FROM articles WHERE openID = '{$openID}' ORDER BY time DESC LIMIT 0,1";
+
+
+        $result = getDataAsArray(mysqli_query($conn, $sql));
+        //var_dump($result);
+
+        $aID = $result[0]->aID;
+        //$result = 
+        //echo $sql;
         if(isset($_FILES["file1"])){
-            insert_article_picture($_FILES["file1"],1);
+            //echo "start upload file1";
+            insert_article_picture($_FILES["file1"],$aID,$conn);
         }
         if(isset($_FILES["file2"])){
-            insert_article_picture($_FILES["file2"],1);
+            insert_article_picture($_FILES["file2"],$aID,$conn);
         }
         if(isset($_FILES["file3"])){
-            insert_article_picture($_FILES["file3"],1);
+            insert_article_picture($_FILES["file3"],$aID,$conn);
         }
+
+        return array('aID' => $aID);
     }
 
     /*
     **增加一条文章图片
     */
-    function insert_article_picture($file,$pointerID){
-        require_once "pictures.php";
-        upload_picture('article_pictures',$conn,$pointerID);
+    function insert_article_picture($file,$pointerID,$conn){
+        require_once "../model/pictures.php";
+        upload_picture('article_pictures',$conn, $file, $pointerID);
     }
 
 

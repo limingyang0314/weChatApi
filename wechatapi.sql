@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50723
 File Encoding         : 65001
 
-Date: 2019-03-17 22:38:38
+Date: 2019-03-18 15:06:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,7 +29,7 @@ CREATE TABLE `articles` (
   `location_id` int(11) NOT NULL,
   `hot` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`aID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of articles
@@ -40,6 +40,35 @@ INSERT INTO `articles` VALUES ('3', '3', '1111', '这是第三篇文章', '32452
 INSERT INTO `articles` VALUES ('4', '4', '1111', '这是第四篇文章', '4535434532413412421', '2019-03-11 09:03:48', '1', '0');
 INSERT INTO `articles` VALUES ('5', '2', 'omfHM4iU0EA1jCLmUh43itEhtpcc', '这是新文章1', '的撒发射点发射点反动', '2019-03-11 10:23:36', '1', '0');
 INSERT INTO `articles` VALUES ('6', '3', 'omfHM4iU0EA1jCLmUh43itEhtpcc', '这是新文章2', '反对法国公司纷纷', '2019-03-11 10:23:50', '1', '0');
+INSERT INTO `articles` VALUES ('7', '1', '1111', 'title已经没用了', '这是文章内容，看上去很nb', '2019-03-18 13:42:29', '1', '1000');
+INSERT INTO `articles` VALUES ('8', '1', '1111', null, '718041', '2019-03-18 13:52:56', '1', '0');
+INSERT INTO `articles` VALUES ('9', '1', '1111', null, '718041', '2019-03-18 13:53:30', '1', '0');
+INSERT INTO `articles` VALUES ('10', '1', '1111', null, 'hello,world!', '2019-03-18 13:58:27', '1', '0');
+INSERT INTO `articles` VALUES ('11', '1', '1111', null, 'hello,world!', '2019-03-18 14:01:12', '1', '0');
+INSERT INTO `articles` VALUES ('12', '1', '1111', null, 'hello,world!', '2019-03-18 14:02:53', '1', '0');
+INSERT INTO `articles` VALUES ('13', '1', '1111', null, 'hello,world!', '2019-03-18 14:06:41', '1', '0');
+INSERT INTO `articles` VALUES ('14', '1', '1111', null, 'hello,world!', '2019-03-18 14:11:13', '1', '0');
+INSERT INTO `articles` VALUES ('15', '1', '1111', null, 'hello,world!', '2019-03-18 14:14:20', '1', '0');
+INSERT INTO `articles` VALUES ('16', '1', '1111', null, 'hello,world!', '2019-03-18 14:14:46', '1', '0');
+INSERT INTO `articles` VALUES ('17', '1', '1111', null, 'hello,world!', '2019-03-18 14:16:35', '1', '0');
+INSERT INTO `articles` VALUES ('18', '1', '1111', null, 'hello,world!', '2019-03-18 14:27:01', '1', '0');
+INSERT INTO `articles` VALUES ('19', '1', '1111', null, 'hello,world!', '2019-03-18 14:31:25', '1', '0');
+INSERT INTO `articles` VALUES ('20', '1', '1111', null, 'hello,world!', '2019-03-18 14:36:25', '1', '0');
+INSERT INTO `articles` VALUES ('21', '1', '1111', null, 'hello,world!', '2019-03-18 14:37:14', '1', '0');
+INSERT INTO `articles` VALUES ('22', '1', '1111', null, 'hello,world!', '2019-03-18 14:37:37', '1', '0');
+INSERT INTO `articles` VALUES ('23', '1', '1111', null, 'hello,world!', '2019-03-18 14:43:49', '1', '0');
+INSERT INTO `articles` VALUES ('24', '1', '1111', null, 'hello,world!', '2019-03-18 14:44:42', '1', '0');
+INSERT INTO `articles` VALUES ('25', '1', '1111', null, 'hello,world!', '2019-03-18 14:45:32', '1', '0');
+INSERT INTO `articles` VALUES ('26', '1', '1111', null, 'hello,world!', '2019-03-18 14:45:55', '1', '0');
+INSERT INTO `articles` VALUES ('27', '1', '1111', null, 'hello,world!', '2019-03-18 14:46:39', '1', '0');
+INSERT INTO `articles` VALUES ('28', '1', '1111', null, 'hello,world!', '2019-03-18 14:47:26', '1', '0');
+INSERT INTO `articles` VALUES ('29', '1', '1111', null, 'hello,world!', '2019-03-18 14:53:07', '1', '0');
+INSERT INTO `articles` VALUES ('30', '1', '1111', null, 'hello,world!', '2019-03-18 14:53:19', '1', '0');
+INSERT INTO `articles` VALUES ('31', '1', '1111', null, 'hello,world!', '2019-03-18 15:00:54', '1', '0');
+INSERT INTO `articles` VALUES ('32', '1', '1111', null, 'hello,world!', '2019-03-18 15:01:21', '1', '0');
+INSERT INTO `articles` VALUES ('33', '1', '1111', null, 'hello,world!', '2019-03-18 15:01:36', '1', '0');
+INSERT INTO `articles` VALUES ('34', '1', '1111', null, 'hello,world!', '2019-03-18 15:03:22', '1', '0');
+INSERT INTO `articles` VALUES ('35', '1', '1111', null, 'hello,world!', '2019-03-18 15:04:57', '1', '0');
 
 -- ----------------------------
 -- Table structure for article_pictures
@@ -51,13 +80,27 @@ CREATE TABLE `article_pictures` (
   `pName` varchar(255) NOT NULL,
   `pURL` varchar(255) NOT NULL,
   PRIMARY KEY (`pID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of article_pictures
 -- ----------------------------
 INSERT INTO `article_pictures` VALUES ('1', '1', 'test_001.jpg', 'test_001.jpg');
 INSERT INTO `article_pictures` VALUES ('2', '1', 'test_002.jpg', 'test_002.jpg');
+INSERT INTO `article_pictures` VALUES ('3', '1', 'banner_1552889473.png', '/upload/article_pictures/banner_1552889473.png');
+INSERT INTO `article_pictures` VALUES ('4', '1', 'article_pictures_1552890685.png', '/upload/article_pictures/article_pictures_1552890685.png');
+INSERT INTO `article_pictures` VALUES ('5', '1', 'article_pictures_1552890985.png', '/upload/article_pictures/article_pictures_1552890985.png');
+INSERT INTO `article_pictures` VALUES ('6', '1', 'article_pictures_1552891034.png', '/upload/article_pictures/article_pictures_1552891034.png');
+INSERT INTO `article_pictures` VALUES ('7', '1', 'article_pictures_1552891057.png', '/upload/article_pictures/article_pictures_1552891057.png');
+INSERT INTO `article_pictures` VALUES ('8', '1', 'article_pictures_1552891217.png', '/upload/article_pictures/article_pictures_1552891217.png');
+INSERT INTO `article_pictures` VALUES ('9', '1', 'article_pictures_1552891429.png', '/upload/article_pictures/article_pictures_1552891429.png');
+INSERT INTO `article_pictures` VALUES ('10', '1', 'article_pictures_1552891482.png', '/upload/article_pictures/article_pictures_1552891482.png');
+INSERT INTO `article_pictures` VALUES ('11', '1', 'article_pictures_1552891555.png', '/upload/article_pictures/article_pictures_1552891555.png');
+INSERT INTO `article_pictures` VALUES ('12', '27', 'article_pictures_1552891599.png', '/upload/article_pictures/article_pictures_1552891599.png');
+INSERT INTO `article_pictures` VALUES ('13', '28', 'article_pictures_1552891646.png', '/upload/article_pictures/article_pictures_1552891646.png');
+INSERT INTO `article_pictures` VALUES ('14', '31', 'article_pictures_1552892454.png', '/upload/article_pictures/article_pictures_1552892454.png');
+INSERT INTO `article_pictures` VALUES ('15', '34', 'article_pictures_1552892602.png', '/upload/article_pictures/article_pictures_1552892602.png');
+INSERT INTO `article_pictures` VALUES ('16', '35', 'article_pictures_1552892697.png', '/upload/article_pictures/article_pictures_1552892697.png');
 
 -- ----------------------------
 -- Table structure for article_types
@@ -87,13 +130,15 @@ CREATE TABLE `banners` (
   `b_name` varchar(255) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`bID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of banners
 -- ----------------------------
 INSERT INTO `banners` VALUES ('1', '-1a2153fb14ed0430.jpg', '2019-03-11 11:27:55');
 INSERT INTO `banners` VALUES ('2', 'banner_1552275312.jpg', '2019-03-11 11:35:12');
+INSERT INTO `banners` VALUES ('3', 'banners_1552889971.png', '2019-03-18 14:19:31');
+INSERT INTO `banners` VALUES ('4', 'banners_1552890026.png', '2019-03-18 14:20:26');
 
 -- ----------------------------
 -- Table structure for colletions

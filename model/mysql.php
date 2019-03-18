@@ -1,9 +1,9 @@
 <?php
 session_start();
 if(isset($_SESSION['openID'])){
-    echo "openID is " . $_SESSION['openID'] . "<br>";
+    //echo "openID is " . $_SESSION['openID'] . "<br>";
 }else{
-    echo "not login!<br>";
+    //echo "not login!<br>";
 }
 
 
