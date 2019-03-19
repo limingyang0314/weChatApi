@@ -15,6 +15,9 @@ require_once './api.php';
     case 'select_article_by_type':
         echo json_encode(error_code(select_article_by_type($_GET['typeID'], $_GET['mode'], $conn)));
         break;
+    case 'delete_article':
+        echo json_encode(error_code(delete_article($_GET['openID'], $_GET['aID'], $conn)));
+        break;
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));
     }

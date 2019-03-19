@@ -124,4 +124,20 @@ require_once 'mysql.php';
     }
 
 
+    /*
+    **删除某篇文章
+    */
+    function delete_article($openID, $aid, $conn){
+        $sql = "DELETE FROM articles WHERE openID = '$openID' AND aID = $aid";
+        $result = mysqli_query($conn, $sql);
+        //echo $sql;
+        if($result){
+            return "delete success!";
+        }else{
+            return "delete fail!";
+        }
+    
+    }
+
+
 
