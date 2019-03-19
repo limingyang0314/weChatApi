@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50723
 File Encoding         : 65001
 
-Date: 2019-03-18 15:06:42
+Date: 2019-03-19 22:33:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,7 +40,6 @@ INSERT INTO `articles` VALUES ('3', '3', '1111', '这是第三篇文章', '32452
 INSERT INTO `articles` VALUES ('4', '4', '1111', '这是第四篇文章', '4535434532413412421', '2019-03-11 09:03:48', '1', '0');
 INSERT INTO `articles` VALUES ('5', '2', 'omfHM4iU0EA1jCLmUh43itEhtpcc', '这是新文章1', '的撒发射点发射点反动', '2019-03-11 10:23:36', '1', '0');
 INSERT INTO `articles` VALUES ('6', '3', 'omfHM4iU0EA1jCLmUh43itEhtpcc', '这是新文章2', '反对法国公司纷纷', '2019-03-11 10:23:50', '1', '0');
-INSERT INTO `articles` VALUES ('7', '1', '1111', 'title已经没用了', '这是文章内容，看上去很nb', '2019-03-18 13:42:29', '1', '1000');
 INSERT INTO `articles` VALUES ('8', '1', '1111', null, '718041', '2019-03-18 13:52:56', '1', '0');
 INSERT INTO `articles` VALUES ('9', '1', '1111', null, '718041', '2019-03-18 13:53:30', '1', '0');
 INSERT INTO `articles` VALUES ('10', '1', '1111', null, 'hello,world!', '2019-03-18 13:58:27', '1', '0');
@@ -159,6 +158,32 @@ INSERT INTO `colletions` VALUES ('1111', '1', '1', '2019-03-11 13:43:52');
 INSERT INTO `colletions` VALUES ('1111', '1', '2', '2019-03-13 19:33:30');
 INSERT INTO `colletions` VALUES ('omfHM4iU0EA1jCLmUh43itEhtpcc', '1', '1', '2019-03-11 15:25:56');
 INSERT INTO `colletions` VALUES ('omfHM4iU0EA1jCLmUh43itEhtpcc', '1', '2', '2019-03-11 15:27:00');
+
+-- ----------------------------
+-- Table structure for comments
+-- ----------------------------
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE `comments` (
+  `cID` int(11) NOT NULL AUTO_INCREMENT,
+  `cType` int(11) NOT NULL,
+  `pointerID` int(11) NOT NULL,
+  `openID` int(11) NOT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`cID`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of comments
+-- ----------------------------
+INSERT INTO `comments` VALUES ('2', '1', '1', '1111', '这是一条评论');
+INSERT INTO `comments` VALUES ('3', '1', '1', '1111', '这是一条评论');
+INSERT INTO `comments` VALUES ('4', '1', '1', '1111', '这是一条评论');
+INSERT INTO `comments` VALUES ('5', '1', '1', '1111', '这是一条评论');
+INSERT INTO `comments` VALUES ('6', '1', '1', '1111', '这是一条评论');
+INSERT INTO `comments` VALUES ('7', '1', '1', '1111', '这是一条评论');
+INSERT INTO `comments` VALUES ('8', '1', '1', '1111', '这是一条评论');
+INSERT INTO `comments` VALUES ('9', '1', '1', '1111', '这是一条评论');
+INSERT INTO `comments` VALUES ('10', '1', '1', '1111', '这是一条评论');
 
 -- ----------------------------
 -- Table structure for items

@@ -5,14 +5,11 @@ require_once 'mysql.php';
     */
     function get_article_picture($aID,$conn){
         $sql = "SELECT pURL FROM article_pictures WHERE aID = {$aID}";
-        //echo $sql;
+        //echo $sql."<br>";
         $result = mysqli_query($conn,$sql);
         $result = getDataAsArray($result);
         $newResult = [];
         foreach($result as $thisOne){
-            //$thisOne->pURL = 
-            // = array(array('url' => "https://127.0.0.1/upload/20190311001.jpg"), 
-            //array('url' => "https://127.0.0.1/upload/20190311002.jpg"));
             $newResult[] = $thisOne;
         }
         return $newResult;
@@ -71,8 +68,16 @@ require_once 'mysql.php';
         $sql = "SELECT A.aid, A.content, T.type_name, A.hot, U.username, A.time, U.openID FROM articles A, users U, article_types T WHERE A.type_id = '$typeID' AND T.type_id = A.type_id AND U.openID = A.openID ORDER BY {$descKey} DESC";
         //echo $sql;
         $result = mysqli_query($conn,$sql);
+        $result = finish_article_select_list($result);
+        $newResult = [];
+        foreach($result as $value){
+            //var_dump($value);
+            //echo $value->aID."<br>";
+            $value->pictures = get_article_picture($value->aid,$conn);
+            $newResult[] = $value;
+        }
         //var_dump($result);
-        return finish_article_select_list($result);
+        return $newResult;
     }
 
     /*
