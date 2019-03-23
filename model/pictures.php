@@ -109,7 +109,7 @@ function upload_picture($type,$conn,$file,$pointerID = null){
         $filename = $result[0]->b_name;
         //echo $filename;
         $filename = "../upload/banners/" . $filename;
-        echo $filename;
+        //echo $filename;
         $sql = "DELETE FROM banners WHERE bID = {$id}";
         $result = mysqli_query($conn,$sql);
         unlink($filename);

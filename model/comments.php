@@ -2,14 +2,14 @@
 require_once 'mysql.php';
 
 function select_comment_by_id($cid, $conn){
-   $sql = "SELECT C.cid, U.username, C.content FROM comments C, users U WHERE U.openID = C.openID AND C.cID = {$cid}";
+   $sql = "SELECT C.cid, U.username, C.content, C.time FROM comments C, users U WHERE U.openID = C.openID AND C.cID = {$cid}";
    $result = mysqli_query($conn, $sql);
    $result = getDataAsArray($result);
    return $result;
 }
 
 function select_comment_by_pointerID($cType, $pointerID, $conn){
-    $sql = "SELECT C.cid, U.username, C.content FROM comments C, users U WHERE C.pointerID = {$pointerID} AND U.openID = C.openID AND C.cType = {$cType}";
+    $sql = "SELECT C.cid, U.username, C.content, C.time FROM comments C, users U WHERE C.pointerID = {$pointerID} AND U.openID = C.openID AND C.cType = {$cType}";
     $result = mysqli_query($conn, $sql);
     //echo $sql;
     //exit;

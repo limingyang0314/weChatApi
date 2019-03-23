@@ -3,11 +3,11 @@ require_once './api.php';
 
     require_once "../model/colletions.php";
     switch ($_GET['secondType']){
-    case 'select_article_colletion':
-        echo json_encode(error_code(get_article_colletion($_GET['openID'], $conn)));
+    case 'select_article_collection':
+        echo json_encode(error_code(get_article_collection($_GET['openID'], $conn)));
         break;
-    case 'select_item_colletion':
-        echo json_encode(error_code(get_item_colletion($_GET['openID'], $conn)));
+    case 'select_item_collection':
+        echo json_encode(error_code(get_item_collection($_GET['openID'], $conn)));
         break;
     case 'insert_colletion':
         echo json_encode(error_code(insert_colletion($_GET['openID'], $_GET['type'], $_GET['id'], $conn)));

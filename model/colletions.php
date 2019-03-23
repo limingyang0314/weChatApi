@@ -12,7 +12,7 @@ function finish_colletion_select($result){
 /*
 **根据openID获取用户收藏文章
 */
-function get_article_colletion($openID,$conn){
+function get_article_collection($openID,$conn){
     $query = "SELECT A.aID, A.title, C.time FROM colletions C, articles A WHERE C.openID = '{$openID}' AND C.type = 1 AND A.aID = C.pointerID";
     $result = $conn->query($query);
     return finish_colletion_select($result);
@@ -21,8 +21,10 @@ function get_article_colletion($openID,$conn){
 /*
 **根据openID获取用户收藏商品
 */
-function get_item_colletion($openID, $conn){
-    $query = "SELECT I.iID, I.item_name, I.item_info FROM colletions C, item I WHERE C.openID = '{$openID}' AND C.type = 2 AND I.iID = C.pointerID";
+function get_item_collection($openID, $conn){
+    $query = "SELECT I.iID, I.item_info, I.time FROM colletions C, items I WHERE C.openID = '{$openID}' AND C.type = 2 AND I.iID = C.pointerID";
+    //echo $query;
+    //exit;
     $result = $conn->query($query);
     return finish_colletion_select($result);
 }
@@ -52,6 +54,14 @@ function insert_colletion($openID, $type, $id, $conn){
     }else{
         return array('result' => 'insert fail!');
     }
+
+    // /*
+    // **获取当前用户的收藏
+    // ** type 1 文章  2 商品
+    // */
+    // function get_collection_by_user($openID, $type, $conn){
+
+    // }
 
 
 }
