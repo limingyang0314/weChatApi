@@ -102,8 +102,17 @@ function upload_picture($type,$conn,$file,$pointerID = null){
     **删除id标注的banner
     */
     function delete_banners($id,$conn){
-    $sql = "DELETE FROM banners WHERE bID = {$id}";
+        $sql = "SELECT b_name FROM banners WHERE bID = {$id}";
         $result = mysqli_query($conn,$sql);
+        $result = getDataAsArray($result);
+        //var_dump($result);
+        $filename = $result[0]->b_name;
+        //echo $filename;
+        $filename = "../upload/banners/" . $filename;
+        echo $filename;
+        $sql = "DELETE FROM banners WHERE bID = {$id}";
+        $result = mysqli_query($conn,$sql);
+        unlink($filename);
         return "我觉得ok";
     }
 

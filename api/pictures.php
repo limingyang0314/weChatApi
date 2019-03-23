@@ -16,6 +16,10 @@ require_once './api.php';
         //获取最近的5张banner
         echo json_encode(error_code(get_banners($_GET['number'],$conn)));
         break;
+    case 'delete_banner':
+        //获取最近的5张banner
+        echo json_encode(error_code(delete_banners($_GET['id'],$conn)));
+        break;
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));
     }
