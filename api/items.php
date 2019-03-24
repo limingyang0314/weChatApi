@@ -1,7 +1,7 @@
 <?php
 require_once "./api.php";
 
-    require_once "../model/item.php";
+    require_once "../model/items.php";
     switch ($_GET['secondType']){
     case 'select_item_by_id':
         //echo error_code(select_article_by_id($_GET['aID'], $conn));
