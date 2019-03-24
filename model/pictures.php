@@ -17,7 +17,7 @@ function other_upload_into_db($type,$pointerID,$file_name,$conn){
     $url = "/upload/{$type}/{$file_name}";
     $sql = "INSERT INTO {$type} (aID, pName, pURL) VALUES ('{$pointerID}','{$file_name}','{$url}')";
     //echo "<br>";
-    //echo $sql;
+    echo $sql;
     //$conn->query($sql);
     $result = mysqli_query($conn, $sql);
 }
@@ -26,9 +26,9 @@ function other_upload_into_db($type,$pointerID,$file_name,$conn){
 /*
 **上传成功的banner插入数据库
 */
-function banners_upload_into_db($type,$file_name,$conn){
+function banners_upload_into_db($type,$file_name,$first_typeID,$second_typeID,$conn){
     //include 'mysql.php';
-    $sql = "INSERT INTO {$type} (b_name) VALUES ('{$file_name}')";
+    $sql = "INSERT INTO {$type} (b_name,first_typeID,second_typeID) VALUES ('{$file_name}','{$first_typeID}','{$second_typeID}')";
     //$conn->query($sql);
     mysqli_query($conn, $sql);
 }
@@ -36,7 +36,12 @@ function banners_upload_into_db($type,$file_name,$conn){
 /*
 **处理上传的图片
 */
-function upload_picture($type,$conn,$file,$pointerID = null){
+function upload_picture($type,$conn,$file,$pointerID = null,$first_typeID = null, $second_typeID = null){
+    $max_size = 204800;
+    if($type == 'banners'){
+        $max_size = 2048000;
+    }
+    echo "second_typeID is " . $second_typeID . "<br>";
     $allowedTypes = array("banners", "item_pictures", "article_pictures");
     if(!in_array($type,$allowedTypes)){
         //echo "非法上传类型!";
@@ -52,17 +57,17 @@ function upload_picture($type,$conn,$file,$pointerID = null){
        || ($file["type"] == "image/pjpeg")
        || ($file["type"] == "image/x-png")
        || ($file["type"] == "image/png"))
-       && ($file["size"] < 204800)   // 小于 200 kb
+       && ($file["size"] < $max_size)   // 小于 200 kb
        && in_array($extension, $allowedExts))
         {
         if ($file["error"] > 0)
         {
-            //echo "错误：: " . $file["error"] . "<br>";
+            echo "错误：: " . $file["error"] . "<br>";
             }else{
-                //echo "上传文件名: " . $file["name"] . "<br>";
-                //echo "文件类型: " . $file["type"] . "<br>";
-                //echo "文件大小: " . ($file["size"] / 1024) . " kB<br>";
-                //echo "文件临时存储的位置: " . $file["tmp_name"] . "<br>";
+                echo "上传文件名: " . $file["name"] . "<br>";
+                echo "文件类型: " . $file["type"] . "<br>";
+                echo "文件大小: " . ($file["size"] / 1024) . " kB<br>";
+                echo "文件临时存储的位置: " . $file["tmp_name"] . "<br>";
         
         // 判断当期目录下的 upload 目录是否存在该文件
         // 如果没有 upload 目录，你需要创建它，upload 目录权限为 777
@@ -75,7 +80,7 @@ function upload_picture($type,$conn,$file,$pointerID = null){
                     move_uploaded_file($file["tmp_name"], "../upload/{$type}/" . $file["name"]);
                     //echo "文件存储在: " . "upload/{$type}/" . $file["name"];
                     if($type == 'banners'){
-                        banners_upload_into_db($type,$file["name"],$conn);
+                        banners_upload_into_db($type,$file["name"],$first_typeID,$second_typeID,$conn);
                     }else{
                         other_upload_into_db($type,$pointerID,$file["name"],$conn);
                     }
@@ -83,7 +88,7 @@ function upload_picture($type,$conn,$file,$pointerID = null){
                 }
             }
         }else{
-            //echo "非法的文件格式";
+            echo "非法的文件格式";
         }
 
     }

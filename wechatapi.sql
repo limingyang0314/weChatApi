@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50723
 File Encoding         : 65001
 
-Date: 2019-03-19 22:33:10
+Date: 2019-03-23 22:57:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,38 +34,38 @@ CREATE TABLE `articles` (
 -- ----------------------------
 -- Records of articles
 -- ----------------------------
-INSERT INTO `articles` VALUES ('1', '1', '1111', '这是第一篇文章', 'hfgbxxdfgb', '2019-03-11 09:01:36', '1', '5');
-INSERT INTO `articles` VALUES ('2', '2', '1111', '这是第二篇文章', 'tdgbdbdafge', '2019-03-11 09:01:43', '1', '1');
-INSERT INTO `articles` VALUES ('3', '3', '1111', '这是第三篇文章', '324524524324', '2019-03-11 09:01:45', '1', '0');
-INSERT INTO `articles` VALUES ('4', '4', '1111', '这是第四篇文章', '4535434532413412421', '2019-03-11 09:03:48', '1', '0');
-INSERT INTO `articles` VALUES ('5', '2', 'omfHM4iU0EA1jCLmUh43itEhtpcc', '这是新文章1', '的撒发射点发射点反动', '2019-03-11 10:23:36', '1', '0');
-INSERT INTO `articles` VALUES ('6', '3', 'omfHM4iU0EA1jCLmUh43itEhtpcc', '这是新文章2', '反对法国公司纷纷', '2019-03-11 10:23:50', '1', '0');
-INSERT INTO `articles` VALUES ('8', '1', '1111', null, '718041', '2019-03-18 13:52:56', '1', '0');
-INSERT INTO `articles` VALUES ('9', '1', '1111', null, '718041', '2019-03-18 13:53:30', '1', '0');
-INSERT INTO `articles` VALUES ('10', '1', '1111', null, 'hello,world!', '2019-03-18 13:58:27', '1', '0');
-INSERT INTO `articles` VALUES ('11', '1', '1111', null, 'hello,world!', '2019-03-18 14:01:12', '1', '0');
-INSERT INTO `articles` VALUES ('12', '1', '1111', null, 'hello,world!', '2019-03-18 14:02:53', '1', '0');
-INSERT INTO `articles` VALUES ('13', '1', '1111', null, 'hello,world!', '2019-03-18 14:06:41', '1', '0');
-INSERT INTO `articles` VALUES ('14', '1', '1111', null, 'hello,world!', '2019-03-18 14:11:13', '1', '0');
-INSERT INTO `articles` VALUES ('15', '1', '1111', null, 'hello,world!', '2019-03-18 14:14:20', '1', '0');
-INSERT INTO `articles` VALUES ('16', '1', '1111', null, 'hello,world!', '2019-03-18 14:14:46', '1', '0');
-INSERT INTO `articles` VALUES ('17', '1', '1111', null, 'hello,world!', '2019-03-18 14:16:35', '1', '0');
-INSERT INTO `articles` VALUES ('18', '1', '1111', null, 'hello,world!', '2019-03-18 14:27:01', '1', '0');
-INSERT INTO `articles` VALUES ('19', '1', '1111', null, 'hello,world!', '2019-03-18 14:31:25', '1', '0');
-INSERT INTO `articles` VALUES ('20', '1', '1111', null, 'hello,world!', '2019-03-18 14:36:25', '1', '0');
-INSERT INTO `articles` VALUES ('21', '1', '1111', null, 'hello,world!', '2019-03-18 14:37:14', '1', '0');
-INSERT INTO `articles` VALUES ('22', '1', '1111', null, 'hello,world!', '2019-03-18 14:37:37', '1', '0');
-INSERT INTO `articles` VALUES ('23', '1', '1111', null, 'hello,world!', '2019-03-18 14:43:49', '1', '0');
-INSERT INTO `articles` VALUES ('24', '1', '1111', null, 'hello,world!', '2019-03-18 14:44:42', '1', '0');
-INSERT INTO `articles` VALUES ('25', '1', '1111', null, 'hello,world!', '2019-03-18 14:45:32', '1', '0');
-INSERT INTO `articles` VALUES ('26', '1', '1111', null, 'hello,world!', '2019-03-18 14:45:55', '1', '0');
-INSERT INTO `articles` VALUES ('27', '1', '1111', null, 'hello,world!', '2019-03-18 14:46:39', '1', '0');
-INSERT INTO `articles` VALUES ('28', '1', '1111', null, 'hello,world!', '2019-03-18 14:47:26', '1', '0');
-INSERT INTO `articles` VALUES ('29', '1', '1111', null, 'hello,world!', '2019-03-18 14:53:07', '1', '0');
-INSERT INTO `articles` VALUES ('30', '1', '1111', null, 'hello,world!', '2019-03-18 14:53:19', '1', '0');
-INSERT INTO `articles` VALUES ('31', '1', '1111', null, 'hello,world!', '2019-03-18 15:00:54', '1', '0');
-INSERT INTO `articles` VALUES ('32', '1', '1111', null, 'hello,world!', '2019-03-18 15:01:21', '1', '0');
-INSERT INTO `articles` VALUES ('33', '1', '1111', null, 'hello,world!', '2019-03-18 15:01:36', '1', '0');
+INSERT INTO `articles` VALUES ('1', '1', '1111', '', '新的一年伊始\r\n牵动千万游子心的海棠季\r\n即将拉开帷幕\r\n又一年海棠花开\r\n我们等你缓缓归矣\r\n今年的海棠季专属明信片\r\n仍然由你来定义\r\n快来选出你心中的最佳明信片吧', '2019-03-11 09:01:36', '1', '5');
+INSERT INTO `articles` VALUES ('2', '1', '1111', '', '天津大学是教育部直属国家重点大学，也是985工程、211工程首批高校。学校创建于1895年，前身为北洋大学', '2019-03-11 09:01:43', '1', '1');
+INSERT INTO `articles` VALUES ('3', '1', '1111', '', '天津大学智能与计算学部虚位以待，诚聘英才！ “北洋学者英才计划”招聘 暨 第七届“北洋青年科学家”论坛邀请函', '2019-03-11 09:01:45', '1', '0');
+INSERT INTO `articles` VALUES ('4', '1', '1111', '', 'bn', '2019-03-11 09:03:48', '1', '0');
+INSERT INTO `articles` VALUES ('5', '1', 'omfHM4iU0EA1jCLmUh43itEhtpcc', '这是新文章1', '我们等你缓缓归矣', '2019-03-11 10:23:36', '1', '0');
+INSERT INTO `articles` VALUES ('6', '1', 'omfHM4iU0EA1jCLmUh43itEhtpcc', '这是新文章2', '今年的海棠季专属明信片', '2019-03-11 10:23:50', '1', '0');
+INSERT INTO `articles` VALUES ('8', '2', '1111', '', '天津大学元英进团队正在揭开物种进化的神秘面纱，该团队首次发现了由人工基因组重排引发的不同尺度的杂合性缺失现象，揭示了基因组结构变异和非整倍体与酵母雷帕霉素耐受性的基因型-表型关系，为研究物种进化的遗传基础提供了新思路。', '2019-03-18 13:52:56', '1', '0');
+INSERT INTO `articles` VALUES ('9', '2', '1111', null, '今年天津大学工业设计工程应该算的上是历年来最难考的一年，没有之一，先做一个参考，2018年，报名人数80人，15人进入复试，录取12人。2019年，报名人数140人，43人进入复试，录取6人。（报名人数道听途说，也有一定的参考价值）2019年九月左右，教育部对工业设计工程进行改革，将工业设计工程划归为机械工程或艺术，降了一个等级，对于明年考生建议：明年很大概率考数学，工业设计工程不是很好的选择，设计学和艺术设计选择更有优势。', '2019-03-18 13:53:30', '1', '5');
+INSERT INTO `articles` VALUES ('10', '2', '1111', null, '今年就看着天津大学\r\n一开始招30个 后来说20个 放了将近130个进复试\r\n最后出名单收了13个', '2019-03-18 13:58:27', '1', '0');
+INSERT INTO `articles` VALUES ('11', '2', '1111', null, '天津大学法硕复试录取了,果然如此好运，狂吸欧气~\r\n\r\n小满哥考上了，激动的要哭了\r\n\r\n付出终于有了回报', '2019-03-18 14:01:12', '1', '0');
+INSERT INTO `articles` VALUES ('12', '2', '1111', null, '这两天找我聊天的学弟学妹越来越多，不管是本校的还是外校的，微博上认识我的或者朋友介绍的等等，我都尽可能的去解答大家的问题。但是有一些情况还是不太能准确回答大家，比如说天津大学金融专硕的分数线从18年的330到19年的381，涨了51分，会不会吓退20的一大波考生，这是要看你们20考生的心态，我不会不负责任的瞎预测。\r\n还有最近找我聊天的也有很多不确定学校的，我经验贴上写了我具体确定学校的流程，一定要想清楚自己想要什么。\r\n', '2019-03-18 14:02:53', '1', '0');
+INSERT INTO `articles` VALUES ('13', '3', '1111', null, '我们大天津的风，就是这么不期而遇！天津大学走起', '2019-03-18 14:06:41', '1', '0');
+INSERT INTO `articles` VALUES ('14', '3', '1111', null, 'hello,world!', '2019-03-18 14:11:13', '1', '0');
+INSERT INTO `articles` VALUES ('15', '3', '1111', null, 'hello,world!', '2019-03-18 14:14:20', '1', '0');
+INSERT INTO `articles` VALUES ('16', '3', '1111', null, 'hello,world!', '2019-03-18 14:14:46', '1', '0');
+INSERT INTO `articles` VALUES ('17', '3', '1111', null, 'hello,world!', '2019-03-18 14:16:35', '1', '0');
+INSERT INTO `articles` VALUES ('18', '3', '1111', null, 'hello,world!', '2019-03-18 14:27:01', '1', '0');
+INSERT INTO `articles` VALUES ('19', '4', '1111', null, 'hello,world!', '2019-03-18 14:31:25', '1', '0');
+INSERT INTO `articles` VALUES ('20', '4', '1111', null, 'hello,world!', '2019-03-18 14:36:25', '1', '0');
+INSERT INTO `articles` VALUES ('21', '4', '1111', null, 'hello,world!', '2019-03-18 14:37:14', '1', '0');
+INSERT INTO `articles` VALUES ('22', '4', '1111', null, 'hello,world!', '2019-03-18 14:37:37', '1', '0');
+INSERT INTO `articles` VALUES ('23', '4', '1111', null, 'hello,world!', '2019-03-18 14:43:49', '1', '0');
+INSERT INTO `articles` VALUES ('24', '4', '1111', null, 'hello,world!', '2019-03-18 14:44:42', '1', '0');
+INSERT INTO `articles` VALUES ('25', '5', '1111', null, 'hello,world!', '2019-03-18 14:45:32', '1', '0');
+INSERT INTO `articles` VALUES ('26', '5', '1111', null, 'hello,world!', '2019-03-18 14:45:55', '1', '0');
+INSERT INTO `articles` VALUES ('27', '5', '1111', null, 'hello,world!', '2019-03-18 14:46:39', '1', '0');
+INSERT INTO `articles` VALUES ('28', '5', '1111', null, 'hello,world!', '2019-03-18 14:47:26', '1', '0');
+INSERT INTO `articles` VALUES ('29', '5', '1111', null, 'hello,world!', '2019-03-18 14:53:07', '1', '0');
+INSERT INTO `articles` VALUES ('30', '5', '1111', null, 'hello,world!', '2019-03-18 14:53:19', '1', '0');
+INSERT INTO `articles` VALUES ('31', '6', '1111', null, 'hello,world!', '2019-03-18 15:00:54', '1', '0');
+INSERT INTO `articles` VALUES ('32', '6', '1111', null, 'hello,world!', '2019-03-18 15:01:21', '1', '0');
+INSERT INTO `articles` VALUES ('33', '6', '1111', null, 'hello,world!', '2019-03-18 15:01:36', '1', '0');
 INSERT INTO `articles` VALUES ('34', '1', '1111', null, 'hello,world!', '2019-03-18 15:03:22', '1', '0');
 INSERT INTO `articles` VALUES ('35', '1', '1111', null, 'hello,world!', '2019-03-18 15:04:57', '1', '0');
 
@@ -109,16 +109,18 @@ CREATE TABLE `article_types` (
   `type_id` int(11) NOT NULL AUTO_INCREMENT,
   `type_name` varchar(255) NOT NULL,
   PRIMARY KEY (`type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of article_types
 -- ----------------------------
-INSERT INTO `article_types` VALUES ('1', '学校信息');
-INSERT INTO `article_types` VALUES ('2', '食堂资讯');
-INSERT INTO `article_types` VALUES ('3', '社团活动');
-INSERT INTO `article_types` VALUES ('4', '兼职信息');
-INSERT INTO `article_types` VALUES ('5', '就业');
+INSERT INTO `article_types` VALUES ('1', '推荐');
+INSERT INTO `article_types` VALUES ('2', '学校');
+INSERT INTO `article_types` VALUES ('3', '食堂');
+INSERT INTO `article_types` VALUES ('4', '社团');
+INSERT INTO `article_types` VALUES ('5', '失物招领');
+INSERT INTO `article_types` VALUES ('6', '兼职');
+INSERT INTO `article_types` VALUES ('7', '就业');
 
 -- ----------------------------
 -- Table structure for banners
@@ -129,15 +131,15 @@ CREATE TABLE `banners` (
   `b_name` varchar(255) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`bID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of banners
 -- ----------------------------
 INSERT INTO `banners` VALUES ('1', '-1a2153fb14ed0430.jpg', '2019-03-11 11:27:55');
-INSERT INTO `banners` VALUES ('2', 'banner_1552275312.jpg', '2019-03-11 11:35:12');
 INSERT INTO `banners` VALUES ('3', 'banners_1552889971.png', '2019-03-18 14:19:31');
-INSERT INTO `banners` VALUES ('4', 'banners_1552890026.png', '2019-03-18 14:20:26');
+INSERT INTO `banners` VALUES ('9', 'banners_1552890026.png', '2019-03-23 21:51:40');
+INSERT INTO `banners` VALUES ('10', 'banners_1552890026.png', '2019-03-23 21:51:43');
 
 -- ----------------------------
 -- Table structure for colletions
@@ -156,6 +158,8 @@ CREATE TABLE `colletions` (
 -- ----------------------------
 INSERT INTO `colletions` VALUES ('1111', '1', '1', '2019-03-11 13:43:52');
 INSERT INTO `colletions` VALUES ('1111', '1', '2', '2019-03-13 19:33:30');
+INSERT INTO `colletions` VALUES ('1111', '2', '1', '2019-03-23 22:30:39');
+INSERT INTO `colletions` VALUES ('1111', '2', '2', '2019-03-23 22:36:16');
 INSERT INTO `colletions` VALUES ('omfHM4iU0EA1jCLmUh43itEhtpcc', '1', '1', '2019-03-11 15:25:56');
 INSERT INTO `colletions` VALUES ('omfHM4iU0EA1jCLmUh43itEhtpcc', '1', '2', '2019-03-11 15:27:00');
 
@@ -169,21 +173,22 @@ CREATE TABLE `comments` (
   `pointerID` int(11) NOT NULL,
   `openID` int(11) NOT NULL,
   `content` varchar(255) DEFAULT NULL,
+  `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`cID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comments
 -- ----------------------------
-INSERT INTO `comments` VALUES ('2', '1', '1', '1111', '这是一条评论');
-INSERT INTO `comments` VALUES ('3', '1', '1', '1111', '这是一条评论');
-INSERT INTO `comments` VALUES ('4', '1', '1', '1111', '这是一条评论');
-INSERT INTO `comments` VALUES ('5', '1', '1', '1111', '这是一条评论');
-INSERT INTO `comments` VALUES ('6', '1', '1', '1111', '这是一条评论');
-INSERT INTO `comments` VALUES ('7', '1', '1', '1111', '这是一条评论');
-INSERT INTO `comments` VALUES ('8', '1', '1', '1111', '这是一条评论');
-INSERT INTO `comments` VALUES ('9', '1', '1', '1111', '这是一条评论');
-INSERT INTO `comments` VALUES ('10', '1', '1', '1111', '这是一条评论');
+INSERT INTO `comments` VALUES ('2', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('3', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('4', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('5', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('6', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('7', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('8', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('9', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('10', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
 
 -- ----------------------------
 -- Table structure for items
@@ -196,12 +201,15 @@ CREATE TABLE `items` (
   `item_name` varchar(255) DEFAULT NULL,
   `item_info` varchar(255) NOT NULL,
   `hot` int(255) NOT NULL DEFAULT '0',
+  `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`iID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of items
 -- ----------------------------
+INSERT INTO `items` VALUES ('1', '1', '1111', '土豆', '这是土豆', '444', '2019-03-23 22:34:31');
+INSERT INTO `items` VALUES ('2', '2', '1111', '西瓜', '这是西瓜', '555', '2019-03-23 22:34:31');
 
 -- ----------------------------
 -- Table structure for item_types
@@ -233,6 +241,22 @@ CREATE TABLE `locations` (
 -- Records of locations
 -- ----------------------------
 INSERT INTO `locations` VALUES ('1', '天津市');
+
+-- ----------------------------
+-- Table structure for messages
+-- ----------------------------
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE `messages` (
+  `mID` int(11) NOT NULL,
+  `openID` varchar(255) NOT NULL,
+  `from` varchar(255) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  PRIMARY KEY (`mID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of messages
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for schools
