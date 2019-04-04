@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50723
+Source Server         : localhost_3306
+Source Server Version : 50724
 Source Host           : localhost:3306
 Source Database       : wechatapi
 
 Target Server Type    : MYSQL
-Target Server Version : 50723
+Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2019-03-23 22:57:13
+Date: 2019-04-04 16:35:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,7 +29,7 @@ CREATE TABLE `articles` (
   `location_id` int(11) NOT NULL,
   `hot` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`aID`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of articles
@@ -68,6 +68,10 @@ INSERT INTO `articles` VALUES ('32', '6', '1111', null, 'hello,world!', '2019-03
 INSERT INTO `articles` VALUES ('33', '6', '1111', null, 'hello,world!', '2019-03-18 15:01:36', '1', '0');
 INSERT INTO `articles` VALUES ('34', '1', '1111', null, 'hello,world!', '2019-03-18 15:03:22', '1', '0');
 INSERT INTO `articles` VALUES ('35', '1', '1111', null, 'hello,world!', '2019-03-18 15:04:57', '1', '0');
+INSERT INTO `articles` VALUES ('36', '1', '1111', null, '测试三张图片', '2019-03-27 21:40:21', '1', '0');
+INSERT INTO `articles` VALUES ('37', '1', '1111', null, 'hello,world!', '2019-03-27 23:28:50', '1', '0');
+INSERT INTO `articles` VALUES ('38', '1', '1111', null, 'hello,world!', '2019-03-27 23:29:33', '1', '0');
+INSERT INTO `articles` VALUES ('39', '1', '1111', null, 'hello,world!', '2019-03-28 14:44:21', '1', '0');
 
 -- ----------------------------
 -- Table structure for article_pictures
@@ -79,7 +83,7 @@ CREATE TABLE `article_pictures` (
   `pName` varchar(255) NOT NULL,
   `pURL` varchar(255) NOT NULL,
   PRIMARY KEY (`pID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of article_pictures
@@ -100,6 +104,13 @@ INSERT INTO `article_pictures` VALUES ('13', '28', 'article_pictures_1552891646.
 INSERT INTO `article_pictures` VALUES ('14', '31', 'article_pictures_1552892454.png', '/upload/article_pictures/article_pictures_1552892454.png');
 INSERT INTO `article_pictures` VALUES ('15', '34', 'article_pictures_1552892602.png', '/upload/article_pictures/article_pictures_1552892602.png');
 INSERT INTO `article_pictures` VALUES ('16', '35', 'article_pictures_1552892697.png', '/upload/article_pictures/article_pictures_1552892697.png');
+INSERT INTO `article_pictures` VALUES ('17', '36', 'article_pictures_1553694021.png', '/upload/article_pictures/article_pictures_1553694021.png');
+INSERT INTO `article_pictures` VALUES ('18', '36', 'article_pictures_1553694022.jpg', '/upload/article_pictures/article_pictures_1553694022.jpg');
+INSERT INTO `article_pictures` VALUES ('19', '37', 'article_pictures_1553700530.jpg', '/upload/article_pictures/article_pictures_1553700530.jpg');
+INSERT INTO `article_pictures` VALUES ('20', '37', 'article_pictures_1553700530.jpg', '/upload/article_pictures/article_pictures_1553700530.jpg');
+INSERT INTO `article_pictures` VALUES ('21', '37', 'article_pictures_1553700530.jpg', '/upload/article_pictures/article_pictures_1553700530.jpg');
+INSERT INTO `article_pictures` VALUES ('22', '38', 'article_pictures_1553700573.jpg', '/upload/article_pictures/article_pictures_1553700573.jpg');
+INSERT INTO `article_pictures` VALUES ('23', '39', 'article_pictures_1553755461.jpg', '/upload/article_pictures/article_pictures_1553755461.jpg');
 
 -- ----------------------------
 -- Table structure for article_types
@@ -130,16 +141,19 @@ CREATE TABLE `banners` (
   `bID` int(255) NOT NULL AUTO_INCREMENT,
   `b_name` varchar(255) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `first_typeID` int(11) NOT NULL DEFAULT '1',
+  `second_typeID` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`bID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of banners
 -- ----------------------------
-INSERT INTO `banners` VALUES ('1', '-1a2153fb14ed0430.jpg', '2019-03-11 11:27:55');
-INSERT INTO `banners` VALUES ('3', 'banners_1552889971.png', '2019-03-18 14:19:31');
-INSERT INTO `banners` VALUES ('9', 'banners_1552890026.png', '2019-03-23 21:51:40');
-INSERT INTO `banners` VALUES ('10', 'banners_1552890026.png', '2019-03-23 21:51:43');
+INSERT INTO `banners` VALUES ('11', 'banners_1553426733.png', '2019-03-24 19:25:34', '1', '2');
+INSERT INTO `banners` VALUES ('12', 'banners_1553427035.png', '2019-03-24 19:30:35', '1', '1');
+INSERT INTO `banners` VALUES ('13', 'banners_1553427044.png', '2019-03-24 19:30:44', '1', '1');
+INSERT INTO `banners` VALUES ('14', 'banners_1553427052.png', '2019-03-24 19:30:52', '1', '1');
+INSERT INTO `banners` VALUES ('15', 'banners_1553427061.png', '2019-03-24 19:31:01', '1', '1');
 
 -- ----------------------------
 -- Table structure for colletions
@@ -175,7 +189,7 @@ CREATE TABLE `comments` (
   `content` varchar(255) DEFAULT NULL,
   `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`cID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comments
@@ -189,6 +203,15 @@ INSERT INTO `comments` VALUES ('7', '1', '1', '1111', '这是一条评论', '201
 INSERT INTO `comments` VALUES ('8', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
 INSERT INTO `comments` VALUES ('9', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
 INSERT INTO `comments` VALUES ('10', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('11', '1', '1', '1111', '12342314', '2019-03-25 21:58:12');
+INSERT INTO `comments` VALUES ('12', '1', '1', '1111', '@omingyyfy 哈喽，嗯', '2019-03-25 21:59:34');
+INSERT INTO `comments` VALUES ('13', '1', '2', '1111', '我爱天大', '2019-03-25 22:31:32');
+INSERT INTO `comments` VALUES ('14', '1', '2', '1111', '@omingyyfy 天大爱我', '2019-03-25 22:31:51');
+INSERT INTO `comments` VALUES ('15', '1', '35', '1111', '图片咋没了？', '2019-03-27 21:03:29');
+INSERT INTO `comments` VALUES ('16', '1', '36', '1111', '为什么测试3张图，然而只有2张？', '2019-03-27 23:20:39');
+INSERT INTO `comments` VALUES ('17', '1', '38', '1111', '124', '2019-03-28 14:59:20');
+INSERT INTO `comments` VALUES ('18', '1', '39', '1111', '!', '2019-03-28 14:59:47');
+INSERT INTO `comments` VALUES ('19', '1', '39', '1111', 'How handsome I am !', '2019-03-28 15:00:08');
 
 -- ----------------------------
 -- Table structure for items
@@ -210,6 +233,22 @@ CREATE TABLE `items` (
 -- ----------------------------
 INSERT INTO `items` VALUES ('1', '1', '1111', '土豆', '这是土豆', '444', '2019-03-23 22:34:31');
 INSERT INTO `items` VALUES ('2', '2', '1111', '西瓜', '这是西瓜', '555', '2019-03-23 22:34:31');
+
+-- ----------------------------
+-- Table structure for item_pictures
+-- ----------------------------
+DROP TABLE IF EXISTS `item_pictures`;
+CREATE TABLE `item_pictures` (
+  `pID` int(11) NOT NULL AUTO_INCREMENT,
+  `iID` int(11) NOT NULL,
+  `pName` varchar(255) NOT NULL,
+  `pURL` varchar(255) NOT NULL,
+  PRIMARY KEY (`pID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of item_pictures
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for item_types
