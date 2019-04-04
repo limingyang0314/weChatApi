@@ -19,8 +19,12 @@ require_once 'mysql.php';
     **处理某篇文章
     */
     function finish_article_select_exactly($aID,$result,$conn){
-        $result = getDataAsArray($result);
-        $result['pictures'] = get_article_picture($aID,$conn);
+        $temp = getDataAsArray($result);
+        $result = $temp[0];//[0]
+        //var_dump($temp);
+        //var_dump($result);
+        //exit;
+        $result->pictures = get_article_picture($aID,$conn);
         return $result;
     }
 
@@ -38,7 +42,7 @@ require_once 'mysql.php';
     */
     function select_article_by_id($aID, $conn){
         //echo $_SESSION['openID'];
-        $sql = "SELECT T.type_name, A.content, A.hot, U.username, U.openID FROM articles A, users U, article_types T WHERE A.aID = {$aID} AND T.type_id = A.type_id AND U.openID = A.openID";
+        $sql = "SELECT A.aid, A.content, T.type_name, A.hot, U.username, A.time, U.openID FROM articles A, users U, article_types T WHERE A.aID = {$aID} AND T.type_id = A.type_id AND U.openID = A.openID";
         $result = mysqli_query($conn,$sql);
         return finish_article_select_exactly($aID,$result,$conn);
     }

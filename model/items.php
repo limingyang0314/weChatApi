@@ -2,23 +2,27 @@
 require_once 'mysql.php';
 
 function select_item_by_id($id, $conn){
-    $sql = "SELECT * FROM items WHERE iID = $id";
-    $result = mysqli_query($sql);
+    //echo $id;
+    $sql = "SELECT I.iID, U.username, I.item_info, T.type_name, I.hot, I.time FROM items I, item_types T, users U  WHERE I.iID = $id AND T.type_id = I.iType_ID AND U.openID = I.openID";
+    //echo $sql;
+    $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
-    $result = add_pic_to_data($result);
+    //var_dump($result);
+    $result = add_pic_to_data($result, $conn);
     return $result;
 }
 
 function select_item_by_author($openID, $conn){
-    $sql = "SELECT * FROM items WHERE openID = $openID";
-    $result = mysqli_query($sql);
+    $sql = "SELECT I.iID, U.username, I.item_info, T.type_name, I.hot, I.time FROM items I, item_types T, users U  WHERE I.openID = $openID AND T.type_id = I.iType_ID AND U.openID = I.openID";
+    $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
+    $result = add_pic_to_data($result, $conn);
     return $result;
 }
 
 function insert_item($openID, $item_type, $item_info, $conn){
     $sql = "INSERT INTO items (iType_ID,openID,item_info) VALUES ($item_type, $openID, $item_info)";
-    $result = mysqli_query($sql);
+    $result = mysqli_query($conn,$sql);
 }
 
 function insert_picture($file){
@@ -44,10 +48,13 @@ function get_item_picture($iID,$conn){
 **将图片插入文章数据的数组
 */
 function add_pic_to_data($data,$conn){
+
     $result = [];
     foreach($data as $value){
-        $value['pictures'] = get_item_picture($value,$conn);
+
+        $value->pictures = get_item_picture($value->iID,$conn);
         $result[] = $value;
     }
+    //exit;
     return $result;
 }
