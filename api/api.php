@@ -1,5 +1,5 @@
 <?php
-
+require_once "../middle/session.php";
 function error_code($result, $err_code = -1, $message = null){
     $new = array(
         'error_code' => $err_code,
