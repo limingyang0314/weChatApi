@@ -17,7 +17,7 @@ function other_upload_into_db($type,$pointerID,$file_name,$conn){
     $url = "/upload/{$type}/{$file_name}";
     $sql = "INSERT INTO {$type} (aID, pName, pURL) VALUES ('{$pointerID}','{$file_name}','{$url}')";
     //echo "<br>";
-    echo $sql;
+    //echo $sql;
     //$conn->query($sql);
     $result = mysqli_query($conn, $sql);
 }
@@ -36,12 +36,12 @@ function banners_upload_into_db($type,$file_name,$first_typeID,$second_typeID,$c
 /*
 **处理上传的图片
 */
-function upload_picture($type,$conn,$file,$pointerID = null,$first_typeID = null, $second_typeID = null){
+function upload_picture($type,$conn,$file,$pointerID = null,$first_typeID = null, $second_typeID = null, $order = 1){
     $max_size = 204800;
     if($type == 'banners'){
         $max_size = 2048000;
     }
-    echo "second_typeID is " . $second_typeID . "<br>";
+    //echo "second_typeID is " . $second_typeID . "<br>";
     $allowedTypes = array("banners", "item_pictures", "article_pictures");
     if(!in_array($type,$allowedTypes)){
         //echo "非法上传类型!";
@@ -62,17 +62,17 @@ function upload_picture($type,$conn,$file,$pointerID = null,$first_typeID = null
         {
         if ($file["error"] > 0)
         {
-            echo "错误：: " . $file["error"] . "<br>";
+            //echo "错误：: " . $file["error"] . "<br>";
             }else{
-                echo "上传文件名: " . $file["name"] . "<br>";
-                echo "文件类型: " . $file["type"] . "<br>";
-                echo "文件大小: " . ($file["size"] / 1024) . " kB<br>";
-                echo "文件临时存储的位置: " . $file["tmp_name"] . "<br>";
+                // echo "上传文件名: " . $file["name"] . "<br>";
+                // echo "文件类型: " . $file["type"] . "<br>";
+                // echo "文件大小: " . ($file["size"] / 1024) . " kB<br>";
+                // echo "文件临时存储的位置: " . $file["tmp_name"] . "<br>";
         
         // 判断当期目录下的 upload 目录是否存在该文件
         // 如果没有 upload 目录，你需要创建它，upload 目录权限为 777
         
-                $file["name"] = "{$type}_".time().".".$extension;
+                $file["name"] = "{$type}_".time() ." _{$order} ".".".$extension;
                 if (file_exists("upload/{$type}/" . $file["name"])){
                     //echo $file["name"] . " 文件已经存在。 ";
                 }else{

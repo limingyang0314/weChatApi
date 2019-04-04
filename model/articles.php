@@ -94,7 +94,7 @@ require_once 'mysql.php';
     */
     function insert_article($openID, $article_type, $content, $conn){
         $sql = "INSERT INTO articles (openID,type_id,content,location_id) VALUES ('{$openID}','{$article_type}','{$content}',1)";
-        
+        //echo $sql;
         $result = mysqli_query($conn, $sql);
 
         $sql = "SELECT aID FROM articles WHERE openID = '{$openID}' ORDER BY time DESC LIMIT 0,1";
@@ -108,13 +108,13 @@ require_once 'mysql.php';
         //echo $sql;
         if(isset($_FILES["file1"])){
             //echo "start upload file1";
-            insert_article_picture($_FILES["file1"],$aID,$conn);
+            insert_article_picture($_FILES["file1"],$aID,$conn,1);
         }
         if(isset($_FILES["file2"])){
-            insert_article_picture($_FILES["file2"],$aID,$conn);
+            insert_article_picture($_FILES["file2"],$aID,$conn,2);
         }
         if(isset($_FILES["file3"])){
-            insert_article_picture($_FILES["file3"],$aID,$conn);
+            insert_article_picture($_FILES["file3"],$aID,$conn,3);
         }
 
         return array('aID' => $aID);
@@ -123,9 +123,9 @@ require_once 'mysql.php';
     /*
     **增加一条文章图片
     */
-    function insert_article_picture($file,$pointerID,$conn){
+    function insert_article_picture($file,$pointerID,$conn,$order){
         require_once "../model/pictures.php";
-        upload_picture('article_pictures',$conn, $file, $pointerID);
+        upload_picture('article_pictures',$conn, $file, $pointerID,0,0,$order);
     }
 
 
