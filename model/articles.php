@@ -20,11 +20,11 @@ require_once 'mysql.php';
     */
     function finish_article_select_exactly($aID,$result,$conn){
         $temp = getDataAsArray($result);
-        $result = $temp[0];//[0]
+        $result = $temp;//[0];//[0]
         //var_dump($temp);
         //var_dump($result);
         //exit;
-        $result->pictures = get_article_picture($aID,$conn);
+        $result[0]->pictures = get_article_picture($aID,$conn);
         return $result;
     }
 
