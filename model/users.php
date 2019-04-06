@@ -1,5 +1,25 @@
 <?php
 require_once "mysql.php";
+$appID = "wxc24a817201be0ebc";
+
+function getAccessToken(){
+    $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxc24a817201be0ebc&secret=17b371bd3f834c1c782afeafb7bc3575";
+
+    require_once("../curl.php");
+    $result = getToken($url);
+    session_start();
+    $_SESSION['openID'] = "omfHM4iU0EA1jCLmUh43itEhtpcc";//json_decode($result)->openid;
+    echo $result;
+}
+
+function getUserAccessToken($code){
+    $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxc24a817201be0ebc&secret=17b371bd3f834c1c782afeafb7bc3575&code=$code&grant_type=authorization_code";
+    require_once("../curl.php");
+    $result = getToken($url);
+    session_start();
+    $_SESSION['openID'] = "omfHM4iU0EA1jCLmUh43itEhtpcc";//json_decode($result)->openid;
+    echo $result;
+}
 
 function get_openID($js_code){
     $url = "https://api.weixin.qq.com/sns/jscode2session?appid=wxc24a817201be0ebc&secret=17b371bd3f834c1c782afeafb7bc3575&js_code={$js_code}&grant_type=authorization_code";
@@ -38,3 +58,4 @@ function login($openID){
 function is_select_school(){
 
 }
+

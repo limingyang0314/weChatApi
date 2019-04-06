@@ -3,6 +3,12 @@ require_once "api.php";
 
     require_once "../model/users.php";
     switch ($_GET['secondType']){
+    case 'getAccessToken':
+        getAccessToken();
+        break;
+    case 'getUserAccessToken':
+        getUserAccessToken($_GET['code']);
+        break;
     case 'get_openID':
         //echo "ok";
         get_openID($_GET['code']);

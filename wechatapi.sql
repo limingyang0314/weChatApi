@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2019-04-06 11:50:50
+Date: 2019-04-07 01:02:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -69,9 +69,9 @@ INSERT INTO `articles` VALUES ('33', '6', '1111', null, 'hello,world!', '2019-03
 INSERT INTO `articles` VALUES ('34', '1', '1111', null, 'hello,world!', '2019-03-18 15:03:22', '1', '0');
 INSERT INTO `articles` VALUES ('35', '1', '1111', null, 'hello,world!', '2019-03-18 15:04:57', '1', '0');
 INSERT INTO `articles` VALUES ('36', '1', '1111', null, '测试三张图片', '2019-03-27 21:40:21', '1', '0');
-INSERT INTO `articles` VALUES ('37', '1', '1111', null, 'hello,world!', '2019-03-27 23:28:50', '1', '0');
-INSERT INTO `articles` VALUES ('38', '1', '1111', null, 'hello,world!', '2019-03-27 23:29:33', '1', '0');
-INSERT INTO `articles` VALUES ('39', '1', '1111', null, 'hello,world!', '2019-03-28 14:44:21', '1', '0');
+INSERT INTO `articles` VALUES ('37', '1', '1111', null, 'hello天津,world!', '2019-03-27 23:28:50', '1', '0');
+INSERT INTO `articles` VALUES ('38', '1', '1111', null, 'hello天津,world!', '2019-03-27 23:29:33', '1', '0');
+INSERT INTO `articles` VALUES ('39', '1', '1111', null, 'hello,天津world天津!', '2019-03-28 14:44:21', '1', '0');
 
 -- ----------------------------
 -- Table structure for article_pictures
@@ -231,8 +231,8 @@ CREATE TABLE `items` (
 -- ----------------------------
 -- Records of items
 -- ----------------------------
-INSERT INTO `items` VALUES ('1', '1', '1111', '土豆', '这是土豆', '444', '2019-03-23 22:34:31');
-INSERT INTO `items` VALUES ('2', '2', '1111', '西瓜', '这是西瓜', '555', '2019-03-23 22:34:31');
+INSERT INTO `items` VALUES ('1', '1', '1111', '土豆', '这是土豆,haha', '444', '2019-03-23 22:34:31');
+INSERT INTO `items` VALUES ('2', '2', '1111', '西瓜', '这是西瓜,hoho', '555', '2019-03-23 22:34:31');
 
 -- ----------------------------
 -- Table structure for item_pictures
@@ -325,11 +325,13 @@ CREATE TABLE `users` (
   `location_id` int(11) NOT NULL,
   `avatar` varchar(255) DEFAULT '',
   `school_id` int(11) DEFAULT NULL,
+  `session_key` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`openID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1111', 'omingyyfy', '1', '1.jpg', '1');
-INSERT INTO `users` VALUES ('omfHM4iU0EA1jCLmUh43itEhtpcc', 'tester2', '1', '1.jpg', '1');
+INSERT INTO `users` VALUES ('1111', 'omingyyfy', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '1', null);
+INSERT INTO `users` VALUES ('omfHM4iU0EA1jCLmUh43itEhtpcc', 'tester2', '1', '1.jpg', '1', null);
+INSERT INTO `users` VALUES ('ozInc4nxFajRO-7DVyg7WfLb2GcE', '呜喵王', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', null, null);
