@@ -2,3 +2,6 @@
 /upload/banners
 /upload/item_pictures
 /.idea
+/.git
+/aspnet_client
+/web.config
