@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2019-04-04 16:35:43
+Date: 2019-04-06 11:50:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -244,11 +244,13 @@ CREATE TABLE `item_pictures` (
   `pName` varchar(255) NOT NULL,
   `pURL` varchar(255) NOT NULL,
   PRIMARY KEY (`pID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of item_pictures
 -- ----------------------------
+INSERT INTO `item_pictures` VALUES ('1', '1', 'test.jpg', '/upload/item_pictures/test.jpg');
+INSERT INTO `item_pictures` VALUES ('2', '1', 'test2.jpg', '/upload/hahahah.jpg');
 
 -- ----------------------------
 -- Table structure for item_types
