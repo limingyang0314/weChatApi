@@ -7,13 +7,13 @@ require_once './api.php';
         echo json_encode(error_code(select_article_by_id($_GET['aID'], $conn)));
         break;
     case 'select_article_by_author':
-        echo json_encode(error_code(select_article_by_author($_GET['openID'], $conn)));
+        echo json_encode(error_code(select_article_by_author($_GET['openID'], $_GET['limit'], $_GET['page'], $conn)));
         break;
     case 'insert_article':
         echo json_encode(error_code(insert_article($_GET['openID'], $_POST['article_type'], $_POST['content'], $conn)));
         break;
     case 'select_article_by_type':
-        echo json_encode(error_code(select_article_by_type($_GET['typeID'], $_GET['mode'], $conn)));
+        echo json_encode(error_code(select_article_by_type($_GET['typeID'], $_GET['limit'], $_GET['page'], $_GET['mode'], $conn)));
         break;
     case 'delete_article':
         echo json_encode(error_code(delete_article($_GET['openID'], $_GET['aID'], $conn)));

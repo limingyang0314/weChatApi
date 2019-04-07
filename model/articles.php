@@ -42,7 +42,13 @@ require_once 'mysql.php';
     */
     function select_article_by_id($aID, $conn){
         //echo $_SESSION['openID'];
-        $sql = "SELECT A.aid, A.content, T.type_name, A.hot, U.username, A.time, U.openID FROM articles A, users U, article_types T WHERE A.aID = {$aID} AND T.type_id = A.type_id AND U.openID = A.openID";
+        $sql = "SELECT A.aid, A.content, T.type_name, A.hot, U.username, A.time, U.openID 
+        FROM articles A, users U, article_types T 
+        WHERE A.aID = {$aID} 
+        AND T.type_id = A.type_id 
+        AND U.openID = A.openID 
+        ORDER BY time DESC LIMIT {$start},{$limit}";
+
         $result = mysqli_query($conn,$sql);
         return finish_article_select_exactly($aID,$result,$conn);
     }
@@ -50,8 +56,16 @@ require_once 'mysql.php';
     /*
     **按作者的openID返回全部文章的简要信息
     */
-    function select_article_by_author($openID, $conn){
-        $sql = "SELECT A.aid, A.content, T.type_name, A.hot, U.username, A.time, U.openID FROM articles A, users U, article_types T WHERE A.openID = '$openID' AND T.type_id = A.type_id AND U.openID = A.openID ORDER BY A.time DESC";
+    function select_article_by_author($openID, $limit, $page, $conn){
+        $start = $limit * ($page - 1);
+        $sql = "SELECT A.aid, A.content, T.type_name, A.hot, U.username, A.time, U.openID 
+        FROM articles A, users U, article_types T 
+        WHERE A.openID = '$openID' 
+        AND T.type_id = A.type_id 
+        AND U.openID = A.openID 
+        ORDER BY A.time DESC 
+        LIMIT {$start},{$limit}";
+
         $result = mysqli_query($conn,$sql);
         return finish_article_select_list($result);
     }
@@ -61,7 +75,8 @@ require_once 'mysql.php';
     **mode = 1时为按热度排序 mode = 2时为按时间排序
     **默认按时间排序
     */
-    function select_article_by_type($typeID, $mode = 1, $conn){
+    function select_article_by_type($typeID, $limit, $page, $mode = 1, $conn){
+        $start = $limit * ($page - 1);
         $descKey = null;
         if($mode == 1){
             $descKey = 'A.time';
@@ -69,7 +84,14 @@ require_once 'mysql.php';
         if($mode == 2){
             $descKey = 'A.hot';
         }
-        $sql = "SELECT A.aid, A.content, T.type_name, A.hot, U.username, A.time, U.openID FROM articles A, users U, article_types T WHERE A.type_id = '$typeID' AND T.type_id = A.type_id AND U.openID = A.openID ORDER BY {$descKey} DESC";
+        $sql = "SELECT A.aid, A.content, T.type_name, A.hot, U.username, A.time, U.openID 
+        FROM articles A, users U, article_types T 
+        WHERE A.type_id = '$typeID' 
+        AND T.type_id = A.type_id 
+        AND U.openID = A.openID 
+        ORDER BY {$descKey} DESC 
+        LIMIT {$start},{$limit}";
+
         //echo $sql;
         $result = mysqli_query($conn,$sql);
         $result = finish_article_select_list($result);

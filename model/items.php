@@ -3,7 +3,12 @@ require_once 'mysql.php';
 
 function select_item_by_id($id, $conn){
     //echo $id;
-    $sql = "SELECT I.iID, U.username, I.item_info, T.type_name, I.hot, I.time FROM items I, item_types T, users U  WHERE I.iID = $id AND T.type_id = I.iType_ID AND U.openID = I.openID";
+    $sql = "SELECT I.iID, U.username, I.item_info, T.type_name, I.hot, I.time 
+    FROM items I, item_types T, users U  
+    WHERE I.iID = $id 
+    AND T.type_id = I.iType_ID 
+    AND U.openID = I.openID";
+    
     //echo $sql;
     $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
@@ -12,16 +17,32 @@ function select_item_by_id($id, $conn){
     return $result;
 }
 
-function select_item_by_author($openID, $conn){
-    $sql = "SELECT I.iID, U.username, I.item_info, T.type_name, I.hot, I.time FROM items I, item_types T, users U  WHERE I.openID = $openID AND T.type_id = I.iType_ID AND U.openID = I.openID";
+function select_item_by_author($openID, $limit, $page, $conn){
+    $start = $limit * ($page - 1);
+    $sql = "SELECT I.iID, U.username, I.item_info, T.type_name, I.hot, I.time 
+    FROM items I, item_types T, users U  
+    WHERE I.openID = $openID 
+    AND T.type_id = I.iType_ID 
+    AND U.openID = I.openID 
+    ORDER BY I.time DESC 
+    LIMIT {$start},{$limit}";
+
     $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
     $result = add_pic_to_data($result, $conn);
     return $result;
 }
 
-function select_item_by_type($type, $conn){
-    $sql = "SELECT I.iID, U.username, I.item_info, T.type_name, I.hot, I.time FROM items I, item_types T, users U  WHERE I.itype_ID = $type AND T.type_id = I.iType_ID AND U.openID = I.openID";
+function select_item_by_type($type, $limit, $page, $conn){
+    $start = $limit * ($page - 1);
+    $sql = "SELECT I.iID, U.username, I.item_info, T.type_name, I.hot, I.time 
+    FROM items I, item_types T, users U  
+    WHERE I.itype_ID = $type 
+    AND T.type_id = I.iType_ID 
+    AND U.openID = I.openID 
+    ORDER BY I.time DESC 
+    LIMIT {$start},{$limit}";
+
     $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
     $result = add_pic_to_data($result, $conn);
