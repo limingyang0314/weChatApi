@@ -42,9 +42,10 @@ function get_user_info($openID, $conn){
     return $result;
 }
 
-function login($openID){
+function login($openID,$session_key){
     session_start();
     $_SESSION['openID'] = $openID;
+    $_SESSION['session_key'] = $session_key;
     // if(isset($_SESSION['openID'])){
     //     echo "openID is " . $_SESSION['openID'] . "<br>";
     // }else{
@@ -55,7 +56,15 @@ function login($openID){
 /*
 **是否选择了学校的验证
 */
-function is_select_school(){
-
+function is_select_school($openID,$conn){
+    $sql = "SELECT school_id FROM users WHERE openID = '$openID'";
+    $result = mysqli_query($conn, $sql);
+    $result = getDataAsArray($result);
+    $bool = $result[0]->school_id;
+    if($bool){
+        return true;
+    }else{
+        return false;
+    }
 }
 
