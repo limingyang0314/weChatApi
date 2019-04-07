@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2019-04-07 01:02:45
+Date: 2019-04-07 23:42:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -226,13 +226,17 @@ CREATE TABLE `items` (
   `hot` int(255) NOT NULL DEFAULT '0',
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`iID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of items
 -- ----------------------------
 INSERT INTO `items` VALUES ('1', '1', '1111', '土豆', '这是土豆,haha', '444', '2019-03-23 22:34:31');
 INSERT INTO `items` VALUES ('2', '2', '1111', '西瓜', '这是西瓜,hoho', '555', '2019-03-23 22:34:31');
+INSERT INTO `items` VALUES ('3', '1', '1111', null, 'hello son', '0', '2019-04-07 22:36:05');
+INSERT INTO `items` VALUES ('4', '1', '1111', null, 'hello son', '0', '2019-04-07 22:38:25');
+INSERT INTO `items` VALUES ('5', '1', '1111', null, 'hello son', '0', '2019-04-07 22:41:49');
+INSERT INTO `items` VALUES ('6', '1', '1111', null, 'hello son', '0', '2019-04-07 22:42:18');
 
 -- ----------------------------
 -- Table structure for item_pictures
@@ -244,7 +248,7 @@ CREATE TABLE `item_pictures` (
   `pName` varchar(255) NOT NULL,
   `pURL` varchar(255) NOT NULL,
   PRIMARY KEY (`pID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of item_pictures
@@ -288,16 +292,25 @@ INSERT INTO `locations` VALUES ('1', '天津市');
 -- ----------------------------
 DROP TABLE IF EXISTS `messages`;
 CREATE TABLE `messages` (
-  `mID` int(11) NOT NULL,
-  `openID` varchar(255) NOT NULL,
-  `from` varchar(255) NOT NULL,
+  `mID` int(11) NOT NULL AUTO_INCREMENT,
+  `mType` int(11) NOT NULL DEFAULT '1',
+  `to_who` varchar(255) NOT NULL,
+  `from_who` varchar(255) NOT NULL,
   `content` varchar(255) NOT NULL,
+  `aID` int(11) DEFAULT NULL,
+  `cID` int(11) DEFAULT NULL,
+  `has_read` int(11) DEFAULT NULL,
+  `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`mID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of messages
 -- ----------------------------
+INSERT INTO `messages` VALUES ('1', '1', '1111', '1111', '你好，我是你爹！', null, null, '1', '2019-04-07 23:41:17');
+INSERT INTO `messages` VALUES ('2', '1', '$to', '$from', '$comment', null, null, null, '2019-04-07 23:41:17');
+INSERT INTO `messages` VALUES ('3', '1', '$to', '$from', '$comment', null, null, null, '2019-04-07 23:41:17');
+INSERT INTO `messages` VALUES ('4', '2', '$to', '$from', '$comment', '1', '1', null, '2019-04-07 23:41:17');
 
 -- ----------------------------
 -- Table structure for schools
