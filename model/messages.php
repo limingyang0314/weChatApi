@@ -4,20 +4,20 @@
 /*
 **根据openID获取某个用户收到的所有消息
 */
-function get_message_by_openID($openID, $conn){
-    $sql = "SELECT M.from_who, M.mID, M.content FROM messages M, users U WHERE M.to_who = '$openID' AND U.openID = M.from_who";
+function get_message_by_openID($openID, $limit, $page, $conn){
+    $sql = "SELECT M.from_who, M.mID, M.content FROM messages M, users U WHERE M.to_who = '$openID' AND U.openID = M.from_who ORDER BY time DESC LIMIT {$start},{$limit}";
     $result = mysqli_query($conn,$mID);
     $result = getDataAsArray($result);
-    return $result;
+    return json_encode($result);
 }
 
 /*
 **根据openID获取某个用户收到的未读消息
 */
-function get_message_by_openID_not_read($openID, $conn){
-    $sql = "SELECT M.from_who, M.mID, M.content FROM messages M, users U WHERE M.to_who = '$openID' AND U.openID = M.from_who AND M.has_read <> 1";
+function get_message_by_openID_not_read($openID, $limit, $page, $conn){
+    $sql = "SELECT M.from_who, M.mID, M.content FROM messages M, users U WHERE M.to_who = '$openID' AND U.openID = M.from_who AND M.has_read <> 1 ORDER BY time DESC LIMIT {$start},{$limit}";
     $result = mysqli_query($conn,$mID);
-    $result = getDataAsArray($result);
+    $result = json_encode(getDataAsArray($result));
     return $result;
 }
 
