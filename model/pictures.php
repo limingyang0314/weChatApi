@@ -21,7 +21,8 @@ function other_upload_into_db($type,$pointerID,$file_name,$conn){
         $id = 'aID';
     }
     $url = "/upload/{$type}/{$file_name}";
-    $sql = "INSERT INTO {$type} ($id, pName, pURL) VALUES ('{$pointerID}','{$file_name}','{$url}')";
+    $sql = "INSERT INTO {$type} ($id, pName, pURL) 
+    VALUES ('{$pointerID}','{$file_name}','{$url}')";
     $result = mysqli_query($conn, $sql);
 }
 
@@ -31,7 +32,8 @@ function other_upload_into_db($type,$pointerID,$file_name,$conn){
 */
 function banners_upload_into_db($type,$file_name,$first_typeID,$second_typeID,$conn){
     //include 'mysql.php';
-    $sql = "INSERT INTO {$type} (b_name,first_typeID,second_typeID) VALUES ('{$file_name}','{$first_typeID}','{$second_typeID}')";
+    $sql = "INSERT INTO {$type} (b_name,first_typeID,second_typeID) 
+    VALUES ('{$file_name}','{$first_typeID}','{$second_typeID}')";
     //$conn->query($sql);
     mysqli_query($conn, $sql);
 }

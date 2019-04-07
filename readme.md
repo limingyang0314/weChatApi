@@ -6,6 +6,8 @@
 
 此外外，建议前端把BASE_URL单独写出来，不要直接完整复制URL，我可能在之后会换域名。
 
+所有批量获取数据的接口都已经增加了分页参数，请务必在前端补充相关参数。
+
 
 
 ## 用户验证与用户信息
@@ -140,9 +142,9 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_id&aID=
 ### 按openID获取某一作者的所有文章
 
 https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_author&openID=1111
-| 方法 | openID |
-| ------ | ------ |
-| GET | 微信标志用户唯一性的ID |
+| 方法 | openID | limit | page |
+| ------ | ------ | ------ | ------ |
+| GET | 微信标志用户唯一性的ID | 每页多少篇 | 页数 |
 注意：考虑到获取多篇文章多作为列表使用，一般不需要获取文章的全部信息，因此考虑到查询数据的优化，每条文章只显示部分信息。
 
 ```json
@@ -204,9 +206,9 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_author&
 ###按分类获取文章，并按时间或热度排序
 
 https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_type&typeID=1&mode=1
-| 方法 | typeID | mode |
-| ------ | ------ | ------ |
-| GET | 这是文章的typeID | 1为时间，2为热度 |
+| 方法 | typeID | mode | limit | page |
+| ------ | ------ | ------ | ------ | ------ |
+| GET | 这是文章的typeID | 1为时间，2为热度 | 每页数量 | 页数 |
 ```json
 {
     "error_code":-1,
@@ -397,6 +399,9 @@ https://wechatmore.xyz:666/api/items.php?secondType=select_item_by_id&openID=111
 
 ###根据openID获取商品
 https://wechatmore.xyz:666/api/items.php?secondType=select_item_by_author&openID=1111
+| 方法 | openID | limit | page |
+| ------ | ------ | ------ | ------ |
+| GET | 微信标志用户唯一性的ID | 每页多少篇 | 页数 |
 ```json
 {
     "error_code":-1,
@@ -433,6 +438,122 @@ https://wechatmore.xyz:666/api/items.php?secondType=select_item_by_author&openID
 }
 ```
 
+###根据类型获取商品
+https://wechatmore.xyz:666/api/items.php?secondType=select_item_by_type&type=1&limit=3&page=1
+| 方法 | type | limit | page |
+| ------ | ------ | ------ | ------ |
+| GET | 商品类型的ID | 每页多少篇 | 页数 |
+```json
+{
+    "error_code":-1,
+    "message":null,
+    "result":[
+        {
+            "iID":"7",
+            "username":"omingyyfy",
+            "item_info":"hello son",
+            "type_name":"旧书",
+            "hot":"0",
+            "time":"2019-04-08 00:02:49",
+            "pictures":[
+                {
+                    "pURL":"/upload/item_pictures/item_pictures_1554652969 _1 .png"
+                }
+            ]
+        },
+        {
+            "iID":"6",
+            "username":"omingyyfy",
+            "item_info":"hello son",
+            "type_name":"旧书",
+            "hot":"0",
+            "time":"2019-04-07 22:42:18",
+            "pictures":[
+
+            ]
+        },
+        {
+            "iID":"5",
+            "username":"omingyyfy",
+            "item_info":"hello son",
+            "type_name":"旧书",
+            "hot":"0",
+            "time":"2019-04-07 22:41:49",
+            "pictures":[
+
+            ]
+        }
+    ]
+}
+```
+
+###根据openID获取商品
+```json
+{
+    "error_code":-1,
+    "message":null,
+    "result":[
+        {
+            "iID":"7",
+            "username":"omingyyfy",
+            "item_info":"hello son",
+            "type_name":"旧书",
+            "hot":"0",
+            "time":"2019-04-08 00:02:49",
+            "pictures":[
+                {
+                    "pURL":"/upload/item_pictures/item_pictures_1554652969 _1 .png"
+                }
+            ]
+        },
+        {
+            "iID":"6",
+            "username":"omingyyfy",
+            "item_info":"hello son",
+            "type_name":"旧书",
+            "hot":"0",
+            "time":"2019-04-07 22:42:18",
+            "pictures":[
+
+            ]
+        },
+        {
+            "iID":"5",
+            "username":"omingyyfy",
+            "item_info":"hello son",
+            "type_name":"旧书",
+            "hot":"0",
+            "time":"2019-04-07 22:41:49",
+            "pictures":[
+
+            ]
+        },
+        {
+            "iID":"4",
+            "username":"omingyyfy",
+            "item_info":"hello son",
+            "type_name":"旧书",
+            "hot":"0",
+            "time":"2019-04-07 22:38:25",
+            "pictures":[
+
+            ]
+        },
+        {
+            "iID":"3",
+            "username":"omingyyfy",
+            "item_info":"hello son",
+            "type_name":"旧书",
+            "hot":"0",
+            "time":"2019-04-07 22:36:05",
+            "pictures":[
+
+            ]
+        }
+    ]
+}
+```
+
 ###发布商品
 所有图片目前只支持("gif", "jpeg", "jpg", "png")这四种格式，可以再加，请联系我。
 返回值里的iID是发布成功后的商品ID号，可以根据这个直接做跳转。
@@ -440,6 +561,15 @@ https://wechatmore.xyz:666/api/items.php?secondType=insert_item&openID=1111
 | 方法 | openID | item_type | item_info | file1 | file2 | file3 |
 | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 | POST | openID是get传的 | 商品类型ID | 商品介绍 | 选填 图片1 | 选填 图片2 | 选填 图片3 |
+```json
+{
+    "error_code":-1,
+    "message":null,
+    "result":{
+        "iID":"7"
+    }
+}
+```
 
 
 ## 收藏的获取，添加以及热度相关
