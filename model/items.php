@@ -20,13 +20,45 @@ function select_item_by_author($openID, $conn){
     return $result;
 }
 
-function insert_item($openID, $item_type, $item_info, $conn){
-    $sql = "INSERT INTO items (iType_ID,openID,item_info) VALUES ($item_type, $openID, $item_info)";
+function select_item_by_type($type, $conn){
+    $sql = "SELECT I.iID, U.username, I.item_info, T.type_name, I.hot, I.time FROM items I, item_types T, users U  WHERE I.itype_ID = $type AND T.type_id = I.iType_ID AND U.openID = I.openID";
     $result = mysqli_query($conn,$sql);
+    $result = getDataAsArray($result);
+    $result = add_pic_to_data($result, $conn);
+    return $result;
 }
 
-function insert_picture($file){
+function insert_item($openID, $item_type, $item_info, $conn){
+    $sql = "INSERT INTO items (iType_ID,openID,item_info) VALUES ($item_type, '$openID', '$item_info')";
+    //echo $sql;
+    $result = mysqli_query($conn,$sql);
 
+    $sql = "SELECT iID FROM items WHERE openID = '{$openID}' ORDER BY time DESC LIMIT 0,1";
+
+    //echo $sql;
+    $result = getDataAsArray(mysqli_query($conn, $sql));
+    //var_dump($result);
+
+    $iID = $result[0]->iID;
+    //$result = 
+    //echo $sql;
+    if(isset($_FILES["file1"])){
+        //echo "start upload file1";
+        insert_item_picture($_FILES["file1"],$iID,$conn,1);
+    }
+    if(isset($_FILES["file2"])){
+        insert_item_picture($_FILES["file2"],$iID,$conn,2);
+    }
+    if(isset($_FILES["file3"])){
+        insert_item_picture($_FILES["file3"],$iID,$conn,3);
+    }
+
+    return array('iID' => $iID);
+}
+
+function insert_item_picture($file,$iID,$conn,$order){
+    require_once "../model/pictures.php";
+    upload_picture('item_pictures',$conn, $file, $iID,0,0,$order);
 }
 
 /*

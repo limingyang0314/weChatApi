@@ -13,12 +13,15 @@ function finish_picture_select($type, $result){
 **上传成功的article or item picture插入数据库
 */
 function other_upload_into_db($type,$pointerID,$file_name,$conn){
-    //include 'mysql.php';
+    $id = null;
+    if($type == 'item_pictures'){
+        $id = 'iID';
+    }
+    if($type == 'article_pictures'){
+        $id = 'aID';
+    }
     $url = "/upload/{$type}/{$file_name}";
-    $sql = "INSERT INTO {$type} (aID, pName, pURL) VALUES ('{$pointerID}','{$file_name}','{$url}')";
-    //echo "<br>";
-    //echo $sql;
-    //$conn->query($sql);
+    $sql = "INSERT INTO {$type} ($id, pName, pURL) VALUES ('{$pointerID}','{$file_name}','{$url}')";
     $result = mysqli_query($conn, $sql);
 }
 
