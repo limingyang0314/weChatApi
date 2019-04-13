@@ -2,6 +2,7 @@
 require_once "middle/session.php";
 //require_once "model/mysql.php";
 if(isset($_POST['code'])){
+    //echo "nb";
     $js_code = $_POST['code'];
     //session_start();
     require_once "user.php";
@@ -16,7 +17,6 @@ if(isset($_POST['code'])){
         $state['message'] = $session_obj->errmsg;
         echo json_encode($state);
         exit;
-
     }
 
     $_SESSION['openID'] = $session_obj->openid;
@@ -48,7 +48,7 @@ if(isset($_POST['code'])){
         avatar = '{$avatar}',
         username = '{$username}' 
         WHERE openID = '{$openID}'";
-        
+
         //echo $sql;
         $result = mysqli_query($conn, $sql);
         if($result){

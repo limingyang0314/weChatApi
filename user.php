@@ -1,5 +1,6 @@
 <?php
-include "model/mysql.php";
+//本文件是专供全局调用的user相关功能，与api目录下的作区别
+require_once "model/mysql.php";
 //include "curl.php";
 
 function get_openID($js_code){
@@ -9,21 +10,4 @@ function get_openID($js_code){
     //$_SESSION['openID'] = "omfHM4iU0EA1jCLmUh43itEhtpcc";//json_decode($result)->openid;
     return json_decode($result);
     //echo $_SESSION['openID'];
-}
-
-function get_user_info($openID, $conn){
-    $sql = "SELECT U.openID, U.username,U.avatar, L.location_name, S.school_name FROM users U, locations L, schools S WHERE U.openID = '{$openID}' AND L.location_id = U.location_id AND S.sID = U.school_id";
-    $sql = "SELECT * FROM users WHERE openID = '1111'";
-    if (mysqli_connect_errno($conn)) { 
-        echo "连接 MySQL 失败: " . mysqli_connect_error(); 
-    } 
-
-    //echo $sql;
-    //$conn = mysqli_connect('localhost', 'root', 'dawangba1', 'wechatapi');
-    $result = mysqli_select_db($conn,$sql);
-    //$result = $conn->query($sql);
-    //$result = getDataAsArray($result);
-    $err = mysqli_error($conn);
-    var_dump($err);
-    return $result;
 }

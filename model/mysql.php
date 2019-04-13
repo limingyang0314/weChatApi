@@ -9,3 +9,19 @@ function getDataAsArray($temp){
     }
     return $result;
 }
+
+function check_session($session_key,$conn){
+    $sql = "SELECT openID FROM users WHERE session_key = '$session_key'";
+    //echo $sql;
+
+    $result = mysqli_query($conn, $sql);
+    if($sql){
+        $result = getDataAsArray($result);
+        setcookie("openID", $result[0]->openID, time()+3600);
+        //echo "!!!session ok!!!";
+    }else{
+        //echo "!!!not ok!!!";
+        exit;
+    }
+
+}

@@ -175,6 +175,3 @@ require_once 'mysql.php';
         }
     
     }
-
-
-
