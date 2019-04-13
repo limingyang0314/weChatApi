@@ -17,7 +17,8 @@ function check_session($session_key,$conn){
     $result = mysqli_query($conn, $sql);
     if($sql){
         $result = getDataAsArray($result);
-        setcookie("openID", $result[0]->openID, time()+3600);
+        $_SESSION['openID'] = $result[0]->openID;
+        //setcookie("openID", $result[0]->openID, time()+3600);
         //echo "!!!session ok!!!";
     }else{
         //echo "!!!not ok!!!";
