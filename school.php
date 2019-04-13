@@ -66,24 +66,29 @@ function get_location($conn){
     exit;
 }
 
+session_start();
 if(isset($_GET['action'])){
     if($_GET['action'] == 'check_school'){
+        //echo "session ".$_SESSION['session_key'];
         //echo "session_key = {$_COOKIE['session_key']} openID = {$_COOKIE['openID']} ";
-        check_session($_COOKIE['session_key'],$conn);
-        check_school($_COOKIE['openID'],$conn);
+        check_session($_SESSION['session_key'],$conn);
+        check_school($_SESSION['openID'],$conn);
     }
 
     if($_GET['action'] == 'set_school'){
-        check_session($_COOKIE['session_key'],$conn);
-        set_school($_COOKIE['openID'],$_POST['school_id'],$conn);
+        //echo "session ".$_SESSION['session_key'];
+        check_session($_SESSION['session_key'],$conn);
+        set_school($_SESSION['openID'],$_POST['school_id'],$conn);
     }
 
     if($_GET['action'] == 'get_school'){
+        //echo "session ".$_SESSION['session_key'];
         get_school($_GET['location_id'],$conn);
 
     }
 
     if($_GET['action'] == 'get_location'){
+        //echo "session ".$_SESSION['session_key'];
         get_location($conn);
     }
 

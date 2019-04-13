@@ -20,11 +20,11 @@ if(isset($_POST['code'])){
     }
 
     $_SESSION['openID'] = $session_obj->openid;
-    $_COOKIE['openID'] = $session_obj->openid;
-    setcookie("session_key", $session_obj->session_key, time()+3600);
-    //$_SESSION['session_key'] = $session_obj->session_key;
+    //$_COOKIE['openID'] = $session_obj->openid;
+    //setcookie("session_key", $session_obj->session_key, time()+3600);
+    $_SESSION['session_key'] = $session_obj->session_key;
     //$_COOKIE['session_key'] = $session_obj->session_key;
-    setcookie("openID", $session_obj->openid, time()+3600);
+    //setcookie("openID", $session_obj->openid, time()+3600);
     $openID = $session_obj->openid;
 
     $sql = "SELECT * FROM users WHERE openID = '{$openID}'";
