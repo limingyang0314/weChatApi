@@ -43,7 +43,12 @@ if(isset($_POST['code'])){
     
 
     if($result){
-        $sql = "UPDATE users SET session_key = '{$session_key}' WHERE openID = '{$openID}'";
+        $sql = "UPDATE users 
+        SET session_key = '{$session_key}',
+        avatar = '{$avatar}',
+        username = '{$username}' 
+        WHERE openID = '{$openID}'";
+        
         //echo $sql;
         $result = mysqli_query($conn, $sql);
         if($result){
