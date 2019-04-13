@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2019-04-07 23:42:57
+Date: 2019-04-14 00:13:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -226,7 +226,7 @@ CREATE TABLE `items` (
   `hot` int(255) NOT NULL DEFAULT '0',
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`iID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of items
@@ -237,6 +237,7 @@ INSERT INTO `items` VALUES ('3', '1', '1111', null, 'hello son', '0', '2019-04-0
 INSERT INTO `items` VALUES ('4', '1', '1111', null, 'hello son', '0', '2019-04-07 22:38:25');
 INSERT INTO `items` VALUES ('5', '1', '1111', null, 'hello son', '0', '2019-04-07 22:41:49');
 INSERT INTO `items` VALUES ('6', '1', '1111', null, 'hello son', '0', '2019-04-07 22:42:18');
+INSERT INTO `items` VALUES ('7', '1', '1111', null, 'hello son', '0', '2019-04-08 00:02:49');
 
 -- ----------------------------
 -- Table structure for item_pictures
@@ -248,13 +249,14 @@ CREATE TABLE `item_pictures` (
   `pName` varchar(255) NOT NULL,
   `pURL` varchar(255) NOT NULL,
   PRIMARY KEY (`pID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of item_pictures
 -- ----------------------------
 INSERT INTO `item_pictures` VALUES ('1', '1', 'test.jpg', '/upload/item_pictures/test.jpg');
 INSERT INTO `item_pictures` VALUES ('2', '1', 'test2.jpg', '/upload/hahahah.jpg');
+INSERT INTO `item_pictures` VALUES ('4', '7', 'item_pictures_1554652969 _1 .png', '/upload/item_pictures/item_pictures_1554652969 _1 .png');
 
 -- ----------------------------
 -- Table structure for item_types
@@ -280,12 +282,14 @@ CREATE TABLE `locations` (
   `location_id` int(11) NOT NULL AUTO_INCREMENT,
   `location_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`location_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of locations
 -- ----------------------------
 INSERT INTO `locations` VALUES ('1', '天津市');
+INSERT INTO `locations` VALUES ('2', '河北省');
+INSERT INTO `locations` VALUES ('3', '内蒙古');
 
 -- ----------------------------
 -- Table structure for messages
@@ -321,12 +325,21 @@ CREATE TABLE `schools` (
   `school_name` varchar(255) NOT NULL,
   `location_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`sID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of schools
 -- ----------------------------
 INSERT INTO `schools` VALUES ('1', '天津大学', '1');
+INSERT INTO `schools` VALUES ('2', '南开大学', '1');
+INSERT INTO `schools` VALUES ('3', '天津医科大学', '1');
+INSERT INTO `schools` VALUES ('4', '河北工业大学', '1');
+INSERT INTO `schools` VALUES ('5', '天津财经大学', '1');
+INSERT INTO `schools` VALUES ('6', '天津师范大学', '1');
+INSERT INTO `schools` VALUES ('7', '天津理工大学', '1');
+INSERT INTO `schools` VALUES ('8', '河北大学', '2');
+INSERT INTO `schools` VALUES ('9', '燕山大学', '2');
+INSERT INTO `schools` VALUES ('10', '河北科技大学', '2');
 
 -- ----------------------------
 -- Table structure for users
@@ -345,6 +358,8 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1111', 'omingyyfy', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '1', null);
-INSERT INTO `users` VALUES ('omfHM4iU0EA1jCLmUh43itEhtpcc', 'tester2', '1', '1.jpg', '1', null);
-INSERT INTO `users` VALUES ('ozInc4nxFajRO-7DVyg7WfLb2GcE', '呜喵王', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', null, null);
+INSERT INTO `users` VALUES ('1111', 'omingyyfy', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', 'hello');
+INSERT INTO `users` VALUES ('2222', 'test1', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', '');
+INSERT INTO `users` VALUES ('omfHM4iU0EA1jCLmUh43itEhtpcc', 'tester2', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', null);
+INSERT INTO `users` VALUES ('ozInc4nxFajRO-7DVyg7WfLb2GcE', '呜喵王', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', 'ywDUMGwspR5w5FDZc1sXoA==');
+INSERT INTO `users` VALUES ('{$openID}', '{$username}', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', '{$session_key}');
