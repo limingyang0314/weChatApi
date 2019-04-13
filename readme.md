@@ -1,62 +1,10 @@
 ## 整体情况
 
-由于目前对用户的相关接口仍需讨论，以下接口大多未添加用户参数，或在后台暂时写死了open ID，或直接让前端传open ID到后台， 这些都是临时的， 相关问题讨论完毕后将对所有接口一并修改。
-
-此外，涉及数据安全的问题，比如接口调用时的验证，也要在讨论后一并解决。
-
-此外外，建议前端把BASE_URL单独写出来，不要直接完整复制URL，我可能在之后会换域名。
-
-所有批量获取数据的接口都已经增加了分页参数，请务必在前端补充相关参数。
-
-
+搜索接口和用户相关接口单独提供文档，其它接口如果出现问题可以随时向我反映。
 
 ## 用户验证与用户信息
 
-### 根据微信返回的code获取open ID
-
-https://wechatmore.xyz:666/api/users.php?secondType=get_openID&code=1111
-
-| 方法 | code |
-| ------ | ------ |
-| GET | 微信返回 |
-
-```json
-{
-    "session_key":"IsF3LyFRIirnD7+EbH5vtg==",
-    "openid":"omfHM4iU0EA1jCLmUh43itEhtpcc"
-}
-```
-
-### 根据open ID获取对应用户的信息
-| 方法 | open ID |
-| ------ | ------ |
-| GET | 微信标志用户唯一性的ID |
-```json
-{
-    "error_code":-1,
-    "message":null,
-    "result":[
-        {
-            "openID":"1111",
-            "username":"omingyyfy",
-            "avatar":"1.jpg",
-            "location_name":"天津市",
-            "school_name":"天津大学"
-        }
-    ]
-}
-```
-### 登陆
-基本定型，但还未写完，请勿使用，争取本周末做完
-原则：每次登陆时，将code和其它非敏感信息发给本接口，后台将会把code解析成openID
-https://wechatmore.xyz:666/api/users.php?secondType=login&openID=1111&session_key=aaaa&username=aaaa&avatar=bbbb
-| 方法 | code | username | avatar |
-| ------ | ------ | ------ | ------ |
-| GET | code | 微信提供的用户名 | 微信提供的头像|
-
-###获取用户的信息
-由于登陆操作不会经常进行，登陆后也要频繁获取用户的信息，将通过此接口获取用户信息
-还未完成
+单独附上文档说明
 
 
 
@@ -611,12 +559,25 @@ https://wechatmore.xyz:666/api/collections.php?secondType=select_article_collect
     "result":[
         {
             "aID":"1",
-            "title":"这是第一篇文章",
+            "openID":"1111",
+            "username":"omingyyfy",
+            "avatar":"https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content":"新的一年伊始
+牵动千万游子心的海棠季
+即将拉开帷幕
+又一年海棠花开
+我们等你缓缓归矣
+今年的海棠季专属明信片
+仍然由你来定义
+快来选出你心中的最佳明信片吧",
             "time":"2019-03-11 13:43:52"
         },
         {
             "aID":"2",
-            "title":"这是第二篇文章",
+            "openID":"1111",
+            "username":"omingyyfy",
+            "avatar":"https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content":"天津大学是教育部直属国家重点大学，也是985工程、211工程首批高校。学校创建于1895年，前身为北洋大学",
             "time":"2019-03-13 19:33:30"
         }
     ]
@@ -632,12 +593,18 @@ https://wechatmore.xyz:666/api/collections.php?secondType=select_item_collection
     "result":[
         {
             "iID":"1",
-            "item_info":"这是土豆",
+            "openID":"1111",
+            "username":"omingyyfy",
+            "avatar":"https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "item_info":"这是土豆,haha",
             "time":"2019-03-23 22:34:31"
         },
         {
             "iID":"2",
-            "item_info":"这是西瓜",
+            "openID":"1111",
+            "username":"omingyyfy",
+            "avatar":"https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "item_info":"这是西瓜,hoho",
             "time":"2019-03-23 22:34:31"
         }
     ]

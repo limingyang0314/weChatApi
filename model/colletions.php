@@ -13,7 +13,14 @@ function finish_colletion_select($result){
 **根据openID获取用户收藏文章
 */
 function get_article_collection($openID,$conn){
-    $query = "SELECT A.aID, A.title, C.time FROM colletions C, articles A WHERE C.openID = '{$openID}' AND C.type = 1 AND A.aID = C.pointerID";
+    $query = "SELECT A.aID, A.openID, U.username, U.avatar, A.content, C.time 
+    FROM colletions C, articles A, users U
+    WHERE C.openID = '{$openID}' 
+    AND C.type = 1 
+    AND A.aID = C.pointerID
+    AND U.openID = A.openID";
+    //echo $query;
+
     $result = $conn->query($query);
     return finish_colletion_select($result);
 }
@@ -22,7 +29,13 @@ function get_article_collection($openID,$conn){
 **根据openID获取用户收藏商品
 */
 function get_item_collection($openID, $conn){
-    $query = "SELECT I.iID, I.item_info, I.time FROM colletions C, items I WHERE C.openID = '{$openID}' AND C.type = 2 AND I.iID = C.pointerID";
+    $query = "SELECT I.iID, I.openID, U.username, U.avatar, I.item_info, I.time 
+    FROM colletions C, items I , users U
+    WHERE C.openID = '{$openID}' 
+    AND C.type = 2 
+    AND I.iID = C.pointerID
+    AND U.openID = I.openID";
+
     //echo $query;
     //exit;
     $result = $conn->query($query);

@@ -110,7 +110,13 @@ require_once 'mysql.php';
     **优先获取附近推送，返回多条简要信息
     */
     function select_articles_near($location_id, $conn){
-        $sql = "SELECT A.aid, A.content, T.type_name, U.username, A.time, U.openID FROM articles A, users U, article_types T WHERE A.openID = '$openID' AND T.type_id = A.type_id AND U.openID = A.openID ORDER BY A.time DESC";
+        $sql = "SELECT A.aid, A.content, T.type_name, U.username, A.time, U.openID 
+        FROM articles A, users U, article_types T 
+        WHERE A.openID = '$openID' 
+        AND T.type_id = A.type_id 
+        AND U.openID = A.openID 
+        ORDER BY A.time DESC";
+        
         $result = mysqli_query($conn,$sql);
         return finish_article_select_list($result);
     }
