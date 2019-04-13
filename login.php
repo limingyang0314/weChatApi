@@ -20,11 +20,13 @@ if(isset($_POST['code'])){
     }
 
     $_SESSION['openID'] = $session_obj->openid;
+    $_COOKIE['openID'] = $session_obj->openid;
     $_SESSION['session_key'] = $session_obj->session_key;
+    $_COOKIE['session_key'] = $session_obj->session_key;
     $openID = $session_obj->openid;
 
     $sql = "SELECT * FROM users WHERE openID = '{$openID}'";
-    echo $sql;
+    //echo $sql;
 
 
     $username = $user_info['username'] = $_POST['username'];
@@ -40,7 +42,7 @@ if(isset($_POST['code'])){
 
     if($result){
         $sql = "UPDATE users SET session_key = '{$session_key}' WHERE openID = '{$openID}'";
-        echo $sql;
+        //echo $sql;
         $result = mysqli_query($conn, $sql);
         if($result){
             $state['openID'] = $openID;
