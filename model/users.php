@@ -26,7 +26,12 @@ function get_openID($js_code){
     require_once("../curl.php");
     $result = getToken($url);
     session_start();
-    $_SESSION['openID'] = "omfHM4iU0EA1jCLmUh43itEhtpcc";//json_decode($result)->openid;
+    $temp = json_decode($result);
+    //var_dump($temp);
+    $_SESSION['openID'] = $temp->openid;//json_decode($result)->openid;
+    $_COOKIE['session_key'] = $temp->session_key;
+    //echo $_SESSION['openID'];
+    //echo "   ".$_COOKIE['session_key']."  ";
     echo $result;
     //echo $_SESSION['openID'];
 }
