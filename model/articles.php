@@ -46,8 +46,8 @@ require_once 'mysql.php';
         FROM articles A, users U, article_types T 
         WHERE A.aID = {$aID} 
         AND T.type_id = A.type_id 
-        AND U.openID = A.openID 
-        ORDER BY time DESC LIMIT {$start},{$limit}";
+        AND U.openID = A.openID";
+        //ORDER BY time DESC LIMIT {$start},{$limit}";
 
         $result = mysqli_query($conn,$sql);
         return finish_article_select_exactly($aID,$result,$conn);
