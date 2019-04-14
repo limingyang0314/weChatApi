@@ -756,6 +756,47 @@ https://wechatmore.xyz:666/api/pictures.php?secondType=get_banner&number=2
 }
 ```
 
+###获取某一板块的所有banner，以时间降序
+https://wechatmore.xyz:666/api/pictures.php?secondType=get_banner_by_type&first_type=1&second_type=1
+| 方法 | first_type | second_type |
+| ------  | ------ | ------ |
+| GET  | 大类ID，1为文章，2为商品 | 小类ID |
+```json
+{
+    "error_code":-1,
+    "message":null,
+    "result":[
+        {
+            "bID":"15",
+            "b_name":"banners_1553427061.png",
+            "time":"2019-03-24 19:31:01",
+            "first_typeID":"1",
+            "second_typeID":"1"
+        },
+        {
+            "bID":"14",
+            "b_name":"banners_1553427052.png",
+            "time":"2019-03-24 19:30:52",
+            "first_typeID":"1",
+            "second_typeID":"1"
+        },
+        {
+            "bID":"13",
+            "b_name":"banners_1553427044.png",
+            "time":"2019-03-24 19:30:44",
+            "first_typeID":"1",
+            "second_typeID":"1"
+        },
+        {
+            "bID":"12",
+            "b_name":"banners_1553427035.png",
+            "time":"2019-03-24 19:30:35",
+            "first_typeID":"1",
+            "second_typeID":"1"
+        }
+    ]
+}
+```
 
 
 ### 删除banner
@@ -771,6 +812,7 @@ https://wechatmore.xyz:666/api/pictures.php?secondType=delete_banner&id=2
     "result":"我觉得ok"
 }
 ```
+
 
 ####banner的使用
 

@@ -108,6 +108,19 @@ function upload_picture($type,$conn,$file,$pointerID = null,$first_typeID = null
         return finish_picture_select('banners',$result);
     }
 
+        /*
+    **获取数量为number的最近banner
+    */
+    function get_banners_by_type($first_type,$second_type,$conn){
+        $theLastIndex = $number;
+        $sql = "SELECT * FROM banners 
+        WHERE first_typeID = $first_type 
+        AND second_typeID = $second_type 
+        ORDER BY time DESC";
+        $result = mysqli_query($conn,$sql);
+        return finish_picture_select('banners',$result);
+    }
+
     /*
     **删除id标注的banner
     */
