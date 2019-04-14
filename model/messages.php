@@ -6,16 +6,20 @@
 */
 function get_message_by_openID($openID, $limit, $page, $conn){
     $start = $limit * ($page - 1);
-    $sql = "SELECT M.from_who, M.mID, M.content 
-    FROM messages M, users U 
+    $sql = "SELECT M.from_who, M.mID, M.content,U.username, U.avatar, M.mType, M.aID, A.content AS article_content ,M.cID, c.content AS comment_content
+    FROM messages M, users U, articles A, comments C
     WHERE M.to_who = '$openID' 
+    AND A.aID = M.aID 
+    AND C.cID = M.cID
     AND U.openID = M.from_who 
-    ORDER BY time 
+    ORDER BY M.time 
     DESC LIMIT {$start},{$limit}";
 
-    $result = mysqli_query($conn,$mID);
+    //echo $sql;
+
+    $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
-    return json_encode($result);
+    return $result;
 }
 
 /*
@@ -23,16 +27,20 @@ function get_message_by_openID($openID, $limit, $page, $conn){
 */
 function get_message_by_openID_not_read($openID, $limit, $page, $conn){
     $start = $limit * ($page - 1);
-    $sql = "SELECT M.from_who, M.mID, M.content 
-    FROM messages M, users U 
+    $sql = "SELECT M.from_who, M.mID, M.content, U.username, U.avatar, M.mType, M.aID, A.content AS article_content ,M.cID, c.content AS comment_content
+    FROM messages M, users U, articles A, comments C
     WHERE M.to_who = '$openID' 
     AND U.openID = M.from_who 
-    AND M.has_read <> 1 
-    ORDER BY time 
-    DESC LIMIT {$start},{$limit}";
+    AND A.aID = M.aID 
+    AND C.cID = M.cID
+    AND M.has_read <> 1
+    ORDER BY M.time 
+    DESC LIMIT {$start},{$limit}";//AND M.has_read <> 1 
 
-    $result = mysqli_query($conn,$mID);
-    $result = json_encode(getDataAsArray($result));
+    //echo $sql;
+
+    $result = mysqli_query($conn,$sql);
+    $result = getDataAsArray($result);
     return $result;
 }
 
@@ -40,8 +48,18 @@ function get_message_by_openID_not_read($openID, $limit, $page, $conn){
 **将某条消息标为已读
 */
 function set_had_read($mID, $conn){
-    $sql = "UPDATE messages SET has_read = 1 WHERE mID = $mid";
-    $result = mysqli_query($conn,$mID);
+    $sql = "UPDATE messages SET has_read = 1 WHERE mID = $mID";
+    //echo $sql;
+    $result = mysqli_query($conn,$sql);
+    $sql = "SELECT has_read FROM messages WHERE mID = $mID";
+    $result = mysqli_query($conn,$sql);
+    $result = getDataAsArray($result);
+    //var_dump($result);
+    if($result[0]->has_read == 1){
+        $result = "success";
+    }else{
+        $result = "fail";
+    }
     return $result;
 }
 
@@ -50,7 +68,7 @@ function set_had_read($mID, $conn){
 */
 function delete_message($mID, $conn){
     $sql = "DELECT FROM messages WHERE mID = $mid";
-    $result = mysqli_query($conn,$mID);
+    $result = mysqli_query($conn,$sql);
     return $result;
 }
 

@@ -4,13 +4,13 @@ require_once "./api.php";
     require_once "../model/messages.php";
     switch ($_GET['secondType']){
     case 'get_message_by_openID':
-        echo error_code(get_message_by_openID($_GET['openID'], $_GET['limit'], $_GET['page'], $conn));
+        echo json_encode(error_code(get_message_by_openID($_GET['openID'], $_GET['limit'], $_GET['page'], $conn)));
         break;
     case 'get_message_by_openID_not_read':
-        echo error_code(get_message_by_openID_not_read($_GET['openID'], $_GET['limit'], $_GET['page'], $conn));
+        echo json_encode(error_code(get_message_by_openID_not_read($_GET['openID'], $_GET['limit'], $_GET['page'], $conn)));
         break;
     case 'set_had_read':
-        echo error_code(set_had_read($_POST['mID'], $conn));
+        echo json_encode(error_code(set_had_read($_GET['mID'], $conn)));
         break;
     case 'delete_message':
         delete_message($_POST['mID'], $conn);
