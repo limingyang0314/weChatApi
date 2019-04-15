@@ -29,6 +29,11 @@ function insert_comment($cType, $pointerID, $openID, $content, $conn){
     $result = mysqli_query($conn, $sql);
     //echo $sql;
     if($result){
+        //$sql = "SELECT * FROM comments WHERE openID = '$openID' Limit 0,1 ORDER BY time DESC";
+        //$result = mysqli_query($conn,$sql);
+        $condition = "openID = $openID";
+        $the_last_one = get_lastOne('comments',$condition);
+        //var_dump($the_last_one);
         return "insert success!";
     }else{
         return "insert fail!";
@@ -44,5 +49,13 @@ function delete_comment($openID, $cid, $conn){
     }else{
         return "delete fail!";
     }
+
+}
+
+/*
+**向被回复者发送消息
+*/
+function send_message($openID, $aID, $cID){
+    
 
 }
