@@ -16,7 +16,7 @@ $GLOBALS['db_name'] = $db_name;
 $conn = mysqli_connect($GLOBALS['db_host'], $GLOBALS['db_user'], $GLOBALS['db_pw'], $GLOBALS['db_name']);
 mysqli_query($conn,'set names utf8');
 $GLOBALS['conn'] = $conn;
-$conn_obj = new mysqli($GLOBALS['db_host'],$GLOBALS['db_name'],$GLOBALS['db_pw'],$GLOBALS['db_name']);
+$conn_obj = new mysqli($GLOBALS['db_host'],$GLOBALS['db_user'],$GLOBALS['db_pw'],$GLOBALS['db_name']);
 $conn_obj->query('set names utf8');
 $GLOBALS['conn_obj'] = $conn_obj;
 
