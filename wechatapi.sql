@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2019-04-14 00:13:34
+Date: 2019-04-15 21:41:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -303,7 +303,7 @@ CREATE TABLE `messages` (
   `content` varchar(255) NOT NULL,
   `aID` int(11) DEFAULT NULL,
   `cID` int(11) DEFAULT NULL,
-  `has_read` int(11) DEFAULT NULL,
+  `has_read` int(11) NOT NULL DEFAULT '0',
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`mID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
@@ -311,10 +311,10 @@ CREATE TABLE `messages` (
 -- ----------------------------
 -- Records of messages
 -- ----------------------------
-INSERT INTO `messages` VALUES ('1', '1', '1111', '1111', '你好，我是你爹！', null, null, '1', '2019-04-07 23:41:17');
-INSERT INTO `messages` VALUES ('2', '1', '$to', '$from', '$comment', null, null, null, '2019-04-07 23:41:17');
-INSERT INTO `messages` VALUES ('3', '1', '$to', '$from', '$comment', null, null, null, '2019-04-07 23:41:17');
-INSERT INTO `messages` VALUES ('4', '2', '$to', '$from', '$comment', '1', '1', null, '2019-04-07 23:41:17');
+INSERT INTO `messages` VALUES ('1', '1', '1111', '2222', '你好，我是你爹！', '1', '2', '1', '2019-04-07 23:41:17');
+INSERT INTO `messages` VALUES ('2', '1', '1111', '2222', '$comment', '1', '2', '1', '2019-04-07 23:41:18');
+INSERT INTO `messages` VALUES ('3', '1', '1111', '2222', '$comment', '1', '2', '0', '2019-04-07 23:41:19');
+INSERT INTO `messages` VALUES ('4', '2', '1111', '2222', '$comment', '1', '3', '0', '2019-04-07 23:41:20');
 
 -- ----------------------------
 -- Table structure for schools
