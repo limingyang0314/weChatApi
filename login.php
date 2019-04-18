@@ -37,12 +37,14 @@ if(isset($_POST['code'])){
     $session_key = $user_info['session_key'] = $session_obj->session_key;
     $location = 1;
 
-    $result = mysqli_query($conn, $sql);
+    $result = getDataAsArray(mysqli_query($conn, $sql));
 
 
+    //var_dump($result);
+    //var_dump($state);
     
 
-    if($result){
+    if(!empty($result)){
         $sql = "UPDATE users 
         SET session_key = '{$session_key}',
         avatar = '{$avatar}',
