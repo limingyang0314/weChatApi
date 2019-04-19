@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2019-04-19 19:37:23
+Date: 2019-04-19 22:56:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,7 +35,7 @@ CREATE TABLE `articles` (
 -- ----------------------------
 -- Records of articles
 -- ----------------------------
-INSERT INTO `articles` VALUES ('1', '1', '1111', '', '新的一年伊始\r\n牵动千万游子心的海棠季\r\n即将拉开帷幕\r\n又一年海棠花开\r\n我们等你缓缓归矣\r\n今年的海棠季专属明信片\r\n仍然由你来定义\r\n快来选出你心中的最佳明信片吧', '2019-03-11 09:01:36', '1', '5', '0');
+INSERT INTO `articles` VALUES ('1', '1', '1111', '', '新的一年伊始\r\n牵动千万游子心的海棠季\r\n即将拉开帷幕\r\n又一年海棠花开\r\n我们等你缓缓归矣\r\n今年的海棠季专属明信片\r\n仍然由你来定义\r\n快来选出你心中的最佳明信片吧', '2019-03-11 09:01:36', '1', '5', '3');
 INSERT INTO `articles` VALUES ('2', '1', '1111', '', '天津大学是教育部直属国家重点大学，也是985工程、211工程首批高校。学校创建于1895年，前身为北洋大学', '2019-03-11 09:01:43', '1', '1', '0');
 INSERT INTO `articles` VALUES ('3', '1', '1111', '', '天津大学智能与计算学部虚位以待，诚聘英才！ “北洋学者英才计划”招聘 暨 第七届“北洋青年科学家”论坛邀请函', '2019-03-11 09:01:45', '1', '0', '0');
 INSERT INTO `articles` VALUES ('4', '1', '1111', '', 'bn', '2019-03-11 09:03:48', '1', '0', '0');
@@ -145,7 +145,7 @@ CREATE TABLE `banners` (
   `first_typeID` int(11) NOT NULL DEFAULT '1',
   `second_typeID` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`bID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of banners
@@ -153,8 +153,12 @@ CREATE TABLE `banners` (
 INSERT INTO `banners` VALUES ('11', 'banners_1553426733.png', '2019-03-24 19:25:34', '1', '2');
 INSERT INTO `banners` VALUES ('12', 'banners_1553427035.png', '2019-03-24 19:30:35', '1', '1');
 INSERT INTO `banners` VALUES ('13', 'banners_1553427044.png', '2019-03-24 19:30:44', '1', '1');
-INSERT INTO `banners` VALUES ('14', 'banners_1553427052.png', '2019-03-24 19:30:52', '1', '1');
-INSERT INTO `banners` VALUES ('15', 'banners_1553427061.png', '2019-03-24 19:31:01', '1', '1');
+INSERT INTO `banners` VALUES ('19', 'banners_1555416226 _1 .png', '2019-04-16 20:03:46', '1', '2');
+INSERT INTO `banners` VALUES ('20', 'banners_1555416632 _1 .png', '2019-04-16 20:10:32', '1', '6');
+INSERT INTO `banners` VALUES ('21', 'banners_1555416657 _1 .png', '2019-04-16 20:10:57', '1', '4');
+INSERT INTO `banners` VALUES ('22', 'banners_1555416672 _1 .png', '2019-04-16 20:11:12', '1', '2');
+INSERT INTO `banners` VALUES ('23', 'banners_1555416685 _1 .png', '2019-04-16 20:11:25', '2', '1');
+INSERT INTO `banners` VALUES ('24', 'banners_1555416698 _1 .png', '2019-04-16 20:11:38', '1', '7');
 
 -- ----------------------------
 -- Table structure for colletions
@@ -186,33 +190,38 @@ CREATE TABLE `comments` (
   `cID` int(11) NOT NULL AUTO_INCREMENT,
   `cType` int(11) NOT NULL,
   `pointerID` int(11) NOT NULL,
+  `pointerID2` int(11) DEFAULT NULL,
   `openID` int(11) NOT NULL,
   `content` varchar(255) DEFAULT NULL,
   `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`cID`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comments
 -- ----------------------------
-INSERT INTO `comments` VALUES ('2', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
-INSERT INTO `comments` VALUES ('3', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
-INSERT INTO `comments` VALUES ('4', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
-INSERT INTO `comments` VALUES ('5', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
-INSERT INTO `comments` VALUES ('6', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
-INSERT INTO `comments` VALUES ('7', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
-INSERT INTO `comments` VALUES ('8', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
-INSERT INTO `comments` VALUES ('9', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
-INSERT INTO `comments` VALUES ('10', '1', '1', '1111', '这是一条评论', '2019-03-23 22:33:30');
-INSERT INTO `comments` VALUES ('11', '1', '1', '1111', '12342314', '2019-03-25 21:58:12');
-INSERT INTO `comments` VALUES ('12', '1', '1', '1111', '@omingyyfy 哈喽，嗯', '2019-03-25 21:59:34');
-INSERT INTO `comments` VALUES ('13', '1', '2', '1111', '我爱天大', '2019-03-25 22:31:32');
-INSERT INTO `comments` VALUES ('14', '1', '2', '1111', '@omingyyfy 天大爱我', '2019-03-25 22:31:51');
-INSERT INTO `comments` VALUES ('15', '1', '35', '1111', '图片咋没了？', '2019-03-27 21:03:29');
-INSERT INTO `comments` VALUES ('16', '1', '36', '1111', '为什么测试3张图，然而只有2张？', '2019-03-27 23:20:39');
-INSERT INTO `comments` VALUES ('17', '1', '38', '1111', '124', '2019-03-28 14:59:20');
-INSERT INTO `comments` VALUES ('18', '1', '39', '1111', '!', '2019-03-28 14:59:47');
-INSERT INTO `comments` VALUES ('19', '1', '39', '1111', 'How handsome I am !', '2019-03-28 15:00:08');
+INSERT INTO `comments` VALUES ('2', '1', '1', null, '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('3', '1', '1', null, '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('4', '1', '1', null, '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('5', '1', '1', null, '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('6', '1', '1', null, '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('7', '1', '1', null, '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('8', '1', '1', null, '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('9', '1', '1', null, '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('10', '1', '1', null, '1111', '这是一条评论', '2019-03-23 22:33:30');
+INSERT INTO `comments` VALUES ('11', '1', '1', null, '1111', '12342314', '2019-03-25 21:58:12');
+INSERT INTO `comments` VALUES ('12', '1', '1', null, '1111', '@omingyyfy 哈喽，嗯', '2019-03-25 21:59:34');
+INSERT INTO `comments` VALUES ('13', '1', '2', null, '1111', '我爱天大', '2019-03-25 22:31:32');
+INSERT INTO `comments` VALUES ('14', '1', '2', null, '1111', '@omingyyfy 天大爱我', '2019-03-25 22:31:51');
+INSERT INTO `comments` VALUES ('15', '1', '35', null, '1111', '图片咋没了？', '2019-03-27 21:03:29');
+INSERT INTO `comments` VALUES ('16', '1', '36', null, '1111', '为什么测试3张图，然而只有2张？', '2019-03-27 23:20:39');
+INSERT INTO `comments` VALUES ('17', '1', '38', null, '1111', '124', '2019-03-28 14:59:20');
+INSERT INTO `comments` VALUES ('18', '1', '39', null, '1111', '!', '2019-03-28 14:59:47');
+INSERT INTO `comments` VALUES ('19', '1', '39', null, '1111', 'How handsome I am !', '2019-03-28 15:00:08');
+INSERT INTO `comments` VALUES ('20', '1', '1', '1', '1111', 'helloWorld', '2019-04-19 20:14:12');
+INSERT INTO `comments` VALUES ('21', '1', '1', '1', '1111', 'helloWorld', '2019-04-19 20:14:24');
+INSERT INTO `comments` VALUES ('22', '1', '1', null, '1111', 'helloWorld', '2019-04-19 20:15:24');
+INSERT INTO `comments` VALUES ('23', '1', '1', '2', '1111', 'helloWorld', '2019-04-19 20:44:44');
 
 -- ----------------------------
 -- Table structure for items
@@ -226,19 +235,20 @@ CREATE TABLE `items` (
   `item_info` varchar(255) NOT NULL,
   `hot` int(255) NOT NULL DEFAULT '0',
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `comment_num` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`iID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of items
 -- ----------------------------
-INSERT INTO `items` VALUES ('1', '1', '1111', '土豆', '这是土豆,haha', '444', '2019-03-23 22:34:31');
-INSERT INTO `items` VALUES ('2', '2', '1111', '西瓜', '这是西瓜,hoho', '555', '2019-03-23 22:34:31');
-INSERT INTO `items` VALUES ('3', '1', '1111', null, 'hello son', '0', '2019-04-07 22:36:05');
-INSERT INTO `items` VALUES ('4', '1', '1111', null, 'hello son', '0', '2019-04-07 22:38:25');
-INSERT INTO `items` VALUES ('5', '1', '1111', null, 'hello son', '0', '2019-04-07 22:41:49');
-INSERT INTO `items` VALUES ('6', '1', '1111', null, 'hello son', '0', '2019-04-07 22:42:18');
-INSERT INTO `items` VALUES ('7', '1', '1111', null, 'hello son', '0', '2019-04-08 00:02:49');
+INSERT INTO `items` VALUES ('1', '1', '1111', '土豆', '这是土豆,haha', '444', '2019-03-23 22:34:31', '0');
+INSERT INTO `items` VALUES ('2', '2', '1111', '西瓜', '这是西瓜,hoho', '555', '2019-03-23 22:34:31', '0');
+INSERT INTO `items` VALUES ('3', '1', '1111', null, 'hello son', '0', '2019-04-07 22:36:05', '0');
+INSERT INTO `items` VALUES ('4', '1', '1111', null, 'hello son', '0', '2019-04-07 22:38:25', '0');
+INSERT INTO `items` VALUES ('5', '1', '1111', null, 'hello son', '0', '2019-04-07 22:41:49', '0');
+INSERT INTO `items` VALUES ('6', '1', '1111', null, 'hello son', '0', '2019-04-07 22:42:18', '0');
+INSERT INTO `items` VALUES ('7', '1', '1111', null, 'hello son', '0', '2019-04-18 00:02:49', '0');
 
 -- ----------------------------
 -- Table structure for item_pictures
@@ -352,11 +362,13 @@ CREATE TABLE `search_history` (
   `history` varchar(255) DEFAULT NULL,
   `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`hID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of search_history
 -- ----------------------------
+INSERT INTO `search_history` VALUES ('1', '1111', 'hello,world', '2019-04-19 21:18:08');
+INSERT INTO `search_history` VALUES ('2', '1111', 'fuck', '2019-04-19 21:18:39');
 
 -- ----------------------------
 -- Table structure for users
@@ -369,16 +381,16 @@ CREATE TABLE `users` (
   `avatar` varchar(255) DEFAULT '',
   `school_id` int(11) DEFAULT NULL,
   `session_key` varchar(255) DEFAULT NULL,
-  `secret_key` varchar(255) DEFAULT NULL,
+  `last_login_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`openID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1111', 'omingyyfy', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', 'hello', null);
-INSERT INTO `users` VALUES ('2222', 'test1', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', '', null);
-INSERT INTO `users` VALUES ('omfHM4iU0EA1jCLmUh43itEhtpcc', 'tester2', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', null, null);
-INSERT INTO `users` VALUES ('ozInc4nxFajRO-7DVyg7WfLb2GcE', '呜喵哥', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', 'D2Mq8hd+3R/4WIujyTCo+A==', null);
-INSERT INTO `users` VALUES ('ozInc4s7Q6bfdfe3_FgfuFegTOcg', '黄老师', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', null, 'u/8qqOKvDgRk8N9034DA2Q==', null);
-INSERT INTO `users` VALUES ('{$openID}', '{$username}', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', '{$session_key}', null);
+INSERT INTO `users` VALUES ('1111', 'omingyyfy', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', 'hello', '2019-04-19 20:05:24');
+INSERT INTO `users` VALUES ('2222', 'test1', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', '', '2019-04-19 20:05:24');
+INSERT INTO `users` VALUES ('omfHM4iU0EA1jCLmUh43itEhtpcc', 'tester2', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', null, '2019-04-19 20:05:24');
+INSERT INTO `users` VALUES ('ozInc4nxFajRO-7DVyg7WfLb2GcE', '呜喵哥', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', '3Oo5nmL279TDALy2dkqX8A==', '2019-04-19 20:05:24');
+INSERT INTO `users` VALUES ('ozInc4s7Q6bfdfe3_FgfuFegTOcg', 'ネクロ', '1', 'https://wx.qlogo.cn/mmopen/vi_32/KABlAkJHg1j9Rj5kgT0iaCic49XMQNicXibT0kWHlB6n4AmtaNqomc1ev1ibejyHOjQbJBeAuvJGMQ5Q0OibOJa7pibPA/132', null, 'cEgOLpfJnEkCRmXuF/Kkvw==', '2019-04-19 20:05:24');
+INSERT INTO `users` VALUES ('{$openID}', '{$username}', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', '{$session_key}', '2019-04-19 20:05:24');
