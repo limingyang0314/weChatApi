@@ -93,8 +93,11 @@ require_once 'mysql.php';
         LIMIT {$start},{$limit}";
 
         //echo $sql;
+        //exit;
         $result = mysqli_query($conn,$sql);
+
         $result = finish_article_select_list($result);
+
         $newResult = [];
         foreach($result as $value){
             //var_dump($value);
@@ -102,6 +105,8 @@ require_once 'mysql.php';
             $value->pictures = get_article_picture($value->aid,$conn);
             $newResult[] = $value;
         }
+        //var_dump($newResult);
+        //exit;
         //var_dump($result);
         return $newResult;
     }
