@@ -584,7 +584,10 @@ https://wechatmore.xyz:666/api/collections.php?secondType=select_article_collect
 }
 ```
 
+
+
 ###获取商品收藏
+
 https://wechatmore.xyz:666/api/collections.php?secondType=select_item_collection&openID=1111
 ```json
 {
@@ -639,11 +642,30 @@ https://wechatmore.xyz:666/api/share.php?secondType=hotter&type=1&id=1
 
 ##评论相关
 
-###写评论
+###写一级评论
+
+一级评论就是直接对文章或商品进行评论
+
 https://wechatmore.xyz:666/api/comments.php?secondType=insert_comment&cType=1&pointerID=1&openID=1111&content=helloWorld
 | 方法 | cType | pointerID | openID | content |
 | ------ | ------ | ------ | ------ | ------ |
-| GET | 1是文章2是商品 | 文章或商品ID | 就是openID | 评论内容 |
+| GET | 1是文章，2是商品| 文章或商品ID | 就是open ID | 评论内容 |
+```json
+{
+    "error_code":-1,
+    "message":null,
+    "result":"insert success!"
+}
+```
+
+### 写二级评论
+
+二级评论是对文章的评论或者商品的评论进行评论
+
+https://wechatmore.xyz:666/api/comments.php?secondType=insert_comment_secondType&cType=1&pointerID=1&pointerID2=2&openID=1111&content=helloWorld
+| 方法 | cType | pointerID | pointerID2 | openID | content |
+| ------ | ------ | ------ | ------ | ------ | ------ |
+| GET | 3是文章评论，4是商品评论 | 文章或商品ID | 这个是被评论的评论的c ID | 就是open ID | 评论内容 |
 ```json
 {
     "error_code":-1,
@@ -678,47 +700,110 @@ https://wechatmore.xyz:666/api/comments.php?secondType=select_comment_by_id&cid=
 | POST | 具体某篇评论的评论id |
 ```json
 {
-    "error_code":-1,
-    "message":null,
-    "result":[
+    "error_code": -1,
+    "message": null,
+    "result": [
         {
-            "cid":"3",
-            "username":"omingyyfy",
-            "content":"这是一条评论",
-            "time":"2019-03-23 22:33:30"
+            "cid": "2",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "这是一条评论",
+            "time": "2019-03-23 22:33:30"
         }
     ]
 }
 ```
 
-###根据文章或商品ID获取该文章或商品的全部评论
-https://wechatmore.xyz:666/api/comments.php?secondType=select_comment_by_pointerID&cType=1&pointerID=1
+###根据文章或商品ID获取该文章或商品的全部评论(已增加分页)
+https://wechatmore.xyz:666/api/comments.php?secondType=select_comment_by_pointerID&cType=1&pointerID=1&page=1&limit=4
 | 方法 | cType | pointerID |
 | ------  | ------ | ------ |
 | POST  | 1是文章的评论，2是商品留言 | 对应文章或商品的ID |
 ```json
 {
-    "error_code":-1,
-    "message":null,
-    "result":[
+    "error_code": -1,
+    "message": null,
+    "result": [
         {
-            "cid":"1",
-            "username":"omingyyfy",
-            "content":"这是一条评论"
+            "cid": "23",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "helloWorld",
+            "time": "2019-04-19 20:44:44"
         },
         {
-            "cid":"2",
-            "username":"omingyyfy",
-            "content":"这是一条评论"
+            "cid": "22",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "helloWorld",
+            "time": "2019-04-19 20:15:24"
         },
         {
-            "cid":"3",
-            "username":"omingyyfy",
-            "content":"这是一条评论"
+            "cid": "21",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "helloWorld",
+            "time": "2019-04-19 20:14:24"
+        },
+        {
+            "cid": "20",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "helloWorld",
+            "time": "2019-04-19 20:14:12"
         }
     ]
 }
 ```
+
+###根据openID获取某人的评论(已分页)
+用法基本同上一个接口，传参直接参照url
+https://wechatmore.xyz:666/api/comments.php?secondType=select_comment_by_openID&cType=1&pointerID=1&limit=4&page=1
+```json
+{
+    "error_code": -1,
+    "message": null,
+    "result": [
+        {
+            "cid": "23",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "helloWorld",
+            "time": "2019-04-19 20:44:44",
+            "pointerID": "1",
+            "pointerID2": "2"
+        },
+        {
+            "cid": "22",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "helloWorld",
+            "time": "2019-04-19 20:15:24",
+            "pointerID": "1",
+            "pointerID2": null
+        },
+        {
+            "cid": "21",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "helloWorld",
+            "time": "2019-04-19 20:14:24",
+            "pointerID": "1",
+            "pointerID2": "1"
+        },
+        {
+            "cid": "20",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "helloWorld",
+            "time": "2019-04-19 20:14:12",
+            "pointerID": "1",
+            "pointerID2": "1"
+        }
+    ]
+}
+```
+
 
 
 ## 后台控制相关
