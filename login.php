@@ -2,6 +2,9 @@
 require_once "middle/session.php";
 //require_once "model/mysql.php";
 if(isset($_POST['code'])){
+    $time = date("Y-m-d H:i:s",time() + 28800);
+    //echo $time;
+    //exit;
     //echo "nb";
     $js_code = $_POST['code'];
     //session_start();
@@ -44,17 +47,21 @@ if(isset($_POST['code'])){
     //var_dump($state);
     
 
+    //$time = date("Y-m-d H:i:s",time());
     if(!empty($result)){
         $sql = "UPDATE users 
         SET session_key = '{$session_key}',
         avatar = '{$avatar}',
-        username = '{$username}' 
+        username = '{$username}',
+        last_login_time = '{$time}' 
         WHERE openID = '{$openID}'";
+        //echo $sql;
 
         //echo $sql;
         $result = mysqli_query($conn, $sql);
         if($result){
             $state['openID'] = $openID;
+            $state['last_login_time'] = $time;
             echo json_encode($state);
         } else {
             $state['error_code'] = 2;
@@ -68,14 +75,17 @@ if(isset($_POST['code'])){
         $result = mysqli_query($conn, $sql);
         if($result){
             $state['openID'] = $openID;
+            $state['last_login_time'] = $time;
             echo json_encode($state);
         } else {
             $state['error_code'] = 1;
+            //$state['last_login_time'] = time();
             $state['message'] = 'create user failed';
             echo json_encode($state);
 
         }
 
     }
+    //$sql = "UPDATE ";
 
 }

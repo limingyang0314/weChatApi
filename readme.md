@@ -67,6 +67,7 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_id&aID=
         {
             "aid":"36",
             "content":"测试2张图片",
+            "comment_num": "3",
             "type_name":"推荐",
             "hot":"0",
             "username":"omingyyfy",
@@ -103,6 +104,7 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_author&
         {
             "aid":"7",
             "content":"这是文章内容，看上去很nb",
+            "comment_num": "3",
             "type_name":"学校信息",
             "hot":"1000",
             "username":"omingyyfy",
@@ -112,6 +114,7 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_author&
         {
             "aid":"4",
             "content":"4535434532413412421",
+            "comment_num": "3",
             "type_name":"兼职信息",
             "hot":"0",
             "username":"omingyyfy",
@@ -121,6 +124,7 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_author&
         {
             "aid":"3",
             "content":"324524524324",
+            "comment_num": "3",
             "type_name":"社团活动",
             "hot":"0",
             "username":"omingyyfy",
@@ -130,6 +134,7 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_author&
         {
             "aid":"2",
             "content":"tdgbdbdafge",
+            "comment_num": "3",
             "type_name":"食堂资讯",
             "hot":"1",
             "username":"omingyyfy",
@@ -139,6 +144,7 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_author&
         {
             "aid":"1",
             "content":"hfgbxxdfgb",
+            "comment_num": "3",
             "type_name":"学校信息",
             "hot":"5",
             "username":"omingyyfy",
@@ -165,6 +171,7 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_type&ty
         {
             "aid":"35",
             "content":"hello,world!",
+            "comment_num": "3",
             "type_name":"学校信息",
             "hot":"0",
             "username":"omingyyfy",
@@ -179,6 +186,7 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_type&ty
         {
             "aid":"34",
             "content":"hello,world!",
+            "comment_num": "3",
             "type_name":"学校信息",
             "hot":"0",
             "username":"omingyyfy",
@@ -193,6 +201,7 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_type&ty
         {
             "aid":"31",
             "content":"hello,world!",
+            "comment_num": "3",
             "type_name":"学校信息",
             "hot":"0",
             "username":"omingyyfy",
@@ -207,6 +216,7 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_type&ty
         {
             "aid":"27",
             "content":"hello,world!",
+            "comment_num": "3",
             "type_name":"学校信息",
             "hot":"0",
             "username":"omingyyfy",
@@ -221,6 +231,7 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_type&ty
         {
             "aid":"26",
             "content":"hello,world!",
+            "comment_num": "3",
             "type_name":"学校信息",
             "hot":"0",
             "username":"omingyyfy",
@@ -233,6 +244,7 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_type&ty
         {
             "aid":"25",
             "content":"hello,world!",
+            "comment_num": "3",
             "type_name":"学校信息",
             "hot":"0",
             "username":"omingyyfy",
@@ -245,6 +257,7 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_type&ty
         {
             "aid":"24",
             "content":"hello,world!",
+            "comment_num": "3",
             "type_name":"学校信息",
             "hot":"0",
             "username":"omingyyfy",
