@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2019-04-15 21:41:05
+Date: 2019-04-19 19:30:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -144,7 +144,7 @@ CREATE TABLE `banners` (
   `first_typeID` int(11) NOT NULL DEFAULT '1',
   `second_typeID` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`bID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of banners
@@ -152,8 +152,12 @@ CREATE TABLE `banners` (
 INSERT INTO `banners` VALUES ('11', 'banners_1553426733.png', '2019-03-24 19:25:34', '1', '2');
 INSERT INTO `banners` VALUES ('12', 'banners_1553427035.png', '2019-03-24 19:30:35', '1', '1');
 INSERT INTO `banners` VALUES ('13', 'banners_1553427044.png', '2019-03-24 19:30:44', '1', '1');
-INSERT INTO `banners` VALUES ('14', 'banners_1553427052.png', '2019-03-24 19:30:52', '1', '1');
-INSERT INTO `banners` VALUES ('15', 'banners_1553427061.png', '2019-03-24 19:31:01', '1', '1');
+INSERT INTO `banners` VALUES ('19', 'banners_1555416226 _1 .png', '2019-04-16 20:03:46', '1', '2');
+INSERT INTO `banners` VALUES ('20', 'banners_1555416632 _1 .png', '2019-04-16 20:10:32', '1', '6');
+INSERT INTO `banners` VALUES ('21', 'banners_1555416657 _1 .png', '2019-04-16 20:10:57', '1', '4');
+INSERT INTO `banners` VALUES ('22', 'banners_1555416672 _1 .png', '2019-04-16 20:11:12', '1', '2');
+INSERT INTO `banners` VALUES ('23', 'banners_1555416685 _1 .png', '2019-04-16 20:11:25', '2', '1');
+INSERT INTO `banners` VALUES ('24', 'banners_1555416698 _1 .png', '2019-04-16 20:11:38', '1', '7');
 
 -- ----------------------------
 -- Table structure for colletions
@@ -189,7 +193,7 @@ CREATE TABLE `comments` (
   `content` varchar(255) DEFAULT NULL,
   `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`cID`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comments
@@ -212,6 +216,7 @@ INSERT INTO `comments` VALUES ('16', '1', '36', '1111', '为什么测试3张图�
 INSERT INTO `comments` VALUES ('17', '1', '38', '1111', '124', '2019-03-28 14:59:20');
 INSERT INTO `comments` VALUES ('18', '1', '39', '1111', '!', '2019-03-28 14:59:47');
 INSERT INTO `comments` VALUES ('19', '1', '39', '1111', 'How handsome I am !', '2019-03-28 15:00:08');
+INSERT INTO `comments` VALUES ('20', '1', '1', '1111', '@omingyyfy 哈哈哈', '2019-04-15 21:17:46');
 
 -- ----------------------------
 -- Table structure for items
@@ -312,9 +317,9 @@ CREATE TABLE `messages` (
 -- Records of messages
 -- ----------------------------
 INSERT INTO `messages` VALUES ('1', '1', '1111', '2222', '你好，我是你爹！', '1', '2', '1', '2019-04-07 23:41:17');
-INSERT INTO `messages` VALUES ('2', '1', '1111', '2222', '$comment', '1', '2', '1', '2019-04-07 23:41:18');
+INSERT INTO `messages` VALUES ('2', '1', '1111', '2222', '$comment', '1', '1', '1', '2019-04-07 23:41:18');
 INSERT INTO `messages` VALUES ('3', '1', '1111', '2222', '$comment', '1', '2', '0', '2019-04-07 23:41:19');
-INSERT INTO `messages` VALUES ('4', '2', '1111', '2222', '$comment', '1', '3', '0', '2019-04-07 23:41:20');
+INSERT INTO `messages` VALUES ('4', '2', '1111', '2222', '$comment', '1', '1', '0', '2019-04-07 23:41:20');
 
 -- ----------------------------
 -- Table structure for schools
@@ -361,5 +366,6 @@ CREATE TABLE `users` (
 INSERT INTO `users` VALUES ('1111', 'omingyyfy', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', 'hello');
 INSERT INTO `users` VALUES ('2222', 'test1', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', '');
 INSERT INTO `users` VALUES ('omfHM4iU0EA1jCLmUh43itEhtpcc', 'tester2', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', null);
-INSERT INTO `users` VALUES ('ozInc4nxFajRO-7DVyg7WfLb2GcE', '呜喵王', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', 'ywDUMGwspR5w5FDZc1sXoA==');
+INSERT INTO `users` VALUES ('ozInc4nxFajRO-7DVyg7WfLb2GcE', '呜喵哥', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', '3Oo5nmL279TDALy2dkqX8A==');
+INSERT INTO `users` VALUES ('ozInc4s7Q6bfdfe3_FgfuFegTOcg', 'ネクロ', '1', 'https://wx.qlogo.cn/mmopen/vi_32/KABlAkJHg1j9Rj5kgT0iaCic49XMQNicXibT0kWHlB6n4AmtaNqomc1ev1ibejyHOjQbJBeAuvJGMQ5Q0OibOJa7pibPA/132', null, 'cEgOLpfJnEkCRmXuF/Kkvw==');
 INSERT INTO `users` VALUES ('{$openID}', '{$username}', '1', 'https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132', '2', '{$session_key}');
