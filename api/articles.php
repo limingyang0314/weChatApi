@@ -4,7 +4,7 @@ require_once './api.php';
     require_once "../model/articles.php";
     switch ($_GET['secondType']){
     case 'select_article_by_id':
-        echo json_encode(error_code(select_article_by_id($_GET['aID'],$conn)));//, $conn
+        echo json_encode(error_code(select_article_by_id($_GET['ID'],$conn)));//, $conn
         break;
     case 'select_article_by_author':
         echo json_encode(error_code(select_article_by_author($_GET['openID'], $_GET['limit'], $_GET['page'],$conn)));//, $conn
@@ -16,7 +16,7 @@ require_once './api.php';
         echo json_encode(error_code(select_article_by_type($_GET['typeID'], $_GET['limit'], $_GET['page'], $_GET['mode'], $conn)));
         break;
     case 'delete_article':
-        echo json_encode(error_code(delete_article($_GET['openID'], $_GET['aID'], $conn)));
+        echo json_encode(error_code(delete_article($_GET['openID'], $_GET['ID'], $conn)));
         break;
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));

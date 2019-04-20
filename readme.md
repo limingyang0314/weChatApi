@@ -332,25 +332,26 @@ https://wechatmore.xyz:666/api/types.php?secondType=get_item_types
 }
 ```
 ###根据商品ID获取商品
-https://wechatmore.xyz:666/api/items.php?secondType=select_item_by_id&openID=1111&iID=1
+https://wechatmore.xyz:666/api/items.php?secondType=select_item_by_id&ID=1
 ```json
 {
-    "error_code":-1,
-    "message":null,
-    "result":[
+    "error_code": -1,
+    "message": null,
+    "result": [
         {
-            "iID":"1",
-            "username":"omingyyfy",
-            "item_info":"这是土豆",
-            "type_name":"旧书",
-            "hot":"444",
-            "time":"2019-03-23 22:34:31",
-            "pictures":[
+            "ID": "1",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "这是土豆,haha",
+            "type_name": "旧书",
+            "hot": "444",
+            "time": "2019-03-23 22:34:31",
+            "pictures": [
                 {
-                    "pURL":"/upload/item_pictures/test.jpg"
+                    "pURL": "/upload/item_pictures/test.jpg"
                 },
                 {
-                    "pURL":"/upload/hahahah.jpg"
+                    "pURL": "/upload/hahahah.jpg"
                 }
             ]
         }
@@ -359,41 +360,44 @@ https://wechatmore.xyz:666/api/items.php?secondType=select_item_by_id&openID=111
 ```
 
 ###根据openID获取商品
-https://wechatmore.xyz:666/api/items.php?secondType=select_item_by_author&openID=1111
+https://wechatmore.xyz:666/api/items.php?secondType=select_item_by_author&openID=1111&limit=3&page=1
 | 方法 | openID | limit | page |
 | ------ | ------ | ------ | ------ |
 | GET | 微信标志用户唯一性的ID | 每页多少篇 | 页数 |
 ```json
 {
-    "error_code":-1,
-    "message":null,
-    "result":[
+    "error_code": -1,
+    "message": null,
+    "result": [
         {
-            "iID":"1",
-            "username":"omingyyfy",
-            "item_info":"这是土豆",
-            "type_name":"旧书",
-            "hot":"444",
-            "time":"2019-03-23 22:34:31",
-            "pictures":[
-                {
-                    "pURL":"/upload/item_pictures/test.jpg"
-                },
-                {
-                    "pURL":"/upload/hahahah.jpg"
-                }
-            ]
+            "ID": "7",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "hello son",
+            "type_name": "旧书",
+            "hot": "0",
+            "time": "2019-04-18 00:02:49",
+            "pictures": []
         },
         {
-            "iID":"2",
-            "username":"omingyyfy",
-            "item_info":"这是西瓜",
-            "type_name":"日用品",
-            "hot":"555",
-            "time":"2019-03-23 22:34:31",
-            "pictures":[
-
-            ]
+            "ID": "6",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "hello son",
+            "type_name": "旧书",
+            "hot": "0",
+            "time": "2019-04-07 22:42:18",
+            "pictures": []
+        },
+        {
+            "ID": "5",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "hello son",
+            "type_name": "旧书",
+            "hot": "0",
+            "time": "2019-04-07 22:41:49",
+            "pictures": []
         }
     ]
 }
@@ -406,43 +410,42 @@ https://wechatmore.xyz:666/api/items.php?secondType=select_item_by_type&type=1&l
 | GET | 商品类型的ID | 每页多少篇 | 页数 |
 ```json
 {
-    "error_code":-1,
-    "message":null,
-    "result":[
+    "error_code": -1,
+    "message": null,
+    "result": [
         {
-            "iID":"7",
-            "username":"omingyyfy",
-            "item_info":"hello son",
-            "type_name":"旧书",
-            "hot":"0",
-            "time":"2019-04-08 00:02:49",
-            "pictures":[
+            "ID": "7",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "hello son",
+            "type_name": "旧书",
+            "hot": "0",
+            "time": "2019-04-18 00:02:49",
+            "pictures": [
                 {
-                    "pURL":"/upload/item_pictures/item_pictures_1554652969 _1 .png"
+                    "pURL": "/upload/item_pictures/item_pictures_1554652969 _1 .png"
                 }
             ]
         },
         {
-            "iID":"6",
-            "username":"omingyyfy",
-            "item_info":"hello son",
-            "type_name":"旧书",
-            "hot":"0",
-            "time":"2019-04-07 22:42:18",
-            "pictures":[
-
-            ]
+            "ID": "6",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "hello son",
+            "type_name": "旧书",
+            "hot": "0",
+            "time": "2019-04-07 22:42:18",
+            "pictures": []
         },
         {
-            "iID":"5",
-            "username":"omingyyfy",
-            "item_info":"hello son",
-            "type_name":"旧书",
-            "hot":"0",
-            "time":"2019-04-07 22:41:49",
-            "pictures":[
-
-            ]
+            "ID": "5",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "hello son",
+            "type_name": "旧书",
+            "hot": "0",
+            "time": "2019-04-07 22:41:49",
+            "pictures": []
         }
     ]
 }
@@ -451,65 +454,42 @@ https://wechatmore.xyz:666/api/items.php?secondType=select_item_by_type&type=1&l
 ###根据openID获取商品
 ```json
 {
-    "error_code":-1,
-    "message":null,
-    "result":[
+    "error_code": -1,
+    "message": null,
+    "result": [
         {
-            "iID":"7",
-            "username":"omingyyfy",
-            "item_info":"hello son",
-            "type_name":"旧书",
-            "hot":"0",
-            "time":"2019-04-08 00:02:49",
-            "pictures":[
+            "ID": "7",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "hello son",
+            "type_name": "旧书",
+            "hot": "0",
+            "time": "2019-04-18 00:02:49",
+            "pictures": [
                 {
-                    "pURL":"/upload/item_pictures/item_pictures_1554652969 _1 .png"
+                    "pURL": "/upload/item_pictures/item_pictures_1554652969 _1 .png"
                 }
             ]
         },
         {
-            "iID":"6",
-            "username":"omingyyfy",
-            "item_info":"hello son",
-            "type_name":"旧书",
-            "hot":"0",
-            "time":"2019-04-07 22:42:18",
-            "pictures":[
-
-            ]
+            "ID": "6",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "hello son",
+            "type_name": "旧书",
+            "hot": "0",
+            "time": "2019-04-07 22:42:18",
+            "pictures": []
         },
         {
-            "iID":"5",
-            "username":"omingyyfy",
-            "item_info":"hello son",
-            "type_name":"旧书",
-            "hot":"0",
-            "time":"2019-04-07 22:41:49",
-            "pictures":[
-
-            ]
-        },
-        {
-            "iID":"4",
-            "username":"omingyyfy",
-            "item_info":"hello son",
-            "type_name":"旧书",
-            "hot":"0",
-            "time":"2019-04-07 22:38:25",
-            "pictures":[
-
-            ]
-        },
-        {
-            "iID":"3",
-            "username":"omingyyfy",
-            "item_info":"hello son",
-            "type_name":"旧书",
-            "hot":"0",
-            "time":"2019-04-07 22:36:05",
-            "pictures":[
-
-            ]
+            "ID": "5",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "content": "hello son",
+            "type_name": "旧书",
+            "hot": "0",
+            "time": "2019-04-07 22:41:49",
+            "pictures": []
         }
     ]
 }
@@ -707,7 +687,7 @@ https://wechatmore.xyz:666/api/comments.php?secondType=delete_comment&openID=111
 
 ###根据评论的ID获取具体某条评论的所有信息
 
-https://wechatmore.xyz:666/api/comments.php?secondType=select_comment_by_id&cid=1
+https://wechatmore.xyz:666/api/comments.php?secondType=select_comment_by_id&ID=1
 | 方法 | cid |
 | ------ | ------ |
 | POST | 具体某篇评论的评论id |
@@ -717,7 +697,8 @@ https://wechatmore.xyz:666/api/comments.php?secondType=select_comment_by_id&cid=
     "message": null,
     "result": [
         {
-            "cid": "2",
+            "ID": "2",
+            "cType": "1",
             "username": "omingyyfy",
             "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
             "content": "这是一条评论",
@@ -738,28 +719,32 @@ https://wechatmore.xyz:666/api/comments.php?secondType=select_comment_by_pointer
     "message": null,
     "result": [
         {
-            "cid": "23",
+            "ID": "23",
+            "cType": "1",
             "username": "omingyyfy",
             "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
             "content": "helloWorld",
             "time": "2019-04-19 20:44:44"
         },
         {
-            "cid": "22",
+            "ID": "22",
+            "cType": "1",
             "username": "omingyyfy",
             "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
             "content": "helloWorld",
             "time": "2019-04-19 20:15:24"
         },
         {
-            "cid": "21",
+            "ID": "21",
+            "cType": "1",
             "username": "omingyyfy",
             "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
             "content": "helloWorld",
             "time": "2019-04-19 20:14:24"
         },
         {
-            "cid": "20",
+            "ID": "20",
+            "cType": "1",
             "username": "omingyyfy",
             "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
             "content": "helloWorld",
@@ -778,7 +763,8 @@ https://wechatmore.xyz:666/api/comments.php?secondType=select_comment_by_openID&
     "message": null,
     "result": [
         {
-            "cid": "23",
+            "ID": "23",
+            "cType": "1",
             "username": "omingyyfy",
             "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
             "content": "helloWorld",
@@ -787,7 +773,8 @@ https://wechatmore.xyz:666/api/comments.php?secondType=select_comment_by_openID&
             "pointerID2": "2"
         },
         {
-            "cid": "22",
+            "ID": "22",
+            "cType": "1",
             "username": "omingyyfy",
             "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
             "content": "helloWorld",
@@ -796,7 +783,8 @@ https://wechatmore.xyz:666/api/comments.php?secondType=select_comment_by_openID&
             "pointerID2": null
         },
         {
-            "cid": "21",
+            "ID": "21",
+            "cType": "1",
             "username": "omingyyfy",
             "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
             "content": "helloWorld",
@@ -805,7 +793,8 @@ https://wechatmore.xyz:666/api/comments.php?secondType=select_comment_by_openID&
             "pointerID2": "1"
         },
         {
-            "cid": "20",
+            "ID": "20",
+            "cType": "1",
             "username": "omingyyfy",
             "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
             "content": "helloWorld",

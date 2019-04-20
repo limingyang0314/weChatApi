@@ -42,7 +42,7 @@ require_once 'mysql.php';
     */
     function select_article_by_id($aID, $conn){
         //echo $_SESSION['openID'];
-        $sql = "SELECT A.aid, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID 
+        $sql = "SELECT A.aid AS ID, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID 
         FROM articles A, users U, article_types T 
         WHERE A.aID = {$aID} 
         AND T.type_id = A.type_id 
@@ -58,7 +58,7 @@ require_once 'mysql.php';
     */
     function select_article_by_author($openID, $limit, $page, $conn){
         $start = $limit * ($page - 1);
-        $sql = "SELECT A.aid, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID 
+        $sql = "SELECT A.aid AS ID, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID 
         FROM articles A, users U, article_types T 
         WHERE A.openID = '$openID' 
         AND T.type_id = A.type_id 
@@ -84,7 +84,7 @@ require_once 'mysql.php';
         if($mode == 2){
             $descKey = 'A.hot';
         }
-        $sql = "SELECT A.aid, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID 
+        $sql = "SELECT A.aid AS ID, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID 
         FROM articles A, users U, article_types T 
         WHERE A.type_id = '$typeID' 
         AND T.type_id = A.type_id 
@@ -102,7 +102,7 @@ require_once 'mysql.php';
         foreach($result as $value){
             //var_dump($value);
             //echo $value->aID."<br>";
-            $value->pictures = get_article_picture($value->aid,$conn);
+            $value->pictures = get_article_picture($value->ID,$conn);
             $newResult[] = $value;
         }
         //var_dump($newResult);
