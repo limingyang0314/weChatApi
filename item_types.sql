@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
+Source Server         : wechatmore.xyz
 Source Server Version : 50724
-Source Host           : localhost:3306
+Source Host           : wechatmore.xyz:3306
 Source Database       : wechatapi
 
 Target Server Type    : MYSQL
 Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2019-04-20 21:00:31
+Date: 2019-04-20 21:03:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
