@@ -47,8 +47,13 @@ require_once 'mysql.php';
         $current_a->main_type = 'article';
         $current_i = $item_result[$item_pointer];
         $current_i->main_type = 'item';
+
+
         //item提前耗尽
         if($item_pointer == ($item_num - 1 )){
+            if($article_pointer == ($article_num - 1 )){
+                break;
+            }
             //echo $i;
             for($j = $article_pointer ; $j < $article_num ; $j ++){
                 // if($i == ($num - 1)){
@@ -67,18 +72,16 @@ require_once 'mysql.php';
         }
         //article提前耗尽
         if( $article_pointer == ($article_num - 1 )){
+
+            if($item_pointer == ($item_num - 1 )){
+                break;
+            }
             for($j = $article_pointer ; $j < $article_num ; $j ++){
                 $current_i = $item_result[$item_pointer];
                 $current_i->main_type = 'item';
                 $result[] = $current_i;
                 $item_pointer ++;
                 $i ++;
-                //echo $i . " in article ";
-                
-                // if($i == ($num - 1)){
-                //     exit;
-                //     break(2);
-                // }
             }
             break;
 
