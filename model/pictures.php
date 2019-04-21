@@ -42,7 +42,7 @@ function banners_upload_into_db($type,$file_name,$first_typeID,$second_typeID,$c
 **处理上传的图片
 */
 function upload_picture($type,$conn,$file,$pointerID = null,$first_typeID = null, $second_typeID = null, $order = 1){
-    $max_size = 204800;
+    $max_size = 524288;
     if($type == 'banners'){
         $max_size = 2048000;
     }
