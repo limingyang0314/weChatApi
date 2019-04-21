@@ -43,46 +43,54 @@ require_once 'mysql.php';
     //var_dump($article_result);
     for($i = 0 ; $i < $num ; $i ++){
         //echo $i . " ";
-        $current_a = $article_result[$article_pointer];
-        $current_a->main_type = 'article';
-        $current_i = $item_result[$item_pointer];
-        $current_i->main_type = 'item';
+        if(count($article_result) > 0){
+            $current_a = $article_result[$article_pointer];
+            $current_a->main_type = 'article';
+        }else{
+            $current_a = (object)[];
+            $current_a->time = 0;
+        }
+
+        if(count($item_result) > 0){
+            $current_i = $item_result[$item_pointer];
+            $current_i->main_type = 'item';
+        }else{
+            $current_b = (object)[];
+            $current_b->time = 0;
+        }
+
+        if(count($item_result) == 0 && count($article_result) == 0){
+            break;
+        }
+
 
 
         //item提前耗尽
-        if($item_pointer == ($item_num - 1 )){
-            if($article_pointer == ($article_num - 1 )){
-                break;
+        if($item_pointer == ($item_num - 1 ) || $item_num == 0){
+            if($article_pointer < ($article_num - 1 ) && $article_num != 0){
+                for($j = $article_pointer ; $j < $article_num ; $j ++){
+                    $current_a = $article_result[$article_pointer];
+                    $current_a->main_type = 'article';
+                    $result[] = $current_a;
+                    $article_pointer ++;
+                    $i ++;
+                }
             }
-            //echo $i;
-            for($j = $article_pointer ; $j < $article_num ; $j ++){
-                // if($i == ($num - 1)){
-                //     break(2);
-                // }
-                $current_a = $article_result[$article_pointer];
-                $current_a->main_type = 'article';
-                $result[] = $current_a;
-                $article_pointer ++;
-                $i ++;
-                //echo $i . " in item ";
-                //exit;
-                
-            }
+
             break;
         }
         //article提前耗尽
-        if( $article_pointer == ($article_num - 1 )){
-
-            if($item_pointer == ($item_num - 1 )){
-                break;
+        if( $article_pointer == ($article_num - 1 ) || $article_num == 0){
+            if($item_pointer < ($item_num - 1) && $item_num != 0){
+                for($j = $article_pointer ; $j < $article_num ; $j ++){
+                    $current_i = $item_result[$item_pointer];
+                    $current_i->main_type = 'item';
+                    $result[] = $current_i;
+                    $item_pointer ++;
+                    $i ++;
+                }
             }
-            for($j = $article_pointer ; $j < $article_num ; $j ++){
-                $current_i = $item_result[$item_pointer];
-                $current_i->main_type = 'item';
-                $result[] = $current_i;
-                $item_pointer ++;
-                $i ++;
-            }
+            
             break;
 
         }
@@ -96,7 +104,13 @@ require_once 'mysql.php';
         }
     }
     //exit;
+    if($num > count($result)){
+        $num = count($result);
+    }
     $result_true = [];
+    // echo $num;
+    // var_dump($result);
+    // exit;
     for($m = 0 ; $m < $num ; $m ++){
         $result_true[] = $result[$m];
     }
