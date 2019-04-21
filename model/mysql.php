@@ -22,6 +22,9 @@ $GLOBALS['conn_obj'] = $conn_obj;
 
 function getDataAsArray($temp){
     $result = [];
+    if(!$temp){
+        return $result;
+    }
     while ($fieldinfo = mysqli_fetch_object($temp)) {
         $result[] = $fieldinfo;
     }

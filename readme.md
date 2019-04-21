@@ -55,7 +55,7 @@ https://wechatmore.xyz:666/api/types.php?secondType=get_article_types
 
 ### 按文章ID获取一篇文章
 
-https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_id&aID=1
+https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_id&ID=1
 | 方法 | aID |
 | ------ | ------ |
 | GET | 文章ID |
@@ -65,14 +65,15 @@ https://wechatmore.xyz:666/api/articles.php?secondType=select_article_by_id&aID=
     "message":null,
     "result":[
         {
-            "aid":"36",
-            "content":"测试2张图片",
+            "ID": "1",
+            "content": "新的一年伊始\r\n牵动千万游子心的海棠季\r\n即将拉开帷幕\r\n又一年海棠花开\r\n我们等你缓缓归矣\r\n今年的海棠季专属明信片\r\n仍然由你来定义\r\n快来选出你心中的最佳明信片吧",
             "comment_num": "3",
-            "type_name":"推荐",
-            "hot":"0",
-            "username":"omingyyfy",
-            "time":"2019-03-27 21:40:21",
-            "openID":"1111",
+            "type_name": "推荐",
+            "hot": "5",
+            "username": "omingyyfy",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/SflhBPd2HUIRjQRfmAsRlJzlF1goPsMC1GYiaLibwWuew9oeAUqsCmg6ff1HXt7VUoicsYndpQvwbzhhzJaRMTFOA/132",
+            "time": "2019-03-11 09:01:36",
+            "openID": "1111",
             "pictures":[
                 {
                     "pURL":"/upload/article_pictures/article_pictures_1553694021.png"

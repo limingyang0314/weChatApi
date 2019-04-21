@@ -27,21 +27,75 @@ function get_message_by_openID($openID, $limit, $page, $conn){
 */
 function get_message_by_openID_not_read($openID, $limit, $page, $conn){
     $start = $limit * ($page - 1);
-    $sql = "SELECT M.from_who, M.mID, M.content, U.username, U.avatar, M.mType, M.aID, A.content AS article_content ,M.cID, c.content AS comment_content
-    FROM messages M, users U, articles A, comments C
+    $sql = "SELECT * 
+    FROM messages M
     WHERE M.to_who = '$openID' 
-    AND U.openID = M.from_who 
-    AND A.aID = M.aID 
-    AND C.cID = M.cID
-    AND M.has_read <> 1
+    AND M.has_read <> 1 
     ORDER BY M.time 
-    DESC LIMIT {$start},{$limit}";//AND M.has_read <> 1 
+    DESC LIMIT {$start},{$limit}";
+    $temp =  mysqli_query($conn,$sql);
+    $temp =  getDataAsArray($result);
 
+
+//$sql = "SELECT M.from_who, M.mID, M.content, U.username, U.avatar, M.mType, M.aID, A.content AS article_content ,M.cID, c.content AS comment_content
+// FROM messages M, users U, articles A, comments C
+// WHERE M.to_who = '$openID' 
+// AND U.openID = M.from_who 
+// AND A.aID = M.aID 
+// AND C.cID = M.cID
+// AND M.has_read <> 1
+// ORDER BY M.time 
+// DESC LIMIT {$start},{$limit}";
     //echo $sql;
 
     $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
     return $result;
+}
+
+/*
+**分类查询消息
+**list为二维数组
+*/
+function select_message_by_type($list){
+    // foreach($list as $mainKey => $subList){
+    //     switch ($mainKey){
+    //         case '1':
+
+
+    //         break;
+
+    //         case '2':
+
+    //         break;
+
+    //         case '3':
+
+    //         break;
+
+    //         case '4':
+
+    //         break;
+
+    //         case '5':
+
+    //         break;
+
+    //         case '6':
+    //         break;
+
+    //     }
+    // }
+    //文章回复的sql
+    $sql1 = "SELECT M.from_who, M.mID, M.content,U.username, U.avatar, M.mType, M.aID, A.content AS article_content ,M.cID, c.content AS comment_content
+    FROM messages M, users U, articles A, comments C
+    WHERE M.to_who = '$openID' 
+    AND A.aID = M.aID 
+    AND C.cID = M.cID
+    AND U.openID = M.from_who 
+    ORDER BY M.time 
+    DESC LIMIT {$start},{$limit}";
+
 }
 
 /*
