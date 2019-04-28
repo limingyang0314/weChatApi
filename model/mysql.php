@@ -1,17 +1,10 @@
 <?php
-$base_url = 'https://wechatmore.xyz:666/';
-$app_key = 'wxc24a817201be0ebc';
-$db_host = 'localhost';
-$db_user = 'root';
-$db_pw = 'dawangba1';
-$db_name = 'WeChatApi';
-
-$GLOBALS['base_url'] = $base_url;
-$GLOBALS['app_key'] = $app_key;
-$GLOBALS['db_host'] = $db_host;
-$GLOBALS['db_user'] = $db_user;
-$GLOBALS['db_pw'] = $db_pw;
-$GLOBALS['db_name'] = $db_name;
+$GLOBALS['base_url'] = 'https://wechatmore.xyz:666/';
+$GLOBALS['app_key'] = 'wxc24a817201be0ebc';
+$GLOBALS['db_host'] = 'localhost';
+$GLOBALS['db_user'] = 'root';
+$GLOBALS['db_pw'] = 'dawangba1';
+$GLOBALS['db_name'] = 'WeChatApi';
 
 $conn = mysqli_connect($GLOBALS['db_host'], $GLOBALS['db_user'], $GLOBALS['db_pw'], $GLOBALS['db_name']);
 mysqli_query($conn,'set names utf8');
@@ -39,10 +32,7 @@ function check_session($session_key,$conn){
     if($sql){
         $result = getDataAsArray($result);
         $_SESSION['openID'] = $result[0]->openID;
-        //setcookie("openID", $result[0]->openID, time()+3600);
-        //echo "!!!session ok!!!";
     }else{
-        //echo "!!!not ok!!!";
         exit;
     }
 
@@ -72,8 +62,6 @@ function safe_insert($table_name,$values){
 
         $params[] = $value;
 
-        //echo "nb ";
-        //$b .= $value;
         if($count < $num){
             $b .= "?,";
         }else{
@@ -84,12 +72,6 @@ function safe_insert($table_name,$values){
     var_dump($params);
     $sql = $sql . $a .$b;
     echo $sql;
-
-    //$result = $conn_obj->prepare($sql);
-    //$result->bind_param($pa,$pb);
-    //$pa = $params[0];
-    //$pa = $params[1];
-    //$result->execute();
 }
 
 function get_lastOne($table_name,$conditions){
@@ -107,16 +89,70 @@ function get_lastOne($table_name,$conditions){
             }
         }
     }
-    //echo $sql;
 
     $result = mysqli_query($GLOBALS['conn'], $sql);
     $result = getDataAsArray($result);
-
-    //var_dump($result);
     if(!empty($result)){
         $result = $result[0];
     }else{
         $result = array();
+    }
+    return $result;
+}
+
+function getRandomStr($len, $special=true){
+    $chars = array(
+        "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
+        "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
+        "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G",
+        "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
+        "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2",
+        "3", "4", "5", "6", "7", "8", "9"
+    );
+
+    if($special){
+        $chars = array_merge($chars, array(
+            "!", "@", "#", "$", "?", "|", "{", "/", ":", ";",
+            "%", "^", "&", "*", "(", ")", "-", "_", "[", "]",
+            "}", "<", ">", "~", "+", "=", ",", "."
+        ));
+    }
+
+    $charsLen = count($chars) - 1;
+    shuffle($chars);                            //打乱数组顺序
+    $str = '';
+    for($i=0; $i<$len; $i++){
+        $str .= $chars[mt_rand(0, $charsLen)];    //随机取出一位
+    }
+    return $str;
+}
+
+function encode($openID){
+    $rear = getRandomStr(5);
+    $array = str_split($openID);
+    $num = count($array);
+    $result = '';
+    for($i = 0 ; $i < $num ; $i ++){
+        $temp = $array[$num - $i - 1];
+        $tempResult = ord($temp) + 6;
+        $tempResult = chr($tempResult);
+        $result .= $tempResult;
+    }
+    $result .= $rear;
+    return $result;
+}
+
+function decode($secretID){
+    $array = str_split($secretID);
+    $num = count($array);
+    $result = '';
+    for($i = 0 ; $i < $num - 5 ; $i ++){
+
+        $temp = $array[$num - $i - 6];
+        //echo $temp;
+        $tempResult = ord($temp) - 6;
+        $tempResult = chr($tempResult);
+        $result .= $tempResult;
     }
     return $result;
 }

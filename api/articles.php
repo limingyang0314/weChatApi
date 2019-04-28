@@ -2,6 +2,9 @@
 require_once './api.php';
 
     require_once "../model/articles.php";
+    if(isset($_GET['secretID'])){
+        
+    }
     switch ($_GET['secondType']){
     case 'select_article_by_id':
         echo json_encode(error_code(select_article_by_id($_GET['ID'],$conn)));//, $conn

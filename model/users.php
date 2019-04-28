@@ -51,11 +51,6 @@ function login($openID,$session_key){
     session_start();
     $_SESSION['openID'] = $openID;
     $_SESSION['session_key'] = $session_key;
-    // if(isset($_SESSION['openID'])){
-    //     echo "openID is " . $_SESSION['openID'] . "<br>";
-    // }else{
-    //     echo "not login!<br>";
-    // }
 }
 
 /*
