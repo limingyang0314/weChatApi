@@ -197,7 +197,8 @@ function set_UM_had_read($umID){
 */
 function select_user_message($openID, $limit, $page){
     $start = $limit * ($page - 1);
-    $sql = "SELECT UM.time,
+    $sql = "SELECT UM.umID,
+    UM.time,
     UM.has_read,
     U.username AS author_name,
     U.avatar AS author_avatar,
