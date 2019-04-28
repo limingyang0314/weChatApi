@@ -16,6 +16,7 @@ require_once "./api.php";
         echo json_encode(error_code(insert_item($_GET['openID'],$_POST['item_type'],$_POST['item_info'], $conn)));//$openID, $item_type, $item_info
         break;
     case 'delete_item':
+        echo json_encode(error_code(delete_item($_GET['openID'],$_GET['ID'])));
         break;
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));

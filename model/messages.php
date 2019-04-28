@@ -58,34 +58,6 @@ function get_message_by_openID_not_read($openID, $limit, $page, $conn){
 **list为二维数组
 */
 function select_message_by_type($list){
-    // foreach($list as $mainKey => $subList){
-    //     switch ($mainKey){
-    //         case '1':
-
-
-    //         break;
-
-    //         case '2':
-
-    //         break;
-
-    //         case '3':
-
-    //         break;
-
-    //         case '4':
-
-    //         break;
-
-    //         case '5':
-
-    //         break;
-
-    //         case '6':
-    //         break;
-
-    //     }
-    // }
     //文章回复的sql
     $sql1 = "SELECT M.from_who, M.mID, M.content,U.username, U.avatar, M.mType, M.aID, A.content AS article_content ,M.cID, c.content AS comment_content
     FROM messages M, users U, articles A, comments C
