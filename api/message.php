@@ -27,6 +27,9 @@ require_once "./api.php";
     case 'select_user_message':
         echo json_encode(error_code(select_user_message($_GET['openID'], $_GET['limit'], $_GET['page'])));
         break;
+    case 'delete_user_message':
+        echo json_encode(error_code(delete_user_message($_GET['openID'], $_GET['umID'])));
+        break;
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));
     }

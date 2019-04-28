@@ -193,3 +193,18 @@ function select_user_message($openID, $limit, $page){
     $result = getDataAsArray($result);
     return $result;
 }
+
+/*
+**删除某条私信
+*/
+function delete_user_message($openID, $umID){
+    $sql = "DELETE FROM user_messages WHERE to_who = $openID AND umID = $umID";
+    $result = mysqli_query($sql);
+    
+    if($result){
+        return 'delete success';
+    }else{
+        return 'delete failed';
+    }
+
+}
