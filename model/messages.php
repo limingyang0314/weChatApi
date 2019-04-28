@@ -36,21 +36,62 @@ function get_message_by_openID_not_read($openID, $limit, $page, $conn){
     $temp =  mysqli_query($conn,$sql);
     $temp =  getDataAsArray($result);
 
-
-//$sql = "SELECT M.from_who, M.mID, M.content, U.username, U.avatar, M.mType, M.aID, A.content AS article_content ,M.cID, c.content AS comment_content
-// FROM messages M, users U, articles A, comments C
-// WHERE M.to_who = '$openID' 
-// AND U.openID = M.from_who 
-// AND A.aID = M.aID 
-// AND C.cID = M.cID
-// AND M.has_read <> 1
-// ORDER BY M.time 
-// DESC LIMIT {$start},{$limit}";
-    //echo $sql;
-
     $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
     return $result;
+}
+
+/*
+**获取一种类型的全部消息
+*/
+function get_one_type_message($openID, $typeID){
+    if($typeID == 1){
+        //对文章的回复类型
+        $sql = "SELECT M.mID, M.mType, U.username, A.content
+        FROM messages M, users U, articles A,Comments C
+        WHERE M.to_who = $openID 
+        AND A.aID = M.pointerID1
+        AND U.openID = M.from_who
+        AND C.cID = M.pointerID2";
+        
+    } else if($typeID == 2){
+        //对文章回复的回复类型
+        $sql = "SELECT M.mID, M.mType, U.username, A.content, C1.content, C2.content
+        FROM messages M, users U, articles A, Comments C1, Comments C2
+        WHERE M.to_who = $openID 
+        AND A.openID = M.pointerID1
+        AND C1.cID = M.pointerID2
+        AND C2.cID = M.pointerID3 
+        AND U.openID = M.from_who";
+
+    } else if($typeID == 3){
+        //对商品的回复类型
+        $sql = "SELECT M.mID, M.mType, U.username, I.item_info,Comments C
+        FROM messages M, users U, items I, users U
+        WHERE M.to_who = $openID 
+        AND U.openID = M.from_who 
+        AND I.iID = M.pointerID1
+        AND C.cID = M.pointerID2";
+
+    } else if($typeID == 4){
+        //对商品回复的回复类型
+        $sql = "SELECT M.mID, M.mType, U.username, I.item_info
+        FROM messages M, users U, items I, users U, Comments C1, Comments C2
+        WHERE M.to_who = $openID 
+        AND U.openID = M.from_who 
+        AND I.iID = M.pointerID1
+        AND C1.cID = M.pointerID2
+        AND C2.cID = M.pointerID3";
+
+    } else {
+        echo "非法type";
+        exit;
+    }
+
+    $result = mysqli($GLOBALS['conn'], $sql);
+    $result = getDataAsArray($result);
+    return $result;
+
 }
 
 /*
@@ -112,8 +153,8 @@ function add_comment_message($from, $to, $aID, $cID, $conn){
 **增加一条普通的站内私信
 */
 function add_ordinary_message($from, $to, $comment, $conn){
-    $sql = "INSERT INTO messages (from_who, to_who, content, mType) 
-    VALUES ('$from', '$to', '$comment',1)";
+    $sql = "INSERT INTO user_messages (from_who, to_who, content) 
+    VALUES ('$from', '$to', '$comment')";
     $result = mysqli_query($conn,$sql);
     return $result;
 }
