@@ -133,7 +133,7 @@ function set_had_read($mID, $conn){
     //echo $sql;
     $result = mysqli_query($conn,$sql);
     $sql = "SELECT has_read FROM messages WHERE mID = $mID";
-    $result = mysqli_query($conn,$sql);
+    $result = mysqli_query($GLOBALS['conn'],$sql);
     $result = getDataAsArray($result);
     //var_dump($result);
     if($result[0]->has_read == 1){
@@ -147,9 +147,9 @@ function set_had_read($mID, $conn){
 /*
 **删除某条消息
 */
-function delete_message($mID, $conn){
-    $sql = "DELECT FROM messages WHERE mID = $mid";
-    $result = mysqli_query($conn,$sql);
+function delete_message($openID, $mID, $conn){
+    $sql = "DELECT FROM messages WHERE mID = $mid AND (from_who = '$openID' OR to_who = '$openID')";
+    $result = mysqli_query($GLOBALS['conn'],$sql);
     return $result;
 }
 
@@ -159,7 +159,7 @@ function delete_message($mID, $conn){
 function add_comment_message($from, $to, $aID, $cID, $conn){
     $sql = "INSERT INTO messages (from_who, to_who, content, mType, aID, cID) 
     VALUES ('$from', '$to', '$comment', 2, '$aID', '$cID')";
-    $result = mysqli_query($conn,$sql);
+    $result = mysqli_query($GLOBALS['conn'],$sql);
     return $result;
 }
 
@@ -169,7 +169,26 @@ function add_comment_message($from, $to, $aID, $cID, $conn){
 function add_ordinary_message($from, $to, $comment, $conn){
     $sql = "INSERT INTO user_messages (from_who, to_who, content) 
     VALUES ('$from', '$to', '$comment')";
-    $result = mysqli_query($conn,$sql);
+    $result = mysqli_query($GLOBALS['conn'],$sql);
+    return $result;
+}
+
+/*
+**修改私信为已读
+*/
+function set_UM_had_read($umID){
+    $sql = "UPDATE user_messages SET has_read = 1 WHERE umID = $umID";
+    //echo $sql;
+    $result = mysqli_query($GLOBALS['conn'],$sql);
+    $sql = "SELECT has_read FROM user_messages WHERE umID = $umID";
+    $result = mysqli_query($GLOBALS['conn'],$sql);
+    $result = getDataAsArray($result);
+    //var_dump($result);
+    if($result[0]->has_read == 1){
+        $result = "success";
+    }else{
+        $result = "fail";
+    }
     return $result;
 }
 
@@ -179,6 +198,7 @@ function add_ordinary_message($from, $to, $comment, $conn){
 function select_user_message($openID, $limit, $page){
     $start = $limit * ($page - 1);
     $sql = "SELECT UM.time,
+    UM.has_read,
     U.username AS author_name,
     U.avatar AS author_avatar,
     UM.content AS message_content
@@ -198,7 +218,7 @@ function select_user_message($openID, $limit, $page){
 **删除某条私信
 */
 function delete_user_message($openID, $umID){
-    $sql = "DELETE FROM user_messages WHERE to_who = $openID AND umID = $umID";
+    $sql = "DELETE FROM user_messages WHERE (to_who = '$openID' OR from_who = '$openID') AND umID = $umID";
     $result = mysqli_query($sql);
     
     if($result){
