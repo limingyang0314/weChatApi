@@ -156,3 +156,14 @@ function decode($secretID){
     }
     return $result;
 }
+
+/*
+**如果没有登陆，就停止当前一切行为，提示前端进行登陆
+*/
+function not_login(){
+    if(!isset($_SESSION['openID'])){
+        $result = array('error_code' => 10086, 'message' => 'not login or expired');
+        echo json_encode($result);
+        exit;
+    }
+}

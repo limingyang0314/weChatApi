@@ -112,3 +112,21 @@ function add_pic_to_data($data,$conn){
     //exit;
     return $result;
 }
+
+/*
+**删除商品
+*/
+function delete_item($openID, $iID){
+    $sql = "DELETE FROM items WHERE iID = $iID AND openID = '$openID'";
+    $result = mysqli_query($GLOBALS['conn'],$sql);
+    if($result){
+        $sql = "DELETE FROM item_pictures WHERE iID = $iID";
+        $result = mysqli_query($GLOBALS['conn'],$sql);
+    }
+
+    if($result){
+        return "delete success!";
+    }else{
+        return "delete fail!";
+    }
+}
