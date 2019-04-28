@@ -44,7 +44,12 @@ function get_message_by_openID_not_read($openID, $limit, $page, $conn){
 /*
 **获取一种类型的全部消息
 */
-function get_one_type_message($openID, $typeID){
+function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
+    $condition = '';
+    $start = $limit * ($page - 1);
+    if($mode == 2){
+        $condition = " AND has_read <> 1";
+    }
     if($typeID == 1){
         //对文章的回复类型
         $sql = "SELECT M.mID,
@@ -58,7 +63,9 @@ function get_one_type_message($openID, $typeID){
         WHERE M.to_who = $openID 
         AND A.aID = M.pointerID1
         AND U.openID = M.from_who
-        AND C.cID = M.pointerID2";
+        AND C.cID = M.pointerID2$condition
+        ORDER BY M.time 
+        DESC LIMIT {$start},{$limit}";
         
     } else if($typeID == 2){
         //对文章回复的回复类型
@@ -76,7 +83,9 @@ function get_one_type_message($openID, $typeID){
         AND A.openID = M.pointerID1
         AND C1.cID = M.pointerID2
         AND C2.cID = M.pointerID3 
-        AND U.openID = M.from_who";
+        AND U.openID = M.from_who$condition
+        ORDER BY M.time 
+        DESC LIMIT {$start},{$limit}";
 
     } else if($typeID == 3){
         //对商品的回复类型
@@ -85,7 +94,9 @@ function get_one_type_message($openID, $typeID){
         WHERE M.to_who = $openID 
         AND U.openID = M.from_who 
         AND I.iID = M.pointerID1
-        AND C.cID = M.pointerID2";
+        AND C.cID = M.pointerID2$condition
+        ORDER BY M.time 
+        DESC LIMIT {$start},{$limit}";
 
     } else if($typeID == 4){
         //对商品回复的回复类型
@@ -95,7 +106,9 @@ function get_one_type_message($openID, $typeID){
         AND U.openID = M.from_who 
         AND I.iID = M.pointerID1
         AND C1.cID = M.pointerID2
-        AND C2.cID = M.pointerID3";
+        AND C2.cID = M.pointerID3$condition
+        ORDER BY M.time 
+        DESC LIMIT {$start},{$limit}";
 
     } else {
         echo "非法type";
@@ -148,17 +161,28 @@ function set_had_read($mID, $conn){
 **删除某条消息
 */
 function delete_message($openID, $mID, $conn){
-    $sql = "DELECT FROM messages WHERE mID = $mid AND (from_who = '$openID' OR to_who = '$openID')";
+    $sql = "DELETE FROM messages WHERE mID = $mID AND (from_who = '$openID' OR to_who = '$openID')";
     $result = mysqli_query($GLOBALS['conn'],$sql);
-    return $result;
+    //echo $sql;
+    if($result){
+        return 'delete success';
+    }else{
+        return 'delete failed';
+    }
 }
 
 /*
 **增加一条回复类型的消息
 */
-function add_comment_message($from, $to, $aID, $cID, $conn){
-    $sql = "INSERT INTO messages (from_who, to_who, content, mType, aID, cID) 
-    VALUES ('$from', '$to', '$comment', 2, '$aID', '$cID')";
+function add_comment_message($mType, $from, $to, $pointerID1, $pointerID2, $pointerID3 = null){
+    if($mType == 4 || $mType == 4){
+        $sql = "INSERT INTO messages (mType, from_who, to_who, pointerID1, pointerID2, pointerID3) 
+        VALUES ($mType, '$from', '$to', '$pointerID1', '$pointerID2', '$pointerID3')";
+    }else{
+        $sql = "INSERT INTO messages (mType, from_who, to_who, pointerID1, pointerID2) 
+        VALUES ($mType, '$from', '$to', '$pointerID1', '$pointerID2')";
+    }
+
     $result = mysqli_query($GLOBALS['conn'],$sql);
     return $result;
 }
