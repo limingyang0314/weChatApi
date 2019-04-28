@@ -22,7 +22,10 @@ require_once "./api.php";
         add_ordinary_message($_POST['from'], $_POST['to'], $_POST['comment'], $conn);
         break;
     case 'get_message_by_type':
-        echo json_encode(error_code(get_message_by_openID($_GET['openID'], $_GET['limit'], $_GET['page'], $conn)));
+        echo json_encode(error_code(get_one_type_message($_GET['openID'], $_GET['typeID'])));
+        break;
+    case 'select_user_message':
+        echo json_encode(error_code(select_user_message($_GET['openID'], $_GET['limit'], $_GET['page'])));
         break;
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));

@@ -47,7 +47,13 @@ function get_message_by_openID_not_read($openID, $limit, $page, $conn){
 function get_one_type_message($openID, $typeID){
     if($typeID == 1){
         //对文章的回复类型
-        $sql = "SELECT M.mID, M.mType, U.username, A.content
+        $sql = "SELECT M.mID,
+         M.mType AS message_type,
+         U.username AS author_username,
+         A.aID AS article_ID,
+         A.content AS article_content,
+         C.cID AS comment_ID,
+         C.content AS comment_content,
         FROM messages M, users U, articles A,Comments C
         WHERE M.to_who = $openID 
         AND A.aID = M.pointerID1
@@ -56,7 +62,15 @@ function get_one_type_message($openID, $typeID){
         
     } else if($typeID == 2){
         //对文章回复的回复类型
-        $sql = "SELECT M.mID, M.mType, U.username, A.content, C1.content, C2.content
+        $sql = "SELECT M.mID,
+         M.mType AS message_type, 
+         U.username AS author_username,
+         A.aID AS article_ID,
+         A.content AS article_content,
+         C1.cID AS comment1_ID,
+         C1.content AS comment_content,
+         C2.cID AS comment2_ID,
+         C2.content AS comment2_content
         FROM messages M, users U, articles A, Comments C1, Comments C2
         WHERE M.to_who = $openID 
         AND A.openID = M.pointerID1
@@ -88,7 +102,8 @@ function get_one_type_message($openID, $typeID){
         exit;
     }
 
-    $result = mysqli($GLOBALS['conn'], $sql);
+    echo $sql;
+    $result = mysqli_query($GLOBALS['conn'], $sql);
     $result = getDataAsArray($result);
     return $result;
 
@@ -108,7 +123,6 @@ function select_message_by_type($list){
     AND U.openID = M.from_who 
     ORDER BY M.time 
     DESC LIMIT {$start},{$limit}";
-
 }
 
 /*
@@ -156,5 +170,26 @@ function add_ordinary_message($from, $to, $comment, $conn){
     $sql = "INSERT INTO user_messages (from_who, to_who, content) 
     VALUES ('$from', '$to', '$comment')";
     $result = mysqli_query($conn,$sql);
+    return $result;
+}
+
+/*
+**根据openID返回私信
+*/
+function select_user_message($openID, $limit, $page){
+    $start = $limit * ($page - 1);
+    $sql = "SELECT UM.time,
+    U.username AS author_name,
+    U.avatar AS author_avatar,
+    UM.content AS message_content
+    FROM user_messages UM, users U 
+    WHERE UM.to_who = $openID 
+    AND U.openID = UM.from_who
+    ORDER BY UM.time 
+    DESC LIMIT {$start},{$limit}";
+
+    //echo $sql;
+    $result = mysqli_query($GLOBALS['conn'], $sql);
+    $result = getDataAsArray($result);
     return $result;
 }
