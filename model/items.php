@@ -3,7 +3,7 @@ require_once 'mysql.php';
 
 function select_item_by_id($id, $conn){
     //echo $id;
-    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time 
+    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num
     FROM items I, item_types T, users U  
     WHERE I.iID = $id 
     AND T.type_id = I.iType_ID 
@@ -19,7 +19,7 @@ function select_item_by_id($id, $conn){
 
 function select_item_by_author($openID, $limit, $page, $conn){
     $start = $limit * ($page - 1);
-    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time 
+    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num
     FROM items I, item_types T, users U  
     WHERE I.openID = $openID 
     AND T.type_id = I.iType_ID 
@@ -35,7 +35,7 @@ function select_item_by_author($openID, $limit, $page, $conn){
 
 function select_item_by_type($type, $limit, $page, $conn){
     $start = $limit * ($page - 1);
-    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time 
+    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num 
     FROM items I, item_types T, users U  
     WHERE I.itype_ID = $type 
     AND T.type_id = I.iType_ID 
