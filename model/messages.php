@@ -55,6 +55,7 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
         $sql = "SELECT M.mID,
          M.mType AS message_type,
          U.username AS author_username,
+         U.avatar AS author_avatar,
          A.aID AS article_ID,
          A.content AS article_content,
          C.cID AS comment_ID,
@@ -72,6 +73,7 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
         $sql = "SELECT M.mID,
          M.mType AS message_type, 
          U.username AS author_username,
+         U.avatar AS author_avatar,
          A.aID AS article_ID,
          A.content AS article_content,
          C1.cID AS comment1_ID,
@@ -89,7 +91,7 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
 
     } else if($typeID == 3){
         //对商品的回复类型
-        $sql = "SELECT M.mID, M.mType, U.username, I.item_info,Comments C
+        $sql = "SELECT M.mID, M.mType AS message_type, U.username AS author_username,U.avatar AS author_avatar, I.item_info,Comments C
         FROM messages M, users U, items I, users U
         WHERE M.to_who = '$openID'
         AND U.openID = 'M.from_who'
@@ -100,7 +102,7 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
 
     } else if($typeID == 4){
         //对商品回复的回复类型
-        $sql = "SELECT M.mID, M.mType, U.username, I.item_info
+        $sql = "SELECT M.mID, M.mType AS message_type, U.username AS author_username,U.avatar AS author_avatar, I.item_info
         FROM messages M, users U, items I, users U, Comments C1, Comments C2
         WHERE M.to_who = '$openID'
         AND U.openID = 'M.from_who' 
