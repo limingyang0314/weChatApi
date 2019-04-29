@@ -58,9 +58,9 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
          A.aID AS article_ID,
          A.content AS article_content,
          C.cID AS comment_ID,
-         C.content AS comment_content,
-        FROM messages M, users U, articles A,Comments C
-        WHERE M.to_who = $openID 
+         C.content AS comment_content
+        FROM messages M, users U, articles A, Comments C
+        WHERE M.to_who = '$openID' 
         AND A.aID = M.pointerID1
         AND U.openID = M.from_who
         AND C.cID = M.pointerID2$condition
@@ -79,8 +79,8 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
          C2.cID AS comment2_ID,
          C2.content AS comment2_content
         FROM messages M, users U, articles A, Comments C1, Comments C2
-        WHERE M.to_who = $openID 
-        AND A.openID = M.pointerID1
+        WHERE M.to_who = '$openID'
+        AND A.aID = M.pointerID1
         AND C1.cID = M.pointerID2
         AND C2.cID = M.pointerID3 
         AND U.openID = M.from_who$condition
@@ -91,8 +91,8 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
         //对商品的回复类型
         $sql = "SELECT M.mID, M.mType, U.username, I.item_info,Comments C
         FROM messages M, users U, items I, users U
-        WHERE M.to_who = $openID 
-        AND U.openID = M.from_who 
+        WHERE M.to_who = '$openID'
+        AND U.openID = 'M.from_who'
         AND I.iID = M.pointerID1
         AND C.cID = M.pointerID2$condition
         ORDER BY M.time 
@@ -102,8 +102,8 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
         //对商品回复的回复类型
         $sql = "SELECT M.mID, M.mType, U.username, I.item_info
         FROM messages M, users U, items I, users U, Comments C1, Comments C2
-        WHERE M.to_who = $openID 
-        AND U.openID = M.from_who 
+        WHERE M.to_who = '$openID'
+        AND U.openID = 'M.from_who' 
         AND I.iID = M.pointerID1
         AND C1.cID = M.pointerID2
         AND C2.cID = M.pointerID3$condition
@@ -115,7 +115,7 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
         exit;
     }
 
-    echo $sql;
+    //echo $sql;
     $result = mysqli_query($GLOBALS['conn'], $sql);
     $result = getDataAsArray($result);
     return $result;

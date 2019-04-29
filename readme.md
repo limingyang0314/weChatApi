@@ -500,6 +500,7 @@ https://wechatmore.xyz:666/api/items.php?secondType=select_item_by_type&type=1&l
 所有图片目前只支持("gif", "jpeg", "jpg", "png")这四种格式，可以再加，请联系我。
 返回值里的iID是发布成功后的商品ID号，可以根据这个直接做跳转。
 https://wechatmore.xyz:666/api/items.php?secondType=insert_item&openID=1111
+
 | 方法 | openID | item_type | item_info | file1 | file2 | file3 |
 | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 | POST | openID是get传的 | 商品类型ID | 商品介绍 | 选填 图片1 | 选填 图片2 | 选填 图片3 |
@@ -512,6 +513,21 @@ https://wechatmore.xyz:666/api/items.php?secondType=insert_item&openID=1111
     }
 }
 ```
+
+
+
+### 删除商品
+
+https://wechatmore.xyz:666/api/items.php?secondType=insert_item&openID=1111&ID=3
+
+```json
+{
+    "error_code": -1,
+    "message": null,
+    "result": "delete success!"
+}
+```
+
 
 
 ## 收藏的获取，添加以及热度相关
