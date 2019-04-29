@@ -21,6 +21,9 @@ require_once './api.php';
     case 'delete_article':
         echo json_encode(error_code(delete_article($_GET['openID'], $_GET['ID'], $conn)));
         break;
+    case 'upload_article_picture':
+        insert_article_picture($_FILE['file'],$_POST['aID'],$conn,$_POST['order']);
+        break;
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));
     }
