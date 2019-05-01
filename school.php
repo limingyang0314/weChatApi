@@ -29,7 +29,7 @@ function check_school($openID,$conn){
 
 function set_school($openID,$school_id,$conn){
     $state = array('error_code' => -1 ,'state' =>true,'message' => null);
-    $sql = "UPDATE users SET school_id = {$school_id}";
+    $sql = "UPDATE users SET school_id = {$school_id} WHERE openID = '$openID'";
     $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
     $sql = "SELECT school_id FROM users WHERE openID = '$openID'";
