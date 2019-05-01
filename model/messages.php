@@ -79,7 +79,7 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
          A.aID AS article_ID,
          A.content AS article_content,
          C1.cID AS comment1_ID,
-         C1.content AS comment_content,
+         C1.content AS comment1_content,
          C2.cID AS comment2_ID,
          C2.content AS comment2_content
         FROM messages M, users U, articles A, Comments C1, Comments C2

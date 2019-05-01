@@ -4,7 +4,7 @@ require_once "model/mysql.php";
 //检查是否选择过了学校，如果选择过了就返回校名和true状态，否则返回false状态
 function check_school($openID,$conn){
     $state = array('error_code' => -1 ,'state' =>true,'school_name' => null,'school_id' => null);
-    $sql = "SELECT S.school_name 
+    $sql = "SELECT S.school_name,S.sID
     FROM users U, schools S 
     WHERE openID = '{$openID}' 
     AND S.sID = U.school_id";
@@ -22,7 +22,7 @@ function check_school($openID,$conn){
     
     //var_dump($result);
     $state['school_name'] = $result[0]->school_name;
-    $state['school_id'] = $result[0]->school_id;
+    $state['school_id'] = $result[0]->sID;
     echo json_encode($state);
     exit;
 }
@@ -71,13 +71,19 @@ if(isset($_GET['action'])){
     if($_GET['action'] == 'check_school'){
         //echo "session ".$_SESSION['session_key'];
         //echo "session_key = {$_COOKIE['session_key']} openID = {$_COOKIE['openID']} ";
-        check_session($_SESSION['session_key'],$conn);
-        check_school($_SESSION['openID'],$conn);
+        //check_session($_SESSION['session_key'],$conn);
+        //unset($_SESSION['openID']);
+        if(isset($_SESSION['openID'])){
+            check_school($_SESSION['openID'],$conn);
+        }else{
+            check_school('',$conn);
+        }
+        
     }
 
     if($_GET['action'] == 'set_school'){
         //echo "session ".$_SESSION['session_key'];
-        check_session($_SESSION['session_key'],$conn);
+        //check_session($_SESSION['session_key'],$conn);
         set_school($_SESSION['openID'],$_POST['school_id'],$conn);
     }
 
