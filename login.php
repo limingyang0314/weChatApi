@@ -1,5 +1,7 @@
 <?php
-require_once "middle/session.php";
+//require_once "middle/session.php";
+require_once "model/mysql.php";
+require_once "middle/code.php";
 //require_once "model/mysql.php";
 if(isset($_POST['code'])){
     $time = date("Y-m-d H:i:s",time() + 28800);
@@ -25,8 +27,6 @@ if(isset($_POST['code'])){
         exit;
     }
 
-    $_SESSION['openID'] = $session_obj->openid;
-    $_SESSION['session_key'] = $session_obj->session_key;
     $openID = $session_obj->openid;
 
     $sql = "SELECT * FROM users WHERE openID = '{$openID}'";
@@ -34,7 +34,7 @@ if(isset($_POST['code'])){
     $username = $user_info['username'] = $_POST['username'];
     $avatar  = $user_info['avatar'] = $_POST['avatar'];
     $user_info['openID'] = $openID;
-    $session_key = $user_info['session_key'] = $session_obj->session_key;
+    $session_key = $session_obj->session_key;
     $location = 1;
 
     $result = getDataAsArray(mysqli_query($conn, $sql));
@@ -58,15 +58,14 @@ if(isset($_POST['code'])){
         
             $state['openID'] = $openID;
             $state['last_login_time'] = $time;
+            //echo encode($openID);
+            //exit;
             $state['secret_key'] = encode($openID);
 
             //var_dump($state);
             //exit;
             echo json_encode($state);
         } else {
-
-            //echo "case2";
-
             $state['error_code'] = 2;
             $state['message'] = 'login failed';
             echo json_encode($state);
@@ -79,6 +78,8 @@ if(isset($_POST['code'])){
         if($result){
             $state['openID'] = $openID;
             $state['last_login_time'] = $time;
+            //echo encode($openID);
+            //exit;
             $state['secret_key'] = encode($openID);
             echo json_encode($state);
         } else {
