@@ -87,7 +87,12 @@ if(isset($_GET['action'])){
         //check_session($_SESSION['session_key'],$conn);
         //echo $GLOBALS['openID'];
         //exit;
-        set_school($GLOBALS['openID'],$_POST['school_id'],$conn);
+        if(isset($_POST['school_id'])){
+            set_school($GLOBALS['openID'],$_POST['school_id'],$conn);
+        }else{
+            set_school($GLOBALS['openID'],$_GET['school_id'],$conn);
+        }
+        
     }
 
     if($_GET['action'] == 'get_school'){
