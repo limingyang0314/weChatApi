@@ -11,8 +11,11 @@ if(isset($_POST['code'])){
     require_once "user.php";
     $session_obj = get_openID($js_code);
 
+    //var_dump($session_obj);
+    //exit;
+
     //返回信息
-    $state = array('error_code'=>-1,'message'=>'login success','openID'=>'');
+    $state = array('error_code'=>-1,'message'=>'login success','openID'=>'','secret_key'=>'');
 
     //如果没有获得openID
     if(!isset($session_obj->openid)){
@@ -23,16 +26,10 @@ if(isset($_POST['code'])){
     }
 
     $_SESSION['openID'] = $session_obj->openid;
-    //$_COOKIE['openID'] = $session_obj->openid;
-    //setcookie("session_key", $session_obj->session_key, time()+3600);
     $_SESSION['session_key'] = $session_obj->session_key;
-    //$_COOKIE['session_key'] = $session_obj->session_key;
-    //setcookie("openID", $session_obj->openid, time()+3600);
     $openID = $session_obj->openid;
 
     $sql = "SELECT * FROM users WHERE openID = '{$openID}'";
-    //echo $sql;
-
 
     $username = $user_info['username'] = $_POST['username'];
     $avatar  = $user_info['avatar'] = $_POST['avatar'];
@@ -42,12 +39,8 @@ if(isset($_POST['code'])){
 
     $result = getDataAsArray(mysqli_query($conn, $sql));
 
-
     //var_dump($result);
-    //var_dump($state);
-    
 
-    //$time = date("Y-m-d H:i:s",time());
     if(!empty($result)){
         $sql = "UPDATE users 
         SET session_key = '{$session_key}',
@@ -60,10 +53,20 @@ if(isset($_POST['code'])){
         //echo $sql;
         $result = mysqli_query($conn, $sql);
         if($result){
+
+            //echo "case 1";
+        
             $state['openID'] = $openID;
             $state['last_login_time'] = $time;
+            $state['secret_key'] = encode($openID);
+
+            //var_dump($state);
+            //exit;
             echo json_encode($state);
         } else {
+
+            //echo "case2";
+
             $state['error_code'] = 2;
             $state['message'] = 'login failed';
             echo json_encode($state);
@@ -76,6 +79,7 @@ if(isset($_POST['code'])){
         if($result){
             $state['openID'] = $openID;
             $state['last_login_time'] = $time;
+            $state['secret_key'] = encode($openID);
             echo json_encode($state);
         } else {
             $state['error_code'] = 1;
@@ -86,6 +90,8 @@ if(isset($_POST['code'])){
         }
 
     }
+
+    //echo "nb";
     //$sql = "UPDATE ";
 
 }

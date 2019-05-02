@@ -9,11 +9,23 @@ function error_code($result, $err_code = -1, $message = null){
     return $new;
 }
 
+function decode_mirror($secretID){
 
-// if(!isset($_GET['mainType'])){
-//     echo json_encode(error_code([],'未定义主要的操作类型',1));
-//     exit;
-// }
+    $array = str_split($secretID);
+    $num = count($array);
+    $result = '';
+    for($i = 0 ; $i < $num - 5; $i ++){
 
+        $temp = $array[$num - $i - 6];
+        $tempResult = ord($temp) - 1;
+        $tempResult = chr($tempResult);
+        $result .= $tempResult;
+    }
+    return $result;
+}
+
+if(isset($_GET['secret_key'])){
+    $_GET['openID'] = decode_mirror($_GET['secret_key']);
+}
 
 ?>

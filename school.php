@@ -36,8 +36,9 @@ function set_school($openID,$school_id,$conn){
     $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
 
-    
-    if($result[0]->school_id == $school_id){
+    if(empty($result)){
+
+    }else if($result[0]->school_id == $school_id){
         echo json_encode($state);
         exit;
     }else{
@@ -73,8 +74,8 @@ if(isset($_GET['action'])){
         //echo "session_key = {$_COOKIE['session_key']} openID = {$_COOKIE['openID']} ";
         //check_session($_SESSION['session_key'],$conn);
         //unset($_SESSION['openID']);
-        if(isset($_SESSION['openID'])){
-            check_school($_SESSION['openID'],$conn);
+        if(isset($GLOBALS['openID'])){
+            check_school($GLOBALS['openID'],$conn);
         }else{
             check_school('',$conn);
         }
@@ -84,7 +85,9 @@ if(isset($_GET['action'])){
     if($_GET['action'] == 'set_school'){
         //echo "session ".$_SESSION['session_key'];
         //check_session($_SESSION['session_key'],$conn);
-        set_school($_SESSION['openID'],$_POST['school_id'],$conn);
+        //echo $GLOBALS['openID'];
+        //exit;
+        set_school($GLOBALS['openID'],$_POST['school_id'],$conn);
     }
 
     if($_GET['action'] == 'get_school'){
