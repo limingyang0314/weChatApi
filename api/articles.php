@@ -24,6 +24,9 @@ require_once './api.php';
     case 'upload_article_picture':
         insert_article_picture($_FILE['file'],$_POST['aID'],$conn,$_POST['order']);
         break;
+    case 'recommend_article':
+        select_articles_near($location_id, $conn);
+        break;
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));
     }

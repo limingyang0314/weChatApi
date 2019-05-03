@@ -84,10 +84,13 @@ require_once 'mysql.php';
         if($mode == 2){
             $descKey = 'A.hot';
         }
+
+        if($typeID != 0){
+            $type_condition = "A.type_id = '$typeID' AND";
+        }
         $sql = "SELECT A.aid AS ID, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID , A.comment_num
         FROM articles A, users U, article_types T 
-        WHERE A.type_id = '$typeID' 
-        AND T.type_id = A.type_id 
+        WHERE $type_condition T.type_id = A.type_id 
         AND U.openID = A.openID 
         ORDER BY {$descKey} DESC 
         LIMIT {$start},{$limit}";
@@ -117,9 +120,9 @@ require_once 'mysql.php';
     function select_articles_near($location_id, $conn){
         $sql = "SELECT A.aid, A.content, T.type_name, U.username, U.avatar, A.time, U.openID , A.comment_num
         FROM articles A, users U, article_types T 
-        WHERE A.openID = '$openID' 
-        AND T.type_id = A.type_id 
+        WHERE  T.type_id = A.type_id 
         AND U.openID = A.openID 
+        AND location_id = $location_id
         ORDER BY A.time DESC";
         
         $result = mysqli_query($conn,$sql);
@@ -179,4 +182,9 @@ require_once 'mysql.php';
             return "delete fail!";
         }
     
+    }
+
+    function recommend(){
+        
+
     }
