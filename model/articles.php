@@ -84,7 +84,7 @@ require_once 'mysql.php';
         if($mode == 2){
             $descKey = 'A.hot';
         }
-
+        $type_condition = '';
         if($typeID != 0){
             $type_condition = "A.type_id = '$typeID' AND";
         }

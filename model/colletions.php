@@ -21,7 +21,7 @@ function get_article_collection($openID,$conn){
     AND U.openID = A.openID";
     //echo $query;
 
-    $result = $conn->query($query);
+    $result = mysqli_query($conn,$query);
     return finish_colletion_select($result);
 }
 
@@ -38,8 +38,9 @@ function get_item_collection($openID, $conn){
 
     //echo $query;
     //exit;
-    $result = $conn->query($query);
-    return finish_colletion_select($result);
+    $result = mysqli_query($conn,$query);
+    $result = getDataAsArray($result);
+    return $result;
 }
 
 /*
@@ -47,8 +48,23 @@ function get_item_collection($openID, $conn){
 ** type 1 文章  2 商品
 */
 function insert_colletion($openID, $type, $id, $conn){
+
+    $query = "SELECT * FROM colletions WHERE type = $type AND openID = '$openID' AND pointerID = $id";
+    $result = mysqli_query($conn,$query);
+    $result = getDataAsArray($result);
+    if(!empty($result)){
+        $query = "DELETE FROM colletions WHERE type = $type AND openID = '$openID' AND pointerID = $id";
+        $result = mysqli_query($conn,$query);
+        if($result){
+            return array('result' => 'delete success!');
+        }else{
+            return array('result' => 'delete failed!');
+        }
+
+    }
+
     $query = "INSERT INTO colletions (openID,type,pointerID) VALUES ('{$openID}',{$type}, {$id})";
-    $result = $conn->query($query);
+    $result = mysqli_query($conn,$query);
     if($result){
         $table = null;
         $id_name = null;
@@ -62,7 +78,7 @@ function insert_colletion($openID, $type, $id, $conn){
             $id_name = "iID";
         }
         $query = "UPDATE {$table} SET hot = hot + 1 WHERE {$id_name} = {$id}";
-        $conn->query($query);
+        mysqli_query($conn,$query);
         return array('result' => 'insert success!');
     }else{
         return array('result' => 'insert fail!');

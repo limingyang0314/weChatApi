@@ -35,6 +35,7 @@ function select_item_by_author($openID, $limit, $page, $conn){
 
 function select_item_by_type($type, $limit, $page, $conn){
     $start = $limit * ($page - 1);
+    $type_condition = '';
     if($type != 0){
         $type_condition = "I.itype_ID = $type AND ";
     }
