@@ -78,6 +78,9 @@ function insert_item($openID, $item_type, $item_info, $conn){
         insert_item_picture($_FILES["file3"],$iID,$conn,3);
     }
 
+    $sql = "UPDATE users SET post_num = post_num + 1 WHERE openID = '$openID'";
+    mysqli_query($conn, $sql);
+
     return array('iID' => $iID);
 }
 
@@ -129,6 +132,8 @@ function delete_item($openID, $iID){
     }
 
     if($result){
+        $sql = "UPDATE users SET post_num = post_num - 1 WHERE openID = '$openID'";
+        mysqli_query($conn, $sql);
         return "delete success!";
     }else{
         return "delete fail!";

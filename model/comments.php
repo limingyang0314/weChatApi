@@ -61,6 +61,8 @@ function insert_comment($cType, $pointerID, $pointerID2, $openID, $content, $con
         $condition = "openID = $openID";
         $the_last_one = get_lastOne('comments',$condition);
         //var_dump($the_last_one);
+        $sql = "UPDATE users SET reply_num = reply_num + 1 WHERE openID = '$openID'";
+        mysqli_query($conn, $sql);
         return "insert success!";
     }else{
         return "insert fail!";
@@ -72,6 +74,8 @@ function delete_comment($openID, $cid, $conn){
     $result = mysqli_query($conn, $sql);
     //echo $sql;
     if($result){
+        $sql = "UPDATE users SET reply_num = reply_num - 1 WHERE openID = '$openID'";
+        mysqli_query($conn, $sql);
         return "delete success!";
     }else{
         return "delete fail!";
