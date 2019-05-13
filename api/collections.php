@@ -12,6 +12,9 @@ require_once './api.php';
     case 'insert_colletion':
         echo json_encode(error_code(insert_colletion($_GET['openID'], $_GET['type'], $_GET['id'], $conn)));
         break;
+    case 'is_colletion':
+        echo json_encode(error_code(is_colletion($_GET['openID'], $_GET['type'], $_GET['id'], $conn)));
+        break;
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));
     

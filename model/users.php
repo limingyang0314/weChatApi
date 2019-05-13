@@ -37,7 +37,7 @@ function get_openID($js_code){
 }
 
 function get_user_info($openID, $conn){
-     $sql = "SELECT U.openID, U.username, U.avatar, L.location_name, S.school_name FROM users U, locations L, schools S WHERE U.openID = '{$openID}' AND L.location_id = U.location_id AND S.sID = U.school_id";
+     $sql = "SELECT U.openID, U.username, U.avatar, L.location_name, S.school_name, U.reply_num, U.post_num FROM users U, locations L, schools S WHERE U.openID = '{$openID}' AND L.location_id = U.location_id AND S.sID = U.school_id";
     $result = mysqli_query($conn,$sql);
     if (!$result) {
         printf("Error: %s\n", mysqli_error($conn));
