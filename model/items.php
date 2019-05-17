@@ -35,18 +35,18 @@ function select_item_by_author($openID, $limit, $page, $conn){
 
 function select_item_by_type($type, $limit, $page, $conn){
     $start = $limit * ($page - 1);
-    $type_condition = '';
-    $order = 'I.hot';
-    if($type != 1){
-        $type_condition = "I.itype_ID = $type AND ";
-        $order = 'I.time';
-    }
+    // $type_condition = '';
+    // $order = 'I.hot';
+    // if($type != 1){
+    //     $type_condition = "I.itype_ID = $type AND ";
+    //     $order = 'I.time';
+    // }
     $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num 
     FROM items I, item_types T, users U  
     WHERE $type_condition 
     T.type_id = I.iType_ID 
     AND U.openID = I.openID 
-    ORDER BY $order DESC 
+    ORDER BY I.time DESC 
     LIMIT {$start},{$limit}";
 
     $result = mysqli_query($conn,$sql);
@@ -55,8 +55,8 @@ function select_item_by_type($type, $limit, $page, $conn){
     return $result;
 }
 
-function insert_item($openID, $item_type, $item_info, $conn){
-    $sql = "INSERT INTO items (iType_ID,openID,item_info) VALUES ($item_type, '$openID', '$item_info')";
+function insert_item($openID, $item_type, $item_info, $expect_price,$contact_way,$conn){
+    $sql = "INSERT INTO items (iType_ID,openID,item_info,expect_price,contact_way) VALUES ($item_type, '$openID', '$item_info',$expect_price,'$contact_way')";
     //echo $sql;
     $result = mysqli_query($conn,$sql);
 

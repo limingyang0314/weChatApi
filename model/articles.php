@@ -76,6 +76,7 @@ require_once 'mysql.php';
     **默认按时间排序
     */
     function select_article_by_type($typeID, $limit, $page, $mode = 1, $conn){
+
         $start = $limit * ($page - 1);
         $descKey = null;
         if($mode == 1){
@@ -85,8 +86,10 @@ require_once 'mysql.php';
             $descKey = 'A.time';
         }
         $type_condition = '';
-        if($typeID != 0){
+        if($typeID != 1){
             $type_condition = "A.type_id = '$typeID' AND";
+        }else{
+            $descKey = 'A.hot';
         }
         $sql = "SELECT A.aid AS ID, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID , A.comment_num
         FROM articles A, users U, article_types T 
