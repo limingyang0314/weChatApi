@@ -79,10 +79,10 @@ require_once 'mysql.php';
         $start = $limit * ($page - 1);
         $descKey = null;
         if($mode == 1){
-            $descKey = 'A.time';
+            $descKey = 'A.hot';
         }
         if($mode == 2){
-            $descKey = 'A.hot';
+            $descKey = 'A.time';
         }
         $type_condition = '';
         if($typeID != 0){
