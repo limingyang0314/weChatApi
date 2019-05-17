@@ -45,8 +45,8 @@ function select_comment_by_openID($openID,$limit,$page, $conn){
 function insert_comment($cType, $pointerID, $pointerID2, $openID, $content, $conn){
     $sql = "INSERT INTO comments (cType,pointerID,pointerID2,openID,content) VALUES ({$cType},{$pointerID},{$pointerID2},'{$openID}','{$content}')";
     $result = mysqli_query($conn, $sql);
-    echo $sql;
-    exit;
+    //echo $sql;
+    //exit;
     if($result){
         $table = 'articles';
         $ID_name = 'aID';
