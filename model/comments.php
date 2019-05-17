@@ -26,8 +26,8 @@ function select_comment_by_pointerID($cType, $pointerID, $limit, $page, $conn){
     ORDER BY C.time 
     ASC LIMIT {$start},{$limit}";
     $result = mysqli_query($conn, $sql);
-    echo $sql;
-    exit;
+    //echo $sql;
+    //exit;
     $result = getDataAsArray($result);
     return $result;
 }
