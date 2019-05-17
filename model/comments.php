@@ -13,17 +13,21 @@ function select_comment_by_id($cid, $conn){
 }
 
 function select_comment_by_pointerID($cType, $pointerID, $limit, $page, $conn){
+    $subtype = 3;
+    if($cType == 2){
+        $subtype = 4;
+    }
     $start = $limit * ($page - 1);
-    $sql = "SELECT C.cid AS ID, C.cType, U.username, U.avatar, C.content, C.time 
+    $sql = "SELECT C.cid AS ID, C.cType, U.username,C.pointerID2, U.avatar, C.content, C.time 
     FROM comments C, users U 
     WHERE C.pointerID = {$pointerID} 
     AND U.openID = C.openID 
-    AND C.cType = {$cType} 
+    AND (C.cType = {$cType} OR C.cType = {$subtype}) 
     ORDER BY C.time 
-    DESC LIMIT {$start},{$limit}";
+    ASC LIMIT {$start},{$limit}";
     $result = mysqli_query($conn, $sql);
-    //echo $sql;
-    //exit;
+    echo $sql;
+    exit;
     $result = getDataAsArray($result);
     return $result;
 }
