@@ -3,7 +3,7 @@ require_once 'mysql.php';
 
 function select_item_by_id($id, $conn){
     //echo $id;
-    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num
+    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num, I.expect_price, I.contact_way
     FROM items I, item_types T, users U  
     WHERE I.iID = $id 
     AND T.type_id = I.iType_ID 
@@ -41,7 +41,7 @@ function select_item_by_type($type, $limit, $page, $conn){
          $type_condition = "I.itype_ID = $type AND ";
     //     $order = 'I.time';
     // }
-    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num 
+    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num, I.expect_price
     FROM items I, item_types T, users U  
     WHERE $type_condition 
     T.type_id = I.iType_ID 
