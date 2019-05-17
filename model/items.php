@@ -36,15 +36,17 @@ function select_item_by_author($openID, $limit, $page, $conn){
 function select_item_by_type($type, $limit, $page, $conn){
     $start = $limit * ($page - 1);
     $type_condition = '';
-    if($type != 0){
+    $order = 'I.hot';
+    if($type != 1){
         $type_condition = "I.itype_ID = $type AND ";
+        $order = 'I.time';
     }
     $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num 
     FROM items I, item_types T, users U  
     WHERE $type_condition 
     T.type_id = I.iType_ID 
     AND U.openID = I.openID 
-    ORDER BY I.time DESC 
+    ORDER BY $order DESC 
     LIMIT {$start},{$limit}";
 
     $result = mysqli_query($conn,$sql);
