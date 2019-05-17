@@ -38,7 +38,7 @@ function select_item_by_type($type, $limit, $page, $conn){
     // $type_condition = '';
     // $order = 'I.hot';
     // if($type != 1){
-    //     $type_condition = "I.itype_ID = $type AND ";
+         $type_condition = "I.itype_ID = $type AND ";
     //     $order = 'I.time';
     // }
     $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num 
@@ -48,6 +48,9 @@ function select_item_by_type($type, $limit, $page, $conn){
     AND U.openID = I.openID 
     ORDER BY I.time DESC 
     LIMIT {$start},{$limit}";
+
+    //echo $sql;
+    //exit;
 
     $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
