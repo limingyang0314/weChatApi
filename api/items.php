@@ -19,7 +19,7 @@ require_once "./api.php";
         echo json_encode(error_code(delete_item($_GET['openID'],$_GET['ID'])));
         break;
     case 'insert_item_picture':
-        insert_item_picture($_FILE['file'],$_POST['iID'],$conn,$_POST['order']);
+        insert_item_picture($_FILES['file'],$_POST['iID'],$conn,$_POST['order']);
         break;
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));

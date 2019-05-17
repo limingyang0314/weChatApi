@@ -22,7 +22,7 @@ require_once './api.php';
         echo json_encode(error_code(delete_article($_GET['openID'], $_GET['ID'], $conn)));
         break;
     case 'insert_article_picture':
-        insert_article_picture($_FILE['file'],$_POST['aID'],$conn,$_POST['order']);
+        insert_article_picture($_FILES['file'],$_POST['aID'],$conn,$_POST['order']);
         break;
     case 'recommend_article':
         select_articles_near($location_id, $conn);
