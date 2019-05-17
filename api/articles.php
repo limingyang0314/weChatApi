@@ -21,7 +21,7 @@ require_once './api.php';
     case 'delete_article':
         echo json_encode(error_code(delete_article($_GET['openID'], $_GET['ID'], $conn)));
         break;
-    case 'upload_article_picture':
+    case 'insert_article_picture':
         insert_article_picture($_FILE['file'],$_POST['aID'],$conn,$_POST['order']);
         break;
     case 'recommend_article':
