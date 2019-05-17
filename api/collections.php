@@ -9,10 +9,10 @@ require_once './api.php';
     case 'select_item_collection':
         echo json_encode(error_code(get_item_collection($_GET['openID'], $conn)));
         break;
-    case 'insert_colletion':
+    case 'insert_collection':
         echo json_encode(error_code(insert_colletion($_GET['openID'], $_GET['type'], $_GET['id'], $conn)));
         break;
-    case 'is_colletion':
+    case 'is_collection':
         echo json_encode(error_code(is_colletion($_GET['openID'], $_GET['type'], $_GET['id'], $conn)));
         break;
     default:
