@@ -67,6 +67,8 @@ require_once 'mysql.php';
         AND S.sID = U.school_id
         ORDER BY A.time DESC 
         LIMIT {$start},{$limit}";
+        //echo $sql;
+        //exit;
 
         $result = mysqli_query($conn,$sql);
         return finish_article_select_list($result);
