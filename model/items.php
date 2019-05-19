@@ -29,9 +29,9 @@ function select_item_by_author($openID, $limit, $page, $conn){
     ORDER BY I.time DESC 
     LIMIT {$start},{$limit}";
 
-    echo $sql;
+    //echo $sql;
     //AND U.openID = I.openID
-    exit;
+    //exit;
 
     $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
