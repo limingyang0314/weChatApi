@@ -25,12 +25,12 @@ function select_item_by_author($openID, $limit, $page, $conn){
     WHERE I.openID = '$openID' 
     AND T.type_id = I.iType_ID 
     AND S.sID = U.school_id
-    AND U.openID = I.openID 
+    AND U.openID = I.openID
     ORDER BY I.time DESC 
     LIMIT {$start},{$limit}";
 
-    echo $sql;
-    exit;
+    //echo $sql;AND U.openID = I.openID
+    //exit;
 
     $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
