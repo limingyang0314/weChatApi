@@ -3,10 +3,11 @@ require_once 'mysql.php';
 
 function select_item_by_id($id, $conn){
     //echo $id;
-    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num, I.expect_price, I.contact_way
-    FROM items I, item_types T, users U  
+    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num, I.expect_price, I.contact_way, S.school_name, S.location_id
+    FROM items I, item_types T, users U,schools S
     WHERE I.iID = $id 
     AND T.type_id = I.iType_ID 
+    AND U.school_id = S.sID
     AND U.openID = I.openID";
     
     //echo $sql;
@@ -19,10 +20,11 @@ function select_item_by_id($id, $conn){
 
 function select_item_by_author($openID, $limit, $page, $conn){
     $start = $limit * ($page - 1);
-    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num
+    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num, S.school_name, S.location_id
     FROM items I, item_types T, users U  
     WHERE I.openID = $openID 
     AND T.type_id = I.iType_ID 
+    AND U.school_id = S.sID
     AND U.openID = I.openID 
     ORDER BY I.time DESC 
     LIMIT {$start},{$limit}";
@@ -41,11 +43,12 @@ function select_item_by_type($type, $limit, $page, $conn){
          $type_condition = "I.itype_ID = $type AND ";
     //     $order = 'I.time';
     // }
-    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num, I.expect_price
+    $sql = "SELECT I.iID AS ID, U.username, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num, I.expect_price, S.school_name, S.location_id
     FROM items I, item_types T, users U  
     WHERE $type_condition 
     T.type_id = I.iType_ID 
     AND U.openID = I.openID 
+    AND U.school_id = S.sID
     ORDER BY I.time DESC 
     LIMIT {$start},{$limit}";
 

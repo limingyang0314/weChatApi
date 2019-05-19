@@ -42,11 +42,12 @@ require_once 'mysql.php';
     */
     function select_article_by_id($aID, $conn){
         //echo $_SESSION['openID'];
-        $sql = "SELECT A.aid AS ID, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID , A.comment_num
-        FROM articles A, users U, article_types T 
+        $sql = "SELECT A.aid AS ID, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID , A.comment_num, S.school_name, S.location_id
+        FROM articles A, users U, article_types T,schools S
         WHERE A.aID = {$aID} 
         AND T.type_id = A.type_id 
-        AND U.openID = A.openID";
+        AND U.openID = A.openID
+        AND S.sID = U.school_id";
         //ORDER BY time DESC LIMIT {$start},{$limit}";
 
         $result = mysqli_query($conn,$sql);
@@ -58,11 +59,12 @@ require_once 'mysql.php';
     */
     function select_article_by_author($openID, $limit, $page, $conn){
         $start = $limit * ($page - 1);
-        $sql = "SELECT A.aid AS ID, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID, A.comment_num
-        FROM articles A, users U, article_types T 
+        $sql = "SELECT A.aid AS ID, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID, A.comment_num, S.school_name, S.location_id
+        FROM articles A, users U, article_types T ,schools S
         WHERE A.openID = '$openID' 
         AND T.type_id = A.type_id 
         AND U.openID = A.openID 
+        AND S.sID = U.school_id
         ORDER BY A.time DESC 
         LIMIT {$start},{$limit}";
 
@@ -86,15 +88,20 @@ require_once 'mysql.php';
             $descKey = 'A.time';
         }
         $type_condition = '';
-        if($typeID != 1){
-            $type_condition = "A.type_id = '$typeID' AND";
-        }else{
+        if($typeID == 1){
             $descKey = 'A.hot';
+        }else if($typeID == 2){
+            //选择本校信息
+            $type_condition = "A.type_id = '$typeID' AND";
+            //$type_condition = "A.type_id = '$typeID' AND U.school_id = ''";
+        }else{
+            $type_condition = "A.type_id = '$typeID' AND";
         }
-        $sql = "SELECT A.aid AS ID, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID , A.comment_num
-        FROM articles A, users U, article_types T 
+        $sql = "SELECT A.aid AS ID, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID , A.comment_num, S.school_name, S.location_id
+        FROM articles A, users U, article_types T ,schools S
         WHERE $type_condition T.type_id = A.type_id 
         AND U.openID = A.openID 
+        AND S.sID = U.school_id
         ORDER BY {$descKey} DESC 
         LIMIT {$start},{$limit}";
 
