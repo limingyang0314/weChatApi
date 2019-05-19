@@ -7,7 +7,7 @@ function select_item_by_id($id, $conn){
     FROM items I, item_types T, users U,schools S
     WHERE I.iID = $id 
     AND T.type_id = I.iType_ID 
-    AND U.school_id = S.sID
+    AND  S.sID = U.school_id
     AND U.openID = I.openID";
     
     //echo $sql;
@@ -24,7 +24,7 @@ function select_item_by_author($openID, $limit, $page, $conn){
     FROM items I, item_types T, users U  
     WHERE I.openID = $openID 
     AND T.type_id = I.iType_ID 
-    AND U.school_id = S.sID
+    AND S.sID = U.school_id
     AND U.openID = I.openID 
     ORDER BY I.time DESC 
     LIMIT {$start},{$limit}";
@@ -48,7 +48,7 @@ function select_item_by_type($type, $limit, $page, $conn){
     WHERE $type_condition 
     T.type_id = I.iType_ID 
     AND U.openID = I.openID 
-    AND U.school_id = S.sID
+    AND S.sID = U.school_id
     ORDER BY I.time DESC 
     LIMIT {$start},{$limit}";
 
