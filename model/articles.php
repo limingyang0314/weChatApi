@@ -83,6 +83,7 @@ require_once 'mysql.php';
 
         $start = $limit * ($page - 1);
         $descKey = null;
+        $tableCase = '';
         if($mode == 1){
             $descKey = 'A.hot';
         }
@@ -95,12 +96,16 @@ require_once 'mysql.php';
         }else if($typeID == 2){
             //选择本校信息
             $type_condition = "A.type_id = '$typeID' AND";
+            if(isset($GLOBALS['openID'])){
+                $tableCase = ", users U2";
+                $type_condition = "A.type_id = '$typeID' AND U2.openID = '{$GLOBALS['openID']}' AND U.school_id = U2.school_id AND";
+            }
             //$type_condition = "A.type_id = '$typeID' AND U.school_id = ''";
         }else{
             $type_condition = "A.type_id = '$typeID' AND";
         }
         $sql = "SELECT A.aid AS ID, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID , A.comment_num, S.school_name, S.location_id
-        FROM articles A, users U, article_types T ,schools S
+        FROM articles A, users U, article_types T ,schools S $tableCase
         WHERE $type_condition T.type_id = A.type_id 
         AND U.openID = A.openID 
         AND S.sID = U.school_id

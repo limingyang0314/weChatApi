@@ -145,7 +145,7 @@ function delete_item($openID, $iID){
 
     if($result){
         $sql = "UPDATE users SET post_num = post_num - 1 WHERE openID = '$openID'";
-        mysqli_query($conn, $sql);
+        mysqli_query($GLOBALS['conn'], $sql);
         return "delete success!";
     }else{
         return "delete fail!";
