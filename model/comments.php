@@ -2,7 +2,7 @@
 require_once 'mysql.php';
 
 function select_comment_by_id($cid, $conn){
-   $sql = "SELECT C.cid AS ID, C.cType, U.username, U.avatar, C.content, C.time , S.school_name, s.location_id
+   $sql = "SELECT C.cid AS ID, C.cType, U.username,U.openID, U.avatar, C.content, C.time , S.school_name, s.location_id
    FROM comments C, users U 
    WHERE U.openID = C.openID 
    AND S.sID = U.school_id
@@ -19,7 +19,7 @@ function select_comment_by_pointerID($cType, $pointerID, $limit, $page, $conn){
         $subtype = 4;
     }
     $start = $limit * ($page - 1);
-    $sql = "SELECT C.cid AS ID, C.cType, U.username,C.pointerID2, U.avatar, C.content, C.time, S.school_name, s.location_id
+    $sql = "SELECT C.cid AS ID, C.cType, U.username,U.openID,C.pointerID2, U.avatar, C.content, C.time, S.school_name, s.location_id
     FROM comments C, users U ,schools S
     WHERE C.pointerID = {$pointerID} 
     AND U.openID = C.openID 
@@ -36,7 +36,7 @@ function select_comment_by_pointerID($cType, $pointerID, $limit, $page, $conn){
 
 function select_comment_by_openID($openID,$limit,$page, $conn){
     $start = $limit * ($page - 1);
-    $sql = "SELECT C.cid AS ID, C.cType, U.username, U.avatar, C.content, C.time, C.pointerID, C.pointerID2 , S.school_name, s.location_id
+    $sql = "SELECT C.cid AS ID, C.cType, U.username,U.openID, U.avatar, C.content, C.time, C.pointerID, C.pointerID2 , S.school_name, s.location_id
     FROM comments C, users U 
     WHERE C.openID = {$openID} 
     AND S.sID = U.school_id
