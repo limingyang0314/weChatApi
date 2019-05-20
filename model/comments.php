@@ -49,8 +49,8 @@ function select_comment_by_openID($openID,$limit,$page, $conn){
     return $result;
 }
 
-function insert_comment($cType, $pointerID, $pointerID2, $openID, $content, $conn){
-    $sql = "INSERT INTO comments (cType,pointerID,pointerID2,openID,content) VALUES ({$cType},{$pointerID},{$pointerID2},'{$openID}','{$content}')";
+function insert_comment($cType, $pointerID1, $pointerID2, $openID, $content, $conn){
+    $sql = "INSERT INTO comments (cType,pointerID,pointerID2,openID,content) VALUES ({$cType},{$pointerID1},{$pointerID2},'{$openID}','{$content}')";
     $result = mysqli_query($conn, $sql);
     //echo $sql;
     //exit;
@@ -61,16 +61,62 @@ function insert_comment($cType, $pointerID, $pointerID2, $openID, $content, $con
             $table = 'items';
             $ID_name = 'iID';
         }
-        //$sql = "SELECT * FROM comments WHERE openID = '$openID' Limit 0,1 ORDER BY time DESC";
-        //$result = mysqli_query($conn,$sql);
-        $sql = "UPDATE $table SET comment_num = comment_num + 1 WHERE $ID_name = $pointerID";
+
+        $sql = "UPDATE $table SET comment_num = comment_num + 1 WHERE $ID_name = $pointerID1";
         //echo $sql;
         mysqli_query($conn,$sql);
+        
+        
+        $sql = "UPDATE users SET reply_num = reply_num + 1 WHERE openID = '$openID'";
+        mysqli_query($conn, $sql);
+
+        //获取这条发布的评论的cID
         $condition = "openID = $openID";
         $the_last_one = get_lastOne('comments',$condition);
         //var_dump($the_last_one);
-        $sql = "UPDATE users SET reply_num = reply_num + 1 WHERE openID = '$openID'";
+
+        $thisCID =  $the_last_one->cID;
+        //获取完毕
+
+        //获取原作者
+        if($cType == 3 || $cType == 4){
+            //回复类型
+            $condition = "cID = $pointerID2";
+            $the_last_one = get_lastOne('comments',$condition);
+        }else if($cType == 1){
+            $condition = "aID = $pointerID1";
+            $the_last_one = get_lastOne('articles',$condition);
+        }else if($cType == 2){
+            $condition = "iID = $pointerID1";
+            $the_last_one = get_lastOne('items',$condition);
+        }else{
+            $condition = "aID = $pointerID1";
+            $the_last_one = get_lastOne('articles',$condition);
+        }
+        $toOpenID = $the_last_one->openID;
+         //echo "to : " . $toOpenID . "<br>";
+        //获取完成
+         $fromOpenID = $openID;
+         //echo "from : " . $fromOpenID . "<br>";
+        //exit;
+        $from = $fromOpenID; 
+        $to = $toOpenID; 
+        
+        if($cType == 3 || $cType == 4){
+            $pointerID3 = $thisCID; 
+            $sql = "INSERT INTO messages (mType, from_who, to_who, pointerID1, pointerID2, pointerID3) 
+            VALUES ($cType, '$from', '$to', '$pointerID1', '$pointerID2', '$pointerID3')";
+        }else{
+            $pointerID2 = $thisCID; 
+            $sql = "INSERT INTO messages (mType, from_who, to_who, pointerID1, pointerID2) 
+            VALUES ($cType, '$from', '$to', '$pointerID1', '$pointerID2')";
+        }
+
+        //echo $sql;
+        //exit;
         mysqli_query($conn, $sql);
+
+        
         return "insert success!";
     }else{
         return "insert fail!";

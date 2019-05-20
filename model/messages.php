@@ -193,7 +193,7 @@ function delete_message($openID, $mID, $conn){
 **增加一条回复类型的消息
 */
 function add_comment_message($mType, $from, $to, $pointerID1, $pointerID2, $pointerID3 = null){
-    if($mType == 4 || $mType == 4){
+    if($mType == 3 || $mType == 4){
         $sql = "INSERT INTO messages (mType, from_who, to_who, pointerID1, pointerID2, pointerID3) 
         VALUES ($mType, '$from', '$to', '$pointerID1', '$pointerID2', '$pointerID3')";
     }else{
