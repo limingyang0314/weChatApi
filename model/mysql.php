@@ -90,6 +90,8 @@ function get_lastOne($table_name,$conditions){
         }
     }
 
+    //echo $sql . "<br>";
+
     $result = mysqli_query($GLOBALS['conn'], $sql);
     $result = getDataAsArray($result);
     if(!empty($result)){

@@ -13,11 +13,12 @@ function finish_colletion_select($result){
 **根据openID获取用户收藏文章
 */
 function get_article_collection($openID,$conn){
-    $query = "SELECT A.aID, A.openID, U.username, U.avatar, A.content, C.time 
-    FROM colletions C, articles A, users U
+    $query = "SELECT A.aID, A.openID, U.username, S.school_name, U.avatar, A.content, C.time 
+    FROM colletions C, articles A, users U,schools S
     WHERE C.openID = '{$openID}' 
     AND C.type = 1 
     AND A.aID = C.pointerID
+    AND S.sID = U.school_id
     AND U.openID = A.openID";
     //echo $query;
 
@@ -29,11 +30,12 @@ function get_article_collection($openID,$conn){
 **根据openID获取用户收藏商品
 */
 function get_item_collection($openID, $conn){
-    $query = "SELECT I.iID, I.openID, U.username, U.avatar, I.item_info, I.time 
+    $query = "SELECT I.iID, I.openID, U.username, S.school_name, U.avatar, I.item_info, I.time 
     FROM colletions C, items I , users U
     WHERE C.openID = '{$openID}' 
     AND C.type = 2 
     AND I.iID = C.pointerID
+    AND S.sID = U.school_id
     AND U.openID = I.openID";
 
     //echo $query;

@@ -71,7 +71,7 @@ function insert_comment($cType, $pointerID1, $pointerID2, $openID, $content, $co
         mysqli_query($conn, $sql);
 
         //获取这条发布的评论的cID
-        $condition = "openID = $openID";
+        $condition = "openID = '$openID'";
         $the_last_one = get_lastOne('comments',$condition);
         //var_dump($the_last_one);
 
@@ -93,10 +93,12 @@ function insert_comment($cType, $pointerID1, $pointerID2, $openID, $content, $co
             $condition = "aID = $pointerID1";
             $the_last_one = get_lastOne('articles',$condition);
         }
+        //var_dump($the_last_one);
+        //exit;
         $toOpenID = $the_last_one->openID;
          //echo "to : " . $toOpenID . "<br>";
         //获取完成
-         $fromOpenID = $openID;
+        $fromOpenID = $openID;
          //echo "from : " . $fromOpenID . "<br>";
         //exit;
         $from = $fromOpenID; 
