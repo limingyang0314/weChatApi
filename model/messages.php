@@ -15,7 +15,8 @@ function get_message_by_openID($openID, $limit, $page, $conn){
     ORDER BY M.time 
     DESC LIMIT {$start},{$limit}";
 
-    //echo $sql;
+    echo $sql;
+    exit;
 
     $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
@@ -71,7 +72,7 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
         ORDER BY M.time 
         DESC LIMIT {$start},{$limit}";
         
-    } else if($typeID == 2){
+    } else if($typeID == 3){
         //对文章回复的回复类型
         $sql = "SELECT M.mID,
          M.mType AS message_type,
@@ -100,22 +101,19 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
         //echo $sql;
         //exit;
 
-    } else if($typeID == 3){
+    } else if($typeID == 2){
         //对商品的回复类型
         $sql = "SELECT M.mID,
         M.mType AS message_type,
         M.time,
         U.username AS author_username,
-        
         U.avatar AS author_avatar,
-        I.item_info,
-        Comments C
-        FROM messages M, users U, items I, users U
+        I.item_info
+        FROM messages M, users U, items I,comments C, users U2
         WHERE M.to_who = '$openID'
         AND M.mType = $typeID
         AND U.openID = 'M.from_who'
         AND I.iID = M.pointerID1
-       
         AND C.cID = M.pointerID2$condition
         ORDER BY M.time 
         DESC LIMIT {$start},{$limit}";
@@ -144,6 +142,9 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
         echo "非法type";
         exit;
     }
+
+    echo $sql;
+    exit;
 
     //echo $sql;
     $result = mysqli_query($GLOBALS['conn'], $sql);
