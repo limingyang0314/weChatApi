@@ -76,6 +76,7 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
          M.mType AS message_type,
          M.time, 
          U.username AS author_username,
+         U2.username AS article_author_username,
          U.avatar AS author_avatar,
          A.aID AS article_ID,
          A.content AS article_content,
@@ -83,12 +84,13 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
          C1.content AS comment1_content,
          C2.cID AS comment2_ID,
          C2.content AS comment2_content
-        FROM messages M, users U, articles A, Comments C1, Comments C2
+        FROM messages M, users U, articles A, Comments C1, Comments C2, users U2
         WHERE M.to_who = '$openID'
         AND M.from_who <> M.to_who
         AND A.aID = M.pointerID1
         AND C1.cID = M.pointerID2
         AND C2.cID = M.pointerID3 
+        AND U2.openID = A.openID
         AND U.openID = M.from_who$condition
         ORDER BY M.time 
         DESC LIMIT {$start},{$limit}";
@@ -102,13 +104,15 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
         M.mType AS message_type,
         M.time,
         U.username AS author_username,
+        U2.username AS item_author_username,
         U.avatar AS author_avatar,
         I.item_info,
         Comments C
-        FROM messages M, users U, items I, users U
+        FROM messages M, users U, items I, users U,users U2
         WHERE M.to_who = '$openID'
         AND U.openID = 'M.from_who'
         AND I.iID = M.pointerID1
+        AND U2.openID = I.openID
         AND C.cID = M.pointerID2$condition
         ORDER BY M.time 
         DESC LIMIT {$start},{$limit}";
