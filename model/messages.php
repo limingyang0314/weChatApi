@@ -63,6 +63,7 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
          C.content AS comment_content
         FROM messages M, users U, articles A, Comments C
         WHERE M.to_who = '$openID' 
+        AND M.mType = $typeID
         AND M.from_who <> M.to_who
         AND A.aID = M.pointerID1
         AND U.openID = M.from_who
@@ -86,6 +87,7 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
          C2.content AS comment2_content
         FROM messages M, users U, articles A, Comments C1, Comments C2, users U2
         WHERE M.to_who = '$openID'
+        AND M.mType = $typeID
         AND M.from_who <> M.to_who
         AND A.aID = M.pointerID1
         AND C1.cID = M.pointerID2
@@ -110,6 +112,7 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
         Comments C
         FROM messages M, users U, items I, users U
         WHERE M.to_who = '$openID'
+        AND M.mType = $typeID
         AND U.openID = 'M.from_who'
         AND I.iID = M.pointerID1
        
@@ -128,6 +131,7 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
         I.item_info
         FROM messages M, users U, items I, users U, Comments C1, Comments C2,users U2
         WHERE M.to_who = '$openID'
+        AND M.mType = $typeID
         AND U.openID = 'M.from_who' 
         AND U2.openID = I.openID
         AND I.iID = M.pointerID1
