@@ -63,6 +63,7 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
          C.content AS comment_content
         FROM messages M, users U, articles A, Comments C
         WHERE M.to_who = '$openID' 
+        AND M.from_who <> M.to_who
         AND A.aID = M.pointerID1
         AND U.openID = M.from_who
         AND C.cID = M.pointerID2$condition
@@ -84,6 +85,7 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
          C2.content AS comment2_content
         FROM messages M, users U, articles A, Comments C1, Comments C2
         WHERE M.to_who = '$openID'
+        AND M.from_who <> M.to_who
         AND A.aID = M.pointerID1
         AND C1.cID = M.pointerID2
         AND C2.cID = M.pointerID3 
