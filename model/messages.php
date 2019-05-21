@@ -143,8 +143,8 @@ function get_one_type_message($openID, $typeID,$limit,$page, $mode = 1){
         exit;
     }
 
-    echo $sql;
-    exit;
+   // echo $sql;
+   // exit;
 
     //echo $sql;
     $result = mysqli_query($GLOBALS['conn'], $sql);
