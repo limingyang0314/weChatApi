@@ -26,6 +26,7 @@ function select_item_by_author($openID, $limit, $page, $conn){
     AND T.type_id = I.iType_ID 
     AND S.sID = U.school_id
     AND U.openID = I.openID
+    AND I.status = 0
     ORDER BY I.time DESC 
     LIMIT {$start},{$limit}";
 
@@ -53,6 +54,7 @@ function select_item_by_type($type, $limit, $page, $conn){
     T.type_id = I.iType_ID 
     AND U.openID = I.openID 
     AND S.sID = U.school_id
+    AND I.status = 0
     ORDER BY I.time DESC 
     LIMIT {$start},{$limit}";
 
@@ -149,5 +151,18 @@ function delete_item($openID, $iID){
         return "delete success!";
     }else{
         return "delete fail!";
+    }
+}
+
+/**
+ * 修改商品状态
+ */
+function update_status($openID,$iID,$status){
+    $sql = "UPDATE items SET status = $status WHERE openID = '$openID' AND iID = $iID";
+    $result = mysqli_query($GLOBALS['conn'],$sql);
+    if($result){
+        return 'update success';
+    }else{
+        return 'update failed';
     }
 }

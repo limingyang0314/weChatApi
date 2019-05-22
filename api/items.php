@@ -27,6 +27,9 @@ require_once "./api.php";
     case 'insert_item_picture':
         insert_item_picture($_FILES['file'],$_POST['iID'],$conn,$_POST['order']);
         break;
+    case 'update_status':
+        echo json_encode(error_code(update_status($_GET['openID'], $_GET['ID'], $_GET['status'])));
+        break;
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));
     }
