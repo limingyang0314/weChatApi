@@ -95,11 +95,14 @@ require_once 'mysql.php';
             $descKey = 'A.hot';
         }else if($typeID == 2){
             //选择本校信息
-            $type_condition = "A.type_id = '$typeID' AND";
+            
             if(isset($GLOBALS['openID'])){
                 $tableCase = ", users U2";
                 $type_condition = "A.type_id = '$typeID' AND U2.openID = '{$GLOBALS['openID']}' AND U.school_id = U2.school_id AND";
             }
+
+            #SELECT school_id FROM users WHERE openID = 'ozInc4nwKnuiqorp2la-JiLlk-jE';
+            
             //$type_condition = "A.type_id = '$typeID' AND U.school_id = ''";
         }else{
             $type_condition = "A.type_id = '$typeID' AND";
@@ -112,6 +115,8 @@ require_once 'mysql.php';
         ORDER BY {$descKey} DESC 
         LIMIT {$start},{$limit}";
 
+        //echo $GLOBALS['openID'];
+        //echo $typeID;
         //echo $sql;
         //exit;
         $result = mysqli_query($conn,$sql);
