@@ -98,7 +98,7 @@ require_once 'mysql.php';
             
             if(isset($GLOBALS['openID'])){
                 $tableCase = ", users U2";
-                $type_condition = "A.type_id = '$typeID' AND U2.openID = '{$GLOBALS['openID']}' AND U.school_id = U2.school_id AND";
+                $type_condition = "A.type_id = $typeID AND U2.openID = '{$GLOBALS['openID']}' AND U.school_id = U2.school_id AND";
             }
 
             #SELECT school_id FROM users WHERE openID = 'ozInc4nwKnuiqorp2la-JiLlk-jE';
