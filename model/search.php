@@ -15,7 +15,7 @@ require_once 'mysql.php';
     $result = select_result($sql, $conn);
     $result = getDataAsArray($result);
     //if(!empty($result)){
-        $insert_sql = "INSERT INTO search_history (openID,history) VALUES ({$openID},'{$key}')";
+        $insert_sql = "INSERT INTO search_history (openID,history) VALUES ('{$openID}','{$key}')";
         mysqli_query($conn,$insert_sql);
     //}
     return $result;
