@@ -174,6 +174,7 @@ require_once 'mysql.php';
 function get_search_history($openID,$num,$conn){
     $sql = "SELECT H.time, H.history 
     FROM search_history H 
+    WHERE openID = '$openID'
     ORDER BY H.time 
     DESC LIMIT 0,{$num}";
    // echo $sql;
