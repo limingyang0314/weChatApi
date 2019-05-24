@@ -42,4 +42,4 @@ function encode($openID){
     return $result;
 }
 
-echo encode('ozInc4iTuZJm9Fx6kSc_Z3pRGdCE');
+echo encode('ozInc4nxFajRO-7DVyg7WfLb2GcE');

@@ -98,7 +98,10 @@ require_once 'mysql.php';
             
             if(isset($GLOBALS['openID'])){
                 $tableCase = ", users U2";
-                $type_condition = "A.type_id = $typeID AND U2.openID = '{$GLOBALS['openID']}' AND U.school_id = U2.school_id AND";
+                $type_condition = "A.type_id = $typeID 
+                AND U2.openID = '{$GLOBALS['openID']}' 
+                AND U.school_id = U2.school_id 
+                AND";
             }
 
             #SELECT school_id FROM users WHERE openID = 'ozInc4nwKnuiqorp2la-JiLlk-jE';
@@ -107,7 +110,7 @@ require_once 'mysql.php';
         }else{
             $type_condition = "A.type_id = '$typeID' AND";
         }
-        $sql = "SELECT A.aid AS ID, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID , A.comment_num, S.school_name, S.location_id
+        $sql = "SELECT A.aid AS ID, U.school_id,T.type_id, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID , A.comment_num, S.school_name, S.location_id
         FROM articles A, users U, article_types T ,schools S $tableCase
         WHERE $type_condition T.type_id = A.type_id 
         AND U.openID = A.openID 
@@ -115,10 +118,10 @@ require_once 'mysql.php';
         ORDER BY {$descKey} DESC 
         LIMIT {$start},{$limit}";
 
-        //echo $GLOBALS['openID'];
-        //echo $typeID;
-        //echo $sql;
-        //exit;
+        echo $GLOBALS['openID'];
+        echo $typeID;
+        echo $sql;
+        exit;
         $result = mysqli_query($conn,$sql);
 
         $result = finish_article_select_list($result);
@@ -158,6 +161,9 @@ require_once 'mysql.php';
         $sql = "INSERT INTO articles (openID,type_id,content,location_id) VALUES ('{$openID}','{$article_type}','{$content}',1)";
         //echo $sql;
         $result = mysqli_query($conn, $sql);
+        if(!$result){
+            return array('aID' => null);
+        }
 
         $sql = "SELECT aID FROM articles WHERE openID = '{$openID}' ORDER BY time DESC LIMIT 0,1";
 
