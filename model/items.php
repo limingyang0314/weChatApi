@@ -71,6 +71,9 @@ function insert_item($openID, $item_type, $item_info, $expect_price,$contact_way
     $sql = "INSERT INTO items (iType_ID,openID,item_info,expect_price,contact_way) VALUES ($item_type, '$openID', '$item_info',$expect_price,'$contact_way')";
     //echo $sql;
     $result = mysqli_query($conn,$sql);
+    if(!$result){
+        return array('iID' => null);
+    }
 
     $sql = "SELECT iID FROM items WHERE openID = '{$openID}' ORDER BY time DESC LIMIT 0,1";
 
