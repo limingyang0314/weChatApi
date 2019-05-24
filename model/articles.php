@@ -118,10 +118,10 @@ require_once 'mysql.php';
         ORDER BY {$descKey} DESC 
         LIMIT {$start},{$limit}";
 
-        echo $GLOBALS['openID'];
-        echo $typeID;
-        echo $sql;
-        exit;
+        //echo $GLOBALS['openID'];
+        //echo $typeID;
+        //echo $sql;
+        //exit;
         $result = mysqli_query($conn,$sql);
 
         $result = finish_article_select_list($result);
