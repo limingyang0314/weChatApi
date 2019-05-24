@@ -93,7 +93,7 @@ require_once 'mysql.php';
         $type_condition = '';
         if($typeID == 1){
             $descKey = 'A.hot';
-        }else if($typeID == 2){
+        }else if($typeID == 2 || $typeID == 4){
             //选择本校信息
             
             if(isset($GLOBALS['openID'])){
