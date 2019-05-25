@@ -13,7 +13,7 @@ require_once './api.php';
         echo json_encode(error_code(select_article_by_author($_GET['openID'], $_GET['limit'], $_GET['page'],$conn)));//, $conn
         break;
     case 'insert_article':
-        echo json_encode(error_code(insert_article($_GET['openID'], $_POST['article_type'], $_POST['content'],$conn)));//, $conn
+        echo json_encode(error_code(insert_article($_GET['openID'], $_POST['article_type'], $_POST['content'],$_POST['latitude'],$_POST['longitude'],$_POST['address'],$conn)));//, $conn
         break;
     case 'select_article_by_type':
         echo json_encode(error_code(select_article_by_type($_GET['typeID'], $_GET['limit'], $_GET['page'], $_GET['mode'], $conn)));
