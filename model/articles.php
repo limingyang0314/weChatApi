@@ -158,10 +158,15 @@ require_once 'mysql.php';
     **增加一条article
     */
     function insert_article($openID, $article_type, $content,$latitude,$longitude,$address, $conn){
-        $sql = "INSERT INTO articles (openID,type_id,content,location_id,latitude,longitude,address) VALUES ('{$openID}','{$article_type}','{$content}',1,'$latitude','$longitude','$address')";
+        //$sql = "INSERT INTO articles (openID,type_id,content,location_id,latitude,longitude,address) VALUES ('{$openID}','{$article_type}','{$content}',1,'$latitude','$longitude','$address')";
         //echo $sql;
         //exit;
-        $result = mysqli_query($conn, $sql);
+        //$result = mysqli_query($conn, $sql);
+        $stmt = $GLOBALS['conn_obj']->prepare("INSERT INTO articles (openID,type_id,content,location_id,latitude,longitude,address) VALUES (?,?,?,1,?,?,?)");
+        $stmt->bind_param('sissss',$openID,$article_type,$content,$latitude,$longitude,$address);
+        $stmt->execute();
+        $result = $stmt->store_result();
+        //$GLOBALS['conn_obj']->
         if(!$result){
             return array('aID' => null);
         }
