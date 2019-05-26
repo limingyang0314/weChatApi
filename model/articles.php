@@ -162,7 +162,7 @@ require_once 'mysql.php';
         //echo $sql;
         //exit;
         //$result = mysqli_query($conn, $sql);
-        $stmt = $GLOBALS['conn_obj']->prepare("INSERT INTO articles (openID,type_id,content,location_id,latitude,longitude,address) VALUES (?,?,?,1,?,?,?,?)");
+        $stmt = $GLOBALS['conn_obj']->prepare("INSERT INTO articles (openID,type_id,content,location_id,latitude,longitude,address,labels) VALUES (?,?,?,1,?,?,?,?)");
         $stmt->bind_param('sisssss',$openID,$article_type,$content,$latitude,$longitude,$address,$labels);
         $stmt->execute();
         $result = $stmt->store_result();
