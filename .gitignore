@@ -1,6 +1,7 @@
 /upload/article_pictures
 /upload/banners
 /upload/item_pictures
+/upload/banner_words
 /.idea
 /.git
 /aspnet_client
