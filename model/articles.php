@@ -130,7 +130,8 @@ require_once 'mysql.php';
         foreach($result as $value){
             //var_dump($value);
             //echo $value->aID."<br>";
-            $query = "SELECT * FROM colletions WHERE type = 1 AND openID = '$value->openID'";
+            $query = "SELECT * FROM colletions WHERE type = 1 AND openID = '$value->openID' AND pointerID = $value->ID";
+            echo $query;
             $result = mysqli_query($conn,$query);
             $result = getDataAsArray($result);
             if(!empty($result)){
