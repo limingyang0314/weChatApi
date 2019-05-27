@@ -90,7 +90,7 @@ function upload_picture($type,$conn,$file,$pointerID = null,$first_typeID = null
         // 判断当期目录下的 upload 目录是否存在该文件
         // 如果没有 upload 目录，你需要创建它，upload 目录权限为 777
         
-                $file["name"] = "{$type}_".time()."_{$order} ".".".$extension;
+                $file["name"] = "{$type}_".time()."_{$order}".".".$extension;
                 if (file_exists("upload/{$type}/" . $file["name"])){
                     //echo $file["name"] . " 文件已经存在。 ";
                 }else{
