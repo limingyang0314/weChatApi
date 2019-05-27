@@ -23,6 +23,8 @@ function other_upload_into_db($type,$pointerID,$file_name,$conn){
     $url = "/upload/{$type}/{$file_name}";
     $sql = "INSERT INTO {$type} ($id, pName, pURL) 
     VALUES ('{$pointerID}','{$file_name}','{$url}')";
+    //echo $sql;
+    //exit;
     $result = mysqli_query($conn, $sql);
 }
 
@@ -34,7 +36,8 @@ function banners_upload_into_db($type,$file_name,$first_typeID,$second_typeID,$c
     //include 'mysql.php';
     $sql = "INSERT INTO {$type} (b_name,first_typeID,second_typeID) 
     VALUES ('{$file_name}','{$first_typeID}','{$second_typeID}')";
-    echo $sql;
+    //echo $sql;
+    //exit;
     //$conn->query($sql);
     mysqli_query($conn, $sql);
 }
@@ -43,6 +46,9 @@ function banner_words_upload_into_db($type,$file_name,$first_typeID,$second_type
     $url = "upload/banner_words/" . $file_name;
     $sql = "INSERT INTO {$type} (url,first_TypeID,second_TypeID) 
     VALUES ('{$url}','{$first_typeID}','{$second_typeID}')";
+    //echo $sql;
+    //exit;
+    mysqli_query($conn, $sql);
 }
 
 /*
@@ -93,7 +99,7 @@ function upload_picture($type,$conn,$file,$pointerID = null,$first_typeID = null
                     //echo "文件存储在: " . "upload/{$type}/" . $file["name"];
                     if($type == 'banners'){
                         banners_upload_into_db($type,$file["name"],$first_typeID,$second_typeID,$conn);
-                    }else if($type = 'banner_words'){
+                    }else if($type == 'banner_words'){
                         banner_words_upload_into_db($type,$file["name"],$first_typeID,$second_typeID,$conn);
                     }else{
                         other_upload_into_db($type,$pointerID,$file["name"],$conn);
