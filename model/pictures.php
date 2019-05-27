@@ -34,13 +34,14 @@ function banners_upload_into_db($type,$file_name,$first_typeID,$second_typeID,$c
     //include 'mysql.php';
     $sql = "INSERT INTO {$type} (b_name,first_typeID,second_typeID) 
     VALUES ('{$file_name}','{$first_typeID}','{$second_typeID}')";
+    echo $sql;
     //$conn->query($sql);
     mysqli_query($conn, $sql);
 }
 
 function banner_words_upload_into_db($type,$file_name,$first_typeID,$second_typeID,$conn){
     $url = "upload/banner_words/" . $file_name;
-    $sql = "INSERT INTO {$type} (url,first_typeID,second_typeID) 
+    $sql = "INSERT INTO {$type} (url,first_TypeID,second_TypeID) 
     VALUES ('{$url}','{$first_typeID}','{$second_typeID}')";
 }
 
