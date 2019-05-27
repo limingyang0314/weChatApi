@@ -100,7 +100,7 @@ function insert_colletion($openID, $type, $id, $conn){
 /*
 **判断当前用户是否收藏了该商品
 */
-function is_colletion($openID, $type, $id, $conn){
+function is_collection($openID, $type, $id, $conn){
     $query = "SELECT * FROM colletions WHERE type = $type AND openID = '$openID' AND pointerID = $id";
     $result = mysqli_query($conn,$query);
     $result = getDataAsArray($result);

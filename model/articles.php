@@ -130,6 +130,14 @@ require_once 'mysql.php';
         foreach($result as $value){
             //var_dump($value);
             //echo $value->aID."<br>";
+            $query = "SELECT * FROM colletions WHERE type = $type AND openID = '$openID' AND pointerID = $id";
+            $result = mysqli_query($conn,$query);
+            $result = getDataAsArray($result);
+            if(!empty($result)){
+                $value->is_collection = true;
+            }else{
+                $value->is_collection = false;
+            }
             $value->pictures = get_article_picture($value->ID,$conn);
             $newResult[] = $value;
         }
