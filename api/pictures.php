@@ -4,15 +4,13 @@ require_once './api.php';
     require_once "../model/pictures.php";
     switch ($_GET['secondType']){
     case 'upload_banner':
-    echo "api OK !<br>";
+        //echo "api OK !<br>";
         upload_picture('banners',$conn,$_FILES["file"],0,$_POST["first_typeID"],$_POST["second_typeID"]);
         break;
-    // case 'upload_item_picture':
-    //     upload_picture('item_pictures',$conn);
-    //     break;
-    // case 'upload_article_picture':
-    //     upload_picture('article_pictures',$conn);
-    //     break;
+    case 'upload_banner_words':
+        //echo "api OK !<br>";
+        upload_picture('banner_words',$conn,$_FILES["file"],0,$_POST["first_typeID"],$_POST["second_typeID"]);
+        break;
     case 'get_banner':
         //获取最近的5张banner
         echo json_encode(error_code(get_banners($_GET['number'],$conn)));

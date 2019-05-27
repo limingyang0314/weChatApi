@@ -38,6 +38,12 @@ function banners_upload_into_db($type,$file_name,$first_typeID,$second_typeID,$c
     mysqli_query($conn, $sql);
 }
 
+function banner_words_upload_into_db($type,$file_name,$first_typeID,$second_typeID,$conn){
+    $url = "upload/banner_words/" . $file_name;
+    $sql = "INSERT INTO {$type} (url,first_typeID,second_typeID) 
+    VALUES ('{$url}','{$first_typeID}','{$second_typeID}')";
+}
+
 /*
 **处理上传的图片
 */
@@ -47,7 +53,7 @@ function upload_picture($type,$conn,$file,$pointerID = null,$first_typeID = null
         $max_size = 2048000;
     }
     //echo "second_typeID is " . $second_typeID . "<br>";
-    $allowedTypes = array("banners", "item_pictures", "article_pictures");
+    $allowedTypes = array("banners", "item_pictures", "article_pictures", "banner_words");
     if(!in_array($type,$allowedTypes)){
         //echo "非法上传类型!";
         exit;
@@ -86,6 +92,8 @@ function upload_picture($type,$conn,$file,$pointerID = null,$first_typeID = null
                     //echo "文件存储在: " . "upload/{$type}/" . $file["name"];
                     if($type == 'banners'){
                         banners_upload_into_db($type,$file["name"],$first_typeID,$second_typeID,$conn);
+                    }else if($type = 'banner_words'){
+                        banner_words_upload_into_db($type,$file["name"],$first_typeID,$second_typeID,$conn);
                     }else{
                         other_upload_into_db($type,$pointerID,$file["name"],$conn);
                     }
