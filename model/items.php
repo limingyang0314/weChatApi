@@ -41,7 +41,7 @@ function select_item_by_author($openID, $limit, $page, $conn){
 }
 
 function select_item_by_type($type, $limit, $page, $conn){
-    $start = $limit * ($page - 1);
+    $start = (int)$limit * ((int)$page - 1);
     // $type_condition = '';
     // $order = 'I.hot';
     // if($type != 1){
@@ -133,7 +133,6 @@ function get_item_picture($iID,$conn){
 **将图片插入文章数据的数组
 */
 function add_pic_to_data($data,$conn){
-
     $result = [];
     foreach($data as $value){
         //var_dump($value);
