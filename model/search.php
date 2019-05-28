@@ -118,9 +118,9 @@ require_once 'mysql.php';
   }
 
   function get_article_sql($keys,$limit,$page){
-      $sql = "SELECT U.username, U.avatar, A.aID, A.time, A.content 
-      FROM articles A,users U 
-      WHERE U.openID = A.openID 
+      $sql = "SELECT U.username, U.avatar,S.school_name,A.type_id, AT.type_name,A.aID, A.time, A.content 
+      FROM articles A,users U, schools S, article_types AT
+      WHERE U.openID = A.openID AND S.sID = U.school_id AND AT.type_id = A.type_id
       AND (";
       $num = sizeof($keys);
       $count = 0;
@@ -143,7 +143,10 @@ require_once 'mysql.php';
 
   function get_item_sql($keys,$limit,$page){
     $start = $limit * ($page - 1);
-    $sql = "SELECT U.username, U.avatar, iID, i.time, item_info FROM items I,users U WHERE U.openID = I.openID AND (";
+    $sql = "SELECT U.username, U.avatar,S.school_name,I.iType_ID, I.iID, IT.type_name, I.time, I.item_info 
+    FROM items I,users U, schools S, item_types IT
+    WHERE U.openID = I.openID  AND S.sID = U.school_id AND IT.type_id = I.iType_ID
+    AND (";
     $num = sizeof($keys);
     $count = 0;
     foreach($keys as $value){
