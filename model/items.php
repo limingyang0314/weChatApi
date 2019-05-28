@@ -139,7 +139,7 @@ function add_pic_to_data($data,$conn){
         $value->pictures = get_item_picture($value->ID,$conn);
         $sql = "SELECT * FROM colletions WHERE type = 2 AND pointerID = $value->ID AND openID = '$value->openID'";
         $value->is_collection = false;
-        if(empty(getDataAsArray(mysqli_query($conn,$sql)))){
+        if(!empty(getDataAsArray(mysqli_query($conn,$sql)))){
             $value->is_collection = true;
         }
         $result[] = $value;
