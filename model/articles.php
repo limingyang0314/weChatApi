@@ -87,7 +87,7 @@ require_once 'mysql.php';
     */
     function select_article_by_type($typeID, $limit, $page, $mode = 1, $conn){
 
-        $start = $limit * ($page - 1);
+        $start = (int)$limit * ((int)$page - 1);
         $descKey = null;
         $tableCase = '';
         if($mode == 1){
@@ -139,9 +139,10 @@ require_once 'mysql.php';
         foreach($result as $value){
             //var_dump($value);
             //echo $value->aID."<br>";
-            $query = "SELECT * FROM colletions WHERE type = 1 AND openID = '$value->openID' AND pointerID = $value->ID";
-            echo $query;
-            exit;
+            $query = "SELECT * FROM colletions WHERE type = 1 AND openID = '{$GLOBALS['openID']}' AND pointerID = $value->ID";
+            //echo $query;
+            //echo "<br>";
+            //exit;
             $result = mysqli_query($conn,$query);
             $result = getDataAsArray($result);
             if(!empty($result)){
@@ -152,9 +153,6 @@ require_once 'mysql.php';
             $value->pictures = get_article_picture($value->ID,$conn);
             $newResult[] = $value;
         }
-        //var_dump($newResult);
-        //exit;
-        //var_dump($result);
         return $newResult;
     }
 
