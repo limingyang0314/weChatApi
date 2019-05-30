@@ -137,11 +137,12 @@ function add_pic_to_data($data,$conn){
     foreach($data as $value){
         //var_dump($value);
         $value->pictures = get_item_picture($value->ID,$conn);
-        $sql = "SELECT * FROM colletions WHERE type = 2 AND pointerID = $value->ID AND openID = '{$GLOBALS['openID']}'";
+        // $sql = "SELECT * FROM colletions WHERE type = 2 AND pointerID = $value->ID AND openID = '{$GLOBALS['openID']}'";
+        // $value->is_collection = false;
+        // if(!empty(getDataAsArray(mysqli_query($conn,$sql)))){
+        //     $value->is_collection = true;
+        // }
         $value->is_collection = false;
-        if(!empty(getDataAsArray(mysqli_query($conn,$sql)))){
-            $value->is_collection = true;
-        }
         $result[] = $value;
     }
     //exit;
