@@ -19,8 +19,8 @@ require_once 'mysql.php';
     **处理某篇文章
     */
     function finish_article_select_exactly($aID,$result,$conn){
-        $temp = getDataAsArray($result);
-        $result = $temp;//[0];//[0]
+        //$temp = getDataAsArray($result);
+        //$result = $temp;//[0];//[0]
         //var_dump($temp);
         //var_dump($result);
         //exit;
@@ -55,11 +55,13 @@ require_once 'mysql.php';
 
         $result = mysqli_query($conn,$sql);
         $result = getDataAsArray($result);
+        //var_dump($result);
+        //exit;
 
         $query = "SELECT * FROM colletions WHERE type = 1 AND openID = '{$GLOBALS['openID']}' AND pointerID = {$result[0]->ID}";
         //echo $query;
        // //echo "<br>";
-       // //exit;
+        //exit;
         $result2 = mysqli_query($conn,$query);
         $result2 = getDataAsArray($result2);
         if(!empty($result2)){
