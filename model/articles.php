@@ -54,13 +54,14 @@ require_once 'mysql.php';
         //ORDER BY time DESC LIMIT {$start},{$limit}";
 
         $result = mysqli_query($conn,$sql);
+        $result = getDataAsArray($result);
 
         $query = "SELECT * FROM colletions WHERE type = 1 AND openID = '{$GLOBALS['openID']}' AND pointerID = {$result[0]->ID}";
         //echo $query;
        // //echo "<br>";
        // //exit;
         $result2 = mysqli_query($conn,$query);
-        $result2 = getDataAsArray($result);
+        $result2 = getDataAsArray($result2);
         if(!empty($result2)){
             $result[0]->is_collection = true;
         }else{
