@@ -31,7 +31,7 @@ function get_article_collection($openID,$conn){
 */
 function get_item_collection($openID, $conn){
     $query = "SELECT I.iID, I.openID, U.username, S.school_name, U.avatar, I.item_info, I.time 
-    FROM colletions C, items I , users U
+    FROM colletions C, items I , users U, schools S
     WHERE C.openID = '{$openID}' 
     AND C.type = 2 
     AND I.iID = C.pointerID

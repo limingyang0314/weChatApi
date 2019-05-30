@@ -42,7 +42,10 @@ require_once 'mysql.php';
     */
     function select_article_by_id($aID, $conn){
         //echo $_SESSION['openID'];
-        $sql = "SELECT A.aid AS ID, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID , A.comment_num, S.school_name, S.location_id, A.latitude,A.longitude,A.address,A.labels
+        $sql = "SELECT A.aid AS ID, A.content, A.comment_num,
+         T.type_name, A.hot, U.username, U.avatar, A.time, U.openID ,
+          A.comment_num, S.school_name, S.location_id, A.latitude,
+          A.longitude,A.address,A.labels
         FROM articles A, users U, article_types T,schools S
         WHERE A.aID = {$aID} 
         AND T.type_id = A.type_id 
@@ -59,7 +62,10 @@ require_once 'mysql.php';
     */
     function select_article_by_author($openID, $limit, $page, $conn){
         $start = $limit * ($page - 1);
-        $sql = "SELECT A.aid AS ID, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID, A.comment_num, S.school_name, S.location_id, A.latitude,A.longitude,A.address,A.labels
+        $sql = "SELECT A.aid AS ID, A.content, A.comment_num,
+         T.type_name, A.hot, U.username, U.avatar, A.time, U.openID,
+          A.comment_num, S.school_name, S.location_id, A.latitude,
+          A.longitude,A.address,A.labels
         FROM articles A, users U, article_types T ,schools S
         WHERE A.openID = '$openID' 
         AND T.type_id = A.type_id 
@@ -110,7 +116,10 @@ require_once 'mysql.php';
         }else{
             $type_condition = "A.type_id = '$typeID' AND";
         }
-        $sql = "SELECT A.aid AS ID, U.school_id,T.type_id, A.content, A.comment_num, T.type_name, A.hot, U.username, U.avatar, A.time, U.openID , A.comment_num, S.school_name, S.location_id, A.latitude,A.longitude,A.address,A.labels
+        $sql = "SELECT A.aid AS ID, U.school_id,T.type_id, A.content, A.comment_num,
+         T.type_name, A.hot, U.username, U.avatar, A.time, U.openID ,
+          A.comment_num, S.school_name, S.location_id,
+           A.latitude,A.longitude,A.address,A.labels
         FROM articles A, users U, article_types T ,schools S $tableCase
         WHERE $type_condition T.type_id = A.type_id 
         AND U.openID = A.openID 
@@ -131,7 +140,8 @@ require_once 'mysql.php';
             //var_dump($value);
             //echo $value->aID."<br>";
             $query = "SELECT * FROM colletions WHERE type = 1 AND openID = '$value->openID' AND pointerID = $value->ID";
-            //echo $query;
+            echo $query;
+            exit;
             $result = mysqli_query($conn,$query);
             $result = getDataAsArray($result);
             if(!empty($result)){
