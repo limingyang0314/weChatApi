@@ -131,8 +131,11 @@ require_once 'mysql.php';
             //添加访问记录
             if($openID != null){
                 $sql = "INSERT INTO article_records (aID,openID)VALUES($aID,'$openID')";
-                mysqli_query($conn,$query);
+                mysqli_query($conn,$sql);
+                //echo $sql;
             }
+            //echo "BNB";
+            //exit;
         }
 
         $query = "SELECT * FROM colletions WHERE type = 1 AND openID = '{$GLOBALS['openID']}' AND pointerID = {$result[0]->ID}";

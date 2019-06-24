@@ -33,7 +33,8 @@ function select_item_by_id($id, $conn,$openID = null){
         //添加访问记录
         if($openID != null){
             $sql = "INSERT INTO item_records (iID,openID)VALUES($id,'$openID')";
-            mysqli_query($conn,$query);
+            echo $sql;
+            mysqli_query($conn,$sql);
         }
     }
     //var_dump($result);
