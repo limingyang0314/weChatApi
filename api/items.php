@@ -19,7 +19,7 @@ require_once "./api.php";
         if(!isset($_POST['contact_way'])){
             $_POST['contact_way'] = 'null';
         }
-        echo json_encode(error_code(insert_item($_GET['openID'],$_POST['item_type'],$_POST['item_info'],$_POST['expect_price'],$_POST['contact_way'], $conn)));//$openID, $item_type, $item_info
+        echo json_encode(error_code(insert_item($_GET['openID'],$_POST['item_type'],$_POST['item_info'],$_POST['expect_price'],$_POST['contact_way'],$_POST['latitude'],$_POST['longitude'],$_POST['address'], $conn)));//$openID, $item_type, $item_info
         break;
     case 'delete_item':
         echo json_encode(error_code(delete_item($_GET['openID'],$_GET['ID'])));

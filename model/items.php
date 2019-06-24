@@ -67,7 +67,7 @@ function select_item_by_type($type, $limit, $page, $conn){
     return $result;
 }
 
-function insert_item($openID, $item_type, $item_info, $expect_price,$contact_way,$latitude, $longitude,$conn){
+function insert_item($openID, $item_type, $item_info, $expect_price,$contact_way,$latitude, $longitude,$address,$conn){
     $sql = "INSERT INTO items (iType_ID,openID,item_info,expect_price,contact_way) VALUES ($item_type, '$openID', '$item_info',$expect_price,'$contact_way')";
     //echo $sql;
     //$result = mysqli_query($conn,$sql);
