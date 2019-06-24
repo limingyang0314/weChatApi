@@ -17,7 +17,8 @@ function select_item_by_id($id, $conn){
     S.school_name, 
     S.location_id, 
     I.latitude,
-    I.longitude
+    I.longitude,
+    I.address
     FROM items I, item_types T, users U, schools S
     WHERE I.iID = $id 
     AND T.type_id = I.iType_ID 
@@ -35,9 +36,9 @@ function select_item_by_id($id, $conn){
 
 function select_item_by_author($openID, $limit, $page, $conn){
     $start = $limit * ($page - 1);
-    $sql = "SELECT I.iID AS ID, U.username,U.openID, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num, S.school_name, S.location_id, I.status
-    FROM items I, item_types T, users U  ,schools S ,I.latitude,
-       I.longitude
+    $sql = "SELECT I.iID AS ID, U.username,U.openID, U.avatar, I.item_info AS content, T.type_name, I.hot, I.time ,I.comment_num, S.school_name, S.location_id, I.status,I.latitude,
+    I.longitude,I.address
+    FROM items I, item_types T, users U  ,schools S 
     WHERE I.openID = '$openID' 
     AND T.type_id = I.iType_ID 
     AND S.sID = U.school_id
