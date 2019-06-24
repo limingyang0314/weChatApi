@@ -59,12 +59,7 @@ function select_item_by_author($openID, $limit, $page, $conn){
 
 function select_item_by_type($type, $limit, $page, $conn){
     $start = (int)$limit * ((int)$page - 1);
-    // $type_condition = '';
-    // $order = 'I.hot';
-    // if($type != 1){
-         $type_condition = "I.itype_ID = $type AND ";
-    //     $order = 'I.time';
-    // }
+    $type_condition = "I.itype_ID = $type AND ";
     $sql = "SELECT I.iID AS ID,
      U.username,
      U.openID,
@@ -88,8 +83,6 @@ function select_item_by_type($type, $limit, $page, $conn){
     ORDER BY I.time DESC 
     LIMIT {$start},{$limit}";
 
-    //echo $sql;
-    //exit;
 
     $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
@@ -99,8 +92,6 @@ function select_item_by_type($type, $limit, $page, $conn){
 
 function insert_item($openID, $item_type, $item_info, $expect_price,$contact_way,$latitude, $longitude,$address,$conn){
     $sql = "INSERT INTO items (iType_ID,openID,item_info,expect_price,contact_way) VALUES ($item_type, '$openID', '$item_info',$expect_price,'$contact_way')";
-    //echo $sql;
-    //$result = mysqli_query($conn,$sql);
 
 
     $stmt = $GLOBALS['conn_obj']->prepare("INSERT INTO items (iType_ID,openID,item_info,expect_price,contact_way,latitude,longitude,address) VALUES (?,?,?,?,?,?,?,?)");

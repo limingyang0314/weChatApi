@@ -128,7 +128,7 @@ require_once 'mysql.php';
       //$end = 
       foreach($keys as $value){
           $count ++;
-          $sql .= "content LIKE '%$value%'";
+          $sql .= "(content LIKE '%$value%' OR labels LIKE '%$value%')";
           if($count < $num){
               $sql .= " OR ";
           }else{
@@ -151,7 +151,7 @@ require_once 'mysql.php';
     $count = 0;
     foreach($keys as $value){
         $count ++;
-        $sql .= "item_info LIKE '%$value%'";
+        $sql .= "(item_info LIKE '%$value%' OR labels LIKE '%$value%')";
         if($count < $num){
             $sql .= " OR ";
         }else{
