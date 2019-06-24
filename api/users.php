@@ -21,7 +21,7 @@ require_once "api.php";
         login($_GET['openID']);
         break;
     case 'recent_similar':
-        recent_similar($_GET['openID'],$conn);
+        echo json_encode(error_code(recent_similar($_GET['openID'],$conn)));
         break;
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));

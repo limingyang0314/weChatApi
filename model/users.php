@@ -82,12 +82,17 @@ function recent_similar($openID,$conn){
     LIMIT 0,5";
     $result = mysqli_query($conn, $sql);
     $result = getDataAsArray($result);
-    $condition = "WHERE ";
+    $condition = '';
     $i = 0;
     $num = count($result);
     //echo $sql;
     //echo $num;
     foreach($result as $value){
+        if($i == 0){
+            $condition = "(";
+        }
+
+        
         $tempLabels = $value->Labels;
         $tempLabelArray = explode(",",$tempLabels);
 
@@ -99,7 +104,7 @@ function recent_similar($openID,$conn){
                 ++ $j;
                 continue;
             }
-            $condition .= "A.Labels LIKE %{$tempLabelArray[$j]}% ";
+            $condition .= "A.Labels LIKE '%{$tempLabelArray[$j]}%' ";
             //echo $tempLabelArray[$j];
             //echo $condition;
             if($j + 1 == $tempCount && $i + 1 == $num){
@@ -112,9 +117,43 @@ function recent_similar($openID,$conn){
         }
 
         //echo $condition;
-        ++$i;
+        ++ $i;
+        // if($i == $num){
+            
+        // }
 
     }
-    echo $condition;
-
+    //echo $condition;
+    if($condition != ''){
+        $condition .= ")";
+        $sql = "SELECT A.aid AS ID, 
+        A.content, 
+        A.comment_num,
+        T.type_name, 
+        A.hot, 
+        U.username, 
+        U.avatar, 
+        A.time, 
+        U.openID,
+        A.comment_num, 
+        S.school_name, 
+        S.location_id, 
+        A.latitude,
+        A.longitude,
+        A.address,
+        A.labels
+       FROM articles A, users U, article_types T ,schools S
+       WHERE T.type_id = A.type_id 
+       AND U.openID = A.openID 
+       AND S.sID = U.school_id
+       AND {$condition}
+       ORDER BY A.hot DESC 
+       LIMIT 0,10";
+    //    echo $sql;
+       $result = mysqli_query($conn,$sql);
+       $result = getDataAsArray($result);
+    }else{
+        $result = [];
+    }
+    return $result;
 }
