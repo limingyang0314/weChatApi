@@ -21,7 +21,12 @@ require_once './api.php';
         echo json_encode(error_code(insert_article($_GET['openID'], $_POST['article_type'], $_POST['content'],$_POST['latitude'],$_POST['longitude'],$_POST['address'],$labels,$conn)));//, $conn
         break;
     case 'select_article_by_type':
-        echo json_encode(error_code(select_article_by_type($_GET['typeID'], $_GET['limit'], $_GET['page'], $_GET['mode'], $conn)));
+        if($_GET['mode'] == 3){
+            echo json_encode(error_code(select_article_by_location($_GET['typeID'], $_GET['limit'], $_GET['page'], $_GET['mode'], $_GET['latitude'], $_GET['longitude'],$conn)));
+        }else{
+            echo json_encode(error_code(select_article_by_type($_GET['typeID'], $_GET['limit'], $_GET['page'], $_GET['mode'], $conn)));
+        }
+        
         break;
     case 'delete_article':
         echo json_encode(error_code(delete_article($_GET['openID'], $_GET['ID'], $conn)));

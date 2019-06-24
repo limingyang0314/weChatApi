@@ -36,6 +36,69 @@ require_once 'mysql.php';
         return $result;
     }
 
+    /**
+     * 就近推送
+     */
+    function select_article_by_location($typeID, $limit, $page, $mode = 3, $latitude, $longitude, $conn){
+        $start = (int)$limit * ((int)$page - 1);
+        $temp = $latitude * $latitude + $longitude * $longitude;
+        $ascKey = "((A.latitude * A.latitude) + (A.longitude * A.longitude) - {$temp})";
+        $tableCase = '';
+        if($mode == 3){
+            
+        }
+        $type_condition = '';
+        if($typeID == 1){
+            $descKey = 'A.hot';
+        }else if($typeID == 2 || $typeID == 4){
+            //选择本校信息
+            
+            if(isset($GLOBALS['openID'])){
+                $tableCase = ", users U2";
+                $type_condition = "A.type_id = $typeID 
+                AND U2.openID = '{$GLOBALS['openID']}' 
+                AND U.school_id = U2.school_id 
+                AND";
+            }
+        }else{
+            $type_condition = "A.type_id = '$typeID' AND";
+        }
+        $sql = "SELECT A.aid AS ID, U.school_id,T.type_id, A.content, A.comment_num,
+         T.type_name, A.hot, U.username, U.avatar, A.time, U.openID ,
+          A.comment_num, S.school_name, S.location_id,
+           A.latitude,A.longitude,A.address,A.labels
+        FROM articles A, users U, article_types T ,schools S $tableCase
+        WHERE $type_condition T.type_id = A.type_id 
+        AND U.openID = A.openID 
+        AND S.sID = U.school_id
+        ORDER BY {$ascKey} ASC
+        LIMIT {$start},{$limit}";
+
+        $result = mysqli_query($conn,$sql);
+
+        $result = finish_article_select_list($result);
+
+        $newResult = [];
+        foreach($result as $value){
+            //var_dump($value);
+            //echo $value->aID."<br>";
+             $query = "SELECT * FROM colletions WHERE type = 1 AND openID = '{$GLOBALS['openID']}' AND pointerID = $value->ID";
+             //echo $query;
+            // //echo "<br>";
+            // //exit;
+             $result = mysqli_query($conn,$query);
+             $result = getDataAsArray($result);
+             if(!empty($result)){
+                 $value->is_collection = true;
+             }else{
+                 $value->is_collection = false;
+             }
+            //$value->is_collection = false;
+            $value->pictures = get_article_picture($value->ID,$conn);
+            $newResult[] = $value;
+        }
+        return $newResult;
+    }
 
     /*
     **按文章的ID具体返回一篇文章
