@@ -66,7 +66,8 @@ require_once 'mysql.php';
         $sql = "SELECT A.aid AS ID, U.school_id,T.type_id, A.content, A.comment_num,
          T.type_name, A.hot, U.username, U.avatar, A.time, U.openID ,
           A.comment_num, S.school_name, S.location_id,
-           A.latitude,A.longitude,A.address,A.labels
+           A.latitude,A.longitude,A.address,A.labels,
+           ((A.latitude * A.latitude) + (A.longitude * A.longitude) - {$temp})
         FROM articles A, users U, article_types T ,schools S $tableCase
         WHERE $type_condition T.type_id = A.type_id 
         AND U.openID = A.openID 
