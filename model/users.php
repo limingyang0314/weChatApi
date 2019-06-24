@@ -68,3 +68,49 @@ function is_select_school($openID,$conn){
     }
 }
 
+/**
+ * 最近浏览的五篇文章的相同标签的文章
+ */
+function recent_similar($openID,$conn){
+    //echo "nb1";
+    $sql = "SELECT AR.aID,A.Labels 
+    FROM article_records AR, articles A 
+    WHERE AR.openID = '$openID' 
+    AND A.aID = AR.aID 
+    AND Labels IS NOT NULL
+    ORDER BY AR.time DESC
+    LIMIT 0,5";
+    $result = mysqli_query($conn, $sql);
+    $result = getDataAsArray($result);
+    $condition = "WHERE ";
+    $i = 0;
+    $num = count($result);
+    //echo $sql;
+    //echo $num;
+    foreach($result as $value){
+        $tempLabels = $value->Labels;
+        $tempLabelArray = explode(",",$tempLabels);
+
+        //echo $num;
+        $tempCount = count($tempLabelArray);
+        for($j = 0 ; $j < $tempCount ; ++ $j){
+            //echo "A.Labels LIKE %{$tempLabelArray[$j]}% ";
+            $condition .= "A.Labels LIKE %{$tempLabelArray[$j]}% ";
+            //echo $tempLabelArray[$j];
+            //echo $condition;
+            if($j + 1 == $tempCount && $i + 1 == $num){
+                break(2);
+                echo "nb";
+                //到头了，不加OR了
+            }else{
+                $condition .= "OR ";
+            }
+        }
+
+        //echo $condition;
+        ++$i;
+
+    }
+    echo $condition;
+
+}
