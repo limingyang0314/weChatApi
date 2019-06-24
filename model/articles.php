@@ -42,7 +42,7 @@ require_once 'mysql.php';
     function select_article_by_location($typeID, $limit, $page, $mode = 3, $latitude, $longitude, $conn){
         $start = (int)$limit * ((int)$page - 1);
         $temp = $latitude * $latitude + $longitude * $longitude;
-        $ascKey = "((A.latitude * A.latitude) + (A.longitude * A.longitude) - {$temp})";
+        $ascKey = " ABS((A.latitude * A.latitude) + (A.longitude * A.longitude) - {$temp})";
         $tableCase = '';
         if($mode == 3){
             
@@ -67,7 +67,7 @@ require_once 'mysql.php';
          T.type_name, A.hot, U.username, U.avatar, A.time, U.openID ,
           A.comment_num, S.school_name, S.location_id,
            A.latitude,A.longitude,A.address,A.labels,
-           ((A.latitude * A.latitude) + (A.longitude * A.longitude) - {$temp})
+           ABS((A.latitude * A.latitude) + (A.longitude * A.longitude) - {$temp})
         FROM articles A, users U, article_types T ,schools S $tableCase
         WHERE $type_condition T.type_id = A.type_id 
         AND U.openID = A.openID 
