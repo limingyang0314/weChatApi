@@ -87,8 +87,8 @@ function insert_item($openID, $item_type, $item_info, $expect_price,$contact_way
     //$result = mysqli_query($conn,$sql);
 
 
-    $stmt = $GLOBALS['conn_obj']->prepare("INSERT INTO items (iType_ID,openID,item_info,expect_price,contact_way,latitude,longitude) VALUES (?,?,?,?,?,?,?)");
-    $stmt->bind_param('ississs',$item_type, $openID, $item_info,$expect_price,$contact_way,$latitude, $longitude);
+    $stmt = $GLOBALS['conn_obj']->prepare("INSERT INTO items (iType_ID,openID,item_info,expect_price,contact_way,latitude,longitude,address) VALUES (?,?,?,?,?,?,?,?)");
+    $stmt->bind_param('ississss',$item_type, $openID, $item_info,$expect_price,$contact_way,$latitude, $longitude,$address);
     $stmt->execute();
     $result = $stmt->store_result();
 
