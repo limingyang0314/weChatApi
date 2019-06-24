@@ -95,6 +95,10 @@ function recent_similar($openID,$conn){
         $tempCount = count($tempLabelArray);
         for($j = 0 ; $j < $tempCount ; ++ $j){
             //echo "A.Labels LIKE %{$tempLabelArray[$j]}% ";
+            if($tempLabelArray[$j] == ''){
+                ++ $j;
+                continue;
+            }
             $condition .= "A.Labels LIKE %{$tempLabelArray[$j]}% ";
             //echo $tempLabelArray[$j];
             //echo $condition;
