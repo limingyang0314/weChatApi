@@ -67,14 +67,14 @@ function select_item_by_type($type, $limit, $page, $conn){
     return $result;
 }
 
-function insert_item($openID, $item_type, $item_info, $expect_price,$contact_way,$conn){
+function insert_item($openID, $item_type, $item_info, $expect_price,$contact_way,$latitude, $longitude,$conn){
     $sql = "INSERT INTO items (iType_ID,openID,item_info,expect_price,contact_way) VALUES ($item_type, '$openID', '$item_info',$expect_price,'$contact_way')";
     //echo $sql;
     //$result = mysqli_query($conn,$sql);
 
 
-    $stmt = $GLOBALS['conn_obj']->prepare("INSERT INTO items (iType_ID,openID,item_info,expect_price,contact_way) VALUES (?,?,?,?,?)");
-    $stmt->bind_param('issis',$item_type, $openID, $item_info,$expect_price,$contact_way);
+    $stmt = $GLOBALS['conn_obj']->prepare("INSERT INTO items (iType_ID,openID,item_info,expect_price,contact_way,latitude,longitude) VALUES (?,?,?,?,?,?,?)");
+    $stmt->bind_param('ississs',$item_type, $openID, $item_info,$expect_price,$contact_way,$latitude, $longitude);
     $stmt->execute();
     $result = $stmt->store_result();
 
