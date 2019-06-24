@@ -118,7 +118,7 @@ require_once 'mysql.php';
   }
 
   function get_article_sql($keys,$limit,$page){
-      $sql = "SELECT U.username, U.avatar,S.school_name,A.type_id, AT.type_name,A.aID, A.time, A.content 
+      $sql = "SELECT U.username, U.avatar,S.school_name,A.type_id, AT.type_name,A.aID, A.time, A.content ,A.Labels
       FROM articles A,users U, schools S, article_types AT
       WHERE U.openID = A.openID AND S.sID = U.school_id AND AT.type_id = A.type_id
       AND (";
@@ -143,7 +143,7 @@ require_once 'mysql.php';
 
   function get_item_sql($keys,$limit,$page){
     $start = $limit * ($page - 1);
-    $sql = "SELECT U.username, U.avatar,S.school_name,I.iType_ID, I.iID, IT.type_name, I.time, I.item_info 
+    $sql = "SELECT U.username, U.avatar,S.school_name,I.iType_ID, I.iID, IT.type_name, I.time, I.item_info, I.labels
     FROM items I,users U, schools S, item_types IT
     WHERE U.openID = I.openID  AND S.sID = U.school_id AND IT.type_id = I.iType_ID
     AND (";
