@@ -76,7 +76,8 @@ function select_item_by_type($type, $limit, $page, $conn){
        S.school_name, 
        S.location_id,
        I.latitude,
-       I.longitude
+       I.longitude,
+       I.address
     FROM items I, item_types T, users U,schools S
     WHERE $type_condition 
     T.type_id = I.iType_ID 
