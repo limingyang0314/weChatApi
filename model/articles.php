@@ -109,7 +109,8 @@ require_once 'mysql.php';
     /*
     **按文章的ID具体返回一篇文章
     */
-    function select_article_by_id($aID, $conn){
+    function select_article_by_id($aID, $conn, $openID = null){
+
         //echo $_SESSION['openID'];
         $sql = "SELECT A.aid AS ID, A.content, A.comment_num,
          T.type_name, A.hot, U.username, U.avatar, A.time, U.openID ,
@@ -126,6 +127,13 @@ require_once 'mysql.php';
         $result = getDataAsArray($result);
         //var_dump($result);
         //exit;
+        if(!empty($result)){
+            //添加访问记录
+            if($openID != null){
+                $sql = "INSERT INTO article_records (aID,openID)VALUES($aID,'$openID')";
+                mysqli_query($conn,$query);
+            }
+        }
 
         $query = "SELECT * FROM colletions WHERE type = 1 AND openID = '{$GLOBALS['openID']}' AND pointerID = {$result[0]->ID}";
         //echo $query;

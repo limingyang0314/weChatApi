@@ -118,7 +118,7 @@ require_once 'mysql.php';
   }
 
   function get_article_sql($keys,$limit,$page){
-      $sql = "SELECT U.username, U.avatar,S.school_name,A.type_id, AT.type_name,A.aID, A.time, A.content ,A.Labels
+      $sql = "SELECT U.username, U.avatar,S.school_name,A.type_id, AT.type_name,A.aID, A.time, A.content , A.Labels
       FROM articles A,users U, schools S, article_types AT
       WHERE U.openID = A.openID AND S.sID = U.school_id AND AT.type_id = A.type_id
       AND (";
@@ -136,8 +136,8 @@ require_once 'mysql.php';
           }
 
       }
-      //echo $sql;
-      //exit;
+      echo $sql;
+      exit;
       return $sql;
   }
 

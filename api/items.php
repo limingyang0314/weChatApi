@@ -4,7 +4,11 @@ require_once "./api.php";
     require_once "../model/items.php";
     switch ($_GET['secondType']){
     case 'select_item_by_id':
-        echo json_encode(error_code(select_item_by_id($_GET['ID'], $conn)));
+        if(isset($_GET['openID'])){
+            echo json_encode(error_code(select_item_by_id($_GET['ID'], $conn, $_GET['openID'])));
+        }else{
+            echo json_encode(error_code(select_item_by_id($_GET['ID'], $conn)));
+        }
         break;
     case 'select_item_by_author':
         echo json_encode(error_code(select_item_by_author($_GET['openID'], $_GET['limit'], $_GET['page'], $conn)));

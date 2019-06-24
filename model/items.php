@@ -1,7 +1,7 @@
 <?php
 require_once 'mysql.php';
 
-function select_item_by_id($id, $conn){
+function select_item_by_id($id, $conn,$openID = null){
     //echo $id;
     $sql = "SELECT I.iID AS ID, 
     U.username,
@@ -29,6 +29,13 @@ function select_item_by_id($id, $conn){
     //echo $sql;
     $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
+    if(!empty($result)){
+        //添加访问记录
+        if($openID != null){
+            $sql = "INSERT INTO item_records (iID,openID)VALUES($id,'$openID')";
+            mysqli_query($conn,$query);
+        }
+    }
     //var_dump($result);
     $result = add_pic_to_data($result, $conn);
     return $result;
