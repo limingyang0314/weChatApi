@@ -9,7 +9,8 @@ function select_item_by_id($id, $conn){
     U.avatar, 
     I.item_info AS content, 
     T.type_name, 
-    I.hot, I.time ,
+    I.hot, 
+    I.time,
     I.comment_num, 
     I.expect_price, 
     I.contact_way, 
@@ -22,8 +23,8 @@ function select_item_by_id($id, $conn){
     AND T.type_id = I.iType_ID 
     AND  S.sID = U.school_id
     AND U.openID = I.openID";
-    echo $sql;
-    exit;
+    //echo $sql;
+    //exit;
     //echo $sql;
     $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
@@ -85,8 +86,8 @@ function select_item_by_type($type, $limit, $page, $conn){
     ORDER BY I.time DESC 
     LIMIT {$start},{$limit}";
 
-    echo $sql;
-    exit;
+    //echo $sql;
+    //exit;
 
     $result = mysqli_query($conn,$sql);
     $result = getDataAsArray($result);
