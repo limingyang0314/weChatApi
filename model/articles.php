@@ -194,7 +194,8 @@ require_once 'mysql.php';
         }
         $type_condition = '';
         if($typeID == 1){
-            $descKey = 'A.hot';
+            //全部
+            //$descKey = 'A.hot';
         }else if($typeID == 2 || $typeID == 4){
             //选择本校信息
             
