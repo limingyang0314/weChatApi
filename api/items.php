@@ -14,7 +14,17 @@ require_once "./api.php";
         echo json_encode(error_code(select_item_by_author($_GET['openID'], $_GET['limit'], $_GET['page'], $conn)));
         break;
     case 'select_item_by_type':
-        echo json_encode(error_code(select_item_by_type($_GET['type'], $_GET['limit'], $_GET['page'], $conn)));
+        if(isset($_GET['mode'])){
+            if($_GET['mode'] == 1){
+                echo json_encode(error_code(select_item_by_hot($_GET['type'], $_GET['limit'], $_GET['page'], $conn)));
+            }else if($_GET['mode'] == 3){
+                echo json_encode(error_code(select_item_by_location($_GET['type'], $_GET['limit'], $_GET['page'], $_GET['latitude'], $_GET['longitude'] ,$conn)));
+            }
+        }else{
+            //默认为mode2  时间排序
+            echo json_encode(error_code(select_item_by_type($_GET['type'], $_GET['limit'], $_GET['page'], $conn)));
+        }
+        
         break;
     case 'insert_item':
         if(!isset($_POST['expect_price'])){

@@ -1,6 +1,83 @@
 <?php
 require_once 'mysql.php';
 
+/**
+ * 就近排序
+ */
+function select_item_by_location($type, $limit, $page,$latitude,$longitude, $conn){
+
+    $temp = $latitude * $latitude + $longitude * $longitude;
+    $ascKey = " ((I.latitude * I.latitude) + (I.longitude * I.longitude) - {$temp}) * ((I.latitude * I.latitude) + (I.longitude * I.longitude) - {$temp})";
+
+    
+    $start = (int)$limit * ((int)$page - 1);
+    $type_condition = "I.itype_ID = $type AND ";
+    $sql = "SELECT I.iID AS ID,
+     U.username,
+     U.openID,
+      U.avatar,
+       I.item_info AS content, 
+       T.type_name, 
+       I.hot, I.time ,
+       I.comment_num, 
+       I.expect_price, 
+       S.school_name, 
+       S.location_id,
+       I.latitude,
+       I.longitude,
+       I.address
+    FROM items I, item_types T, users U,schools S
+    WHERE $type_condition 
+    T.type_id = I.iType_ID 
+    AND U.openID = I.openID 
+    AND S.sID = U.school_id
+    AND I.status = 0
+    ORDER BY {$ascKey} ASC 
+    LIMIT {$start},{$limit}";
+
+
+    $result = mysqli_query($conn,$sql);
+    $result = getDataAsArray($result);
+    $result = add_pic_to_data($result, $conn);
+    return $result;
+}
+
+/**
+ * 热度排序
+ */
+function select_item_by_hot($type, $limit, $page, $conn){
+    $start = (int)$limit * ((int)$page - 1);
+    $type_condition = "I.itype_ID = $type AND ";
+    $sql = "SELECT I.iID AS ID,
+     U.username,
+     U.openID,
+      U.avatar,
+       I.item_info AS content, 
+       T.type_name, 
+       I.hot, I.time ,
+       I.comment_num, 
+       I.expect_price, 
+       S.school_name, 
+       S.location_id,
+       I.latitude,
+       I.longitude,
+       I.address
+    FROM items I, item_types T, users U,schools S
+    WHERE $type_condition 
+    T.type_id = I.iType_ID 
+    AND U.openID = I.openID 
+    AND S.sID = U.school_id
+    AND I.status = 0
+    ORDER BY I.hot DESC 
+    LIMIT {$start},{$limit}";
+
+
+    $result = mysqli_query($conn,$sql);
+    $result = getDataAsArray($result);
+    $result = add_pic_to_data($result, $conn);
+    return $result;
+}
+
 function select_item_by_id($id, $conn,$openID = null){
     //echo $id;
     $sql = "SELECT I.iID AS ID, 
