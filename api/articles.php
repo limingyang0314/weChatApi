@@ -26,10 +26,17 @@ require_once './api.php';
         echo json_encode(error_code(insert_article($_GET['openID'], $_POST['article_type'], $_POST['content'],$_POST['latitude'],$_POST['longitude'],$_POST['address'],$labels,$conn)));//, $conn
         break;
     case 'select_article_by_type':
+        if(isset($_GET['only_school'])){
+            if($_GET['only_school'] == 1){
+                $only_school = 1;
+            }else{
+                $only_school = 0;
+            }
+        }
         if($_GET['mode'] == 3){
-            echo json_encode(error_code(select_article_by_location($_GET['typeID'], $_GET['limit'], $_GET['page'], $_GET['mode'], $_GET['latitude'], $_GET['longitude'],$conn)));
+            echo json_encode(error_code(select_article_by_location($_GET['typeID'], $_GET['limit'], $_GET['page'], $_GET['mode'], $_GET['latitude'], $_GET['longitude'],$conn,$only_school)));
         }else{
-            echo json_encode(error_code(select_article_by_type($_GET['typeID'], $_GET['limit'], $_GET['page'], $_GET['mode'], $conn)));
+            echo json_encode(error_code(select_article_by_type($_GET['typeID'], $_GET['limit'], $_GET['page'], $_GET['mode'], $conn,$only_school)));
         }
         
         break;

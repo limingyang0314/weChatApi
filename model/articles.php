@@ -39,7 +39,7 @@ require_once 'mysql.php';
     /**
      * 就近推送
      */
-    function select_article_by_location($typeID, $limit, $page, $mode = 3, $latitude, $longitude, $conn){
+    function select_article_by_location($typeID, $limit, $page, $mode = 3, $latitude, $longitude, $conn,$only_school = 0){
         $start = (int)$limit * ((int)$page - 1);
         $temp = $latitude * $latitude + $longitude * $longitude;
         $ascKey = " ((A.latitude * A.latitude) + (A.longitude * A.longitude) - {$temp}) * ((A.latitude * A.latitude) + (A.longitude * A.longitude) - {$temp})";
@@ -48,9 +48,7 @@ require_once 'mysql.php';
             
         }
         $type_condition = '';
-        if($typeID == 1){
-            $descKey = 'A.hot';
-        }else if($typeID == 2 || $typeID == 4){
+        if($only_school == 1){
             //选择本校信息
             
             if(isset($GLOBALS['openID'])){
@@ -181,7 +179,7 @@ require_once 'mysql.php';
     **mode = 1时为按热度排序 mode = 2时为按时间排序
     **默认按时间排序
     */
-    function select_article_by_type($typeID, $limit, $page, $mode = 1, $conn){
+    function select_article_by_type($typeID, $limit, $page, $mode = 1, $conn, $only_school = 0){
 
         $start = (int)$limit * ((int)$page - 1);
         $descKey = null;
@@ -195,8 +193,8 @@ require_once 'mysql.php';
         $type_condition = '';
         if($typeID == 1){
             //全部
-            //$descKey = 'A.hot';
-        }else if($typeID == 2 || $typeID == 4){
+            $descKey = 'A.hot';
+        }else if($only_school == 1){
             //选择本校信息
             
             if(isset($GLOBALS['openID'])){
