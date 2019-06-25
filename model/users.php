@@ -157,3 +157,35 @@ function recent_similar($openID,$conn){
     }
     return $result;
 }
+
+
+/**
+ * 最近浏览的五篇文章的相同标签
+ */
+function recent_labels($openID,$conn){
+    //echo "nb1";
+    $sql = "SELECT AR.aID,A.Labels 
+    FROM article_records AR, articles A 
+    WHERE AR.openID = '$openID' 
+    AND A.aID = AR.aID 
+    AND Labels IS NOT NULL
+    ORDER BY AR.time DESC
+    LIMIT 0,5";
+    //echo $sql;
+    $result = mysqli_query($conn, $sql);
+    $result = getDataAsArray($result);
+    $temp = [];
+    foreach($result as $value){
+        $tempLabels = $value->Labels;
+        $tempLabelArray = explode(",",$tempLabels);
+        $tempCount = count($tempLabelArray);
+        for($j = 0 ; $j < $tempCount ; ++ $j){
+            //echo "nb";
+            if(!in_array($tempLabelArray[$j],$result) && $tempLabelArray[$j] != ""){
+                //echo "nb";
+                $temp [] = $tempLabelArray[$j];
+            }
+        }
+    }
+    return $temp;
+}

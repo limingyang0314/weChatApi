@@ -23,6 +23,9 @@ require_once "api.php";
     case 'recent_similar':
         echo json_encode(error_code(recent_similar($_GET['openID'],$conn)));
         break;
+    case 'recent_labels':
+        echo json_encode(error_code(recent_labels($_GET['openID'],$conn)));
+        break;
     default:
         echo json_encode(error_code([],'未定义次要的操作类型',2));
     }
