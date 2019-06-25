@@ -76,7 +76,7 @@ require_once 'mysql.php';
         LIMIT {$start},{$limit}";
         //  * ((A.latitude * A.latitude) + (A.longitude * A.longitude) - {$temp})
         //- {$temp}
-        echo $temp;
+        //echo $temp;
         //echo $sql;
         //exit;
 
