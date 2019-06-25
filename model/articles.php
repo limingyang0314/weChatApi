@@ -48,19 +48,6 @@ require_once 'mysql.php';
             
         }
         $type_condition = '';
-        // if($only_school == 1){
-        //     //选择本校信息
-            
-        //     if(isset($GLOBALS['openID'])){
-        //         $tableCase = ", users U2";
-        //         $type_condition = "A.type_id = $typeID 
-        //         AND U2.openID = '{$GLOBALS['openID']}' 
-        //         AND U.school_id = U2.school_id 
-        //         AND";
-        //     }
-        // }else{
-        //     $type_condition = "A.type_id = '$typeID' AND";
-        // }
 
         if($typeID == 1){
             //全部
@@ -79,9 +66,6 @@ require_once 'mysql.php';
                 AND";
             }
 
-            #SELECT school_id FROM users WHERE openID = 'ozInc4nwKnuiqorp2la-JiLlk-jE';
-            
-            //$type_condition = "A.type_id = '$typeID' AND U.school_id = ''";
         }
 
 
@@ -232,6 +216,8 @@ require_once 'mysql.php';
         if($typeID == 1){
             //全部
             $descKey = 'A.hot';
+        }else{
+            $type_condition = "A.type_id = '$typeID' AND";
         }
         
         if($only_school == 1){
@@ -239,8 +225,7 @@ require_once 'mysql.php';
             
             if(isset($GLOBALS['openID'])){
                 $tableCase = ", users U2";
-                $type_condition = "A.type_id = $typeID 
-                AND U2.openID = '{$GLOBALS['openID']}' 
+                $type_condition .= " U2.openID = '{$GLOBALS['openID']}' 
                 AND U.school_id = U2.school_id 
                 AND";
             }
@@ -248,8 +233,6 @@ require_once 'mysql.php';
             #SELECT school_id FROM users WHERE openID = 'ozInc4nwKnuiqorp2la-JiLlk-jE';
             
             //$type_condition = "A.type_id = '$typeID' AND U.school_id = ''";
-        }else{
-            $type_condition = "A.type_id = '$typeID' AND";
         }
         $sql = "SELECT A.aid AS ID, 
         U.school_id,
