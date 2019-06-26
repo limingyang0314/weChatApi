@@ -24,10 +24,12 @@ require_once 'mysql.php';
         }
         if($flag == 0){
             $insert_sql = "INSERT INTO search_history (openID,history) VALUES ('{$openID}','{$key}')";
+            //echo $insert_sql;
             mysqli_query($conn,$insert_sql);
         }else{
             $delete_sql = "DELETE FROM search_history WHERE openID = '{$openID}' AND history = '{$key}'";
-            mysqli_query($conn,$insert_sql);
+            //echo $delete_sql;
+            mysqli_query($conn,$delete_sql);
 
             $insert_sql = "INSERT INTO search_history (openID,history) VALUES ('{$openID}','{$key}')";
             mysqli_query($conn,$insert_sql);
