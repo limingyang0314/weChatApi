@@ -78,6 +78,7 @@ require_once 'mysql.php';
         A.hot, 
         U.username, 
         U.avatar, 
+        U.account_type,
         A.time, 
         U.openID,
         A.comment_num, 
@@ -132,10 +133,23 @@ require_once 'mysql.php';
     function select_article_by_id($aID, $conn, $openID = null){
 
         //echo $_SESSION['openID'];
-        $sql = "SELECT A.aid AS ID, A.content, A.comment_num,
-         T.type_name, A.hot, U.username, U.avatar, A.time, U.openID ,
-          A.comment_num, S.school_name, S.location_id, A.latitude,
-          A.longitude,A.address,A.labels
+        $sql = "SELECT A.aid AS ID, 
+        A.content, 
+        A.comment_num,
+        T.type_name, 
+        A.hot, 
+        U.username, 
+        U.avatar, 
+        A.time, 
+        U.openID,
+        U.account_type,
+        A.comment_num, 
+        S.school_name, 
+        S.location_id, 
+        A.latitude,
+        A.longitude,
+        A.address,
+        A.labels
         FROM articles A, users U, article_types T,schools S
         WHERE A.aID = {$aID} 
         AND T.type_id = A.type_id 
@@ -178,10 +192,23 @@ require_once 'mysql.php';
     */
     function select_article_by_author($openID, $limit, $page, $conn){
         $start = $limit * ($page - 1);
-        $sql = "SELECT A.aid AS ID, A.content, A.comment_num,
-         T.type_name, A.hot, U.username, U.avatar, A.time, U.openID,
-          A.comment_num, S.school_name, S.location_id, A.latitude,
-          A.longitude,A.address,A.labels
+        $sql = "SELECT A.aid AS ID, 
+        A.content, 
+        A.comment_num,
+        T.type_name, 
+        A.hot, 
+        U.username, 
+        U.avatar, 
+        A.time, 
+        U.openID,
+        U.account_type,
+        A.comment_num, 
+        S.school_name, 
+        S.location_id, 
+        A.latitude,
+        A.longitude,
+        A.address,
+        A.labels
         FROM articles A, users U, article_types T ,schools S
         WHERE A.openID = '$openID' 
         AND T.type_id = A.type_id 
@@ -244,7 +271,8 @@ require_once 'mysql.php';
         U.username, 
         U.avatar, 
         A.time, 
-        U.openID ,
+        U.openID,
+        U.account_type,
         A.comment_num, 
         S.school_name, 
         S.location_id,
@@ -293,7 +321,7 @@ require_once 'mysql.php';
     **优先获取附近推送，返回多条简要信息
     */
     function select_articles_near($location_id, $conn){
-        $sql = "SELECT A.aid, A.content, T.type_name, U.username, U.avatar, A.time, U.openID , A.comment_num
+        $sql = "SELECT A.aid, A.content, T.type_name, U.username, U.avatar, A.time, U.openID , A.comment_num,U.account_type,
         FROM articles A, users U, article_types T 
         WHERE  T.type_id = A.type_id 
         AND U.openID = A.openID 
