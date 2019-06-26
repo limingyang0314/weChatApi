@@ -51,7 +51,7 @@ require_once 'mysql.php';
 
         if($typeID == 1){
             //全部
-            $descKey = 'A.hot';
+            //$descKey = 'A.hot';
         }else{
             //按类型
             $type_condition = "A.type_id = '$typeID' AND";
@@ -242,7 +242,7 @@ require_once 'mysql.php';
         $type_condition = '';
         if($typeID == 1){
             //全部
-            $descKey = 'A.hot';
+            //$descKey = 'A.hot';
         }else{
             $type_condition = "A.type_id = '$typeID' AND";
         }
