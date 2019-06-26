@@ -15,8 +15,24 @@ require_once 'mysql.php';
     $result = select_result($sql, $conn);
     $result = getDataAsArray($result);
     if($key != ""){
-        $insert_sql = "INSERT INTO search_history (openID,history) VALUES ('{$openID}','{$key}')";
-        mysqli_query($conn,$insert_sql);
+        $flag = 0;//为0无重复 为1有重复
+        $tempResult = get_search_history($openID,5,$conn);
+        foreach($tempResult as $value){
+            if($value->history == $key){
+                $flag = 1;
+            }
+        }
+        if($flag == 0){
+            $insert_sql = "INSERT INTO search_history (openID,history) VALUES ('{$openID}','{$key}')";
+            mysqli_query($conn,$insert_sql);
+        }else{
+            $delete_sql = "DELETE FROM search_history WHERE openID = '{$openID}' AND history = '{$key}'";
+            mysqli_query($conn,$insert_sql);
+
+            $insert_sql = "INSERT INTO search_history (openID,history) VALUES ('{$openID}','{$key}')";
+            mysqli_query($conn,$insert_sql);
+        }
+        
     }
     return $result;
   }
@@ -182,6 +198,7 @@ function get_search_history($openID,$num,$conn){
     WHERE openID = '$openID'
     ORDER BY H.time 
     DESC LIMIT 0,{$num}";
+
    // echo $sql;
     $result = mysqli_query($conn, $sql);
     $result = getDataAsArray($result);
