@@ -14,10 +14,10 @@ require_once 'mysql.php';
     }
     $result = select_result($sql, $conn);
     $result = getDataAsArray($result);
-    //if(!empty($result)){
+    if($key != ""){
         $insert_sql = "INSERT INTO search_history (openID,history) VALUES ('{$openID}','{$key}')";
         mysqli_query($conn,$insert_sql);
-    //}
+    }
     return $result;
   }
 
@@ -175,7 +175,9 @@ require_once 'mysql.php';
 //   search(2,$keys);
 
 function get_search_history($openID,$num,$conn){
-    $sql = "SELECT H.time, H.history 
+    $sql = "SELECT H.hID,
+    H.time, 
+    H.history 
     FROM search_history H 
     WHERE openID = '$openID'
     ORDER BY H.time 
@@ -184,4 +186,9 @@ function get_search_history($openID,$num,$conn){
     $result = mysqli_query($conn, $sql);
     $result = getDataAsArray($result);
     return $result;
+}
+
+function delete_history($openID, $hID, $conn){
+    $sql = "DELETE FROM search_history WHERE openID = '{$openID}' AND hID = {$hID}";
+    mysqli_query($conn, $sql);
 }

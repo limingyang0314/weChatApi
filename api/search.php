@@ -5,6 +5,9 @@ if(isset($_GET['secondType'])){
     if($_GET['secondType'] == 'history'){
         echo json_encode(error_code(get_search_history($_GET['openID'],$_GET['num'],$conn)));
     }
+    if($_GET['secondType'] == 'delete'){
+        delete_history($_GET['openID'],$_GET['hID'],$conn);
+    }
 
 }else{
     echo json_encode(error_code(search($_GET['openID'],$_GET['type'],$_GET['keys'],$_GET['limit'],$_GET['page'], $conn)));
