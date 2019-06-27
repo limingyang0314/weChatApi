@@ -159,7 +159,13 @@ function recent_similar($openID,$conn,$latitude,$longitude){
     }else{
         $result = [];
     }
-    return $result;
+
+    $newResult = [];
+    foreach($result as $value){
+        $value->pictures = get_article_picture($value->ID,$conn);
+        $newResult[] = $value;
+    }
+    return $newResult;
 }
 
 
@@ -193,3 +199,33 @@ function recent_labels($openID,$conn){
     }
     return $temp;
 }
+
+
+
+    /*
+    **获取文章们的图片
+    */
+    function get_article_picture($aID,$conn){
+        $sql = "SELECT pURL FROM article_pictures WHERE aID = {$aID}";
+        //echo $sql."<br>";
+        $result = mysqli_query($conn,$sql);
+        $result = getDataAsArray($result);
+        $newResult = [];
+        foreach($result as $thisOne){
+            $newResult[] = $thisOne;
+        }
+        return $newResult;
+    }
+
+    /*
+    **处理某篇文章
+    */
+    function finish_article_select_exactly($aID,$result,$conn){
+        //$temp = getDataAsArray($result);
+        //$result = $temp;//[0];//[0]
+        //var_dump($temp);
+        //var_dump($result);
+        //exit;
+        $result[0]->pictures = get_article_picture($aID,$conn);
+        return $result;
+    }
