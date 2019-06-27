@@ -110,7 +110,7 @@ function recent_similar($openID,$conn,$latitude,$longitude){
             //echo $condition;
             if($j + 1 == $tempCount && $i + 1 == $num){
                 break(2);
-                echo "nb";
+                //echo "nb";
                 //到头了，不加OR了
             }else{
                 $condition .= "OR ";
@@ -162,6 +162,17 @@ function recent_similar($openID,$conn,$latitude,$longitude){
 
     $newResult = [];
     foreach($result as $value){
+        $query = "SELECT * FROM colletions WHERE type = 1 AND openID = '{$GLOBALS['openID']}' AND pointerID = $value->ID";
+        //echo $query;
+       // //echo "<br>";
+       // //exit;
+        $result = mysqli_query($conn,$query);
+        $result = getDataAsArray($result);
+        if(!empty($result)){
+            $value->is_collection = true;
+        }else{
+            $value->is_collection = false;
+        }
         $value->pictures = get_article_picture($value->ID,$conn);
         $newResult[] = $value;
     }
