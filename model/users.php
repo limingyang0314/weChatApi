@@ -153,7 +153,7 @@ function recent_similar($openID,$conn,$latitude,$longitude){
        AND {$condition}
        ORDER BY A.hot DESC 
        LIMIT 0,10";
-        echo $sql;
+        //echo $sql;
        $result = mysqli_query($conn,$sql);
        $result = getDataAsArray($result);
     }else{
