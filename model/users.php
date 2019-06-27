@@ -133,6 +133,7 @@ function recent_similar($openID,$conn){
         A.hot, 
         U.username, 
         U.avatar, 
+        U.account
         A.time, 
         U.openID,
         A.comment_num, 
