@@ -177,8 +177,8 @@ function recent_labels($openID,$conn){
     $result = getDataAsArray(mysqli_query($conn,$sql));
     //echo $sql;
     $num = $result[0]->num;
-    var_dump($result);
-    exit;
+    //var_dump($result);
+    //exit;
     
     //echo "nb1";
     $sql = "SELECT AR.aID,A.Labels 
