@@ -184,6 +184,9 @@ require_once 'mysql.php';
             $result[0]->is_collection = false;
         }
 
+        $sql = "UPDATE articles SET hot = hot + 1 WHERE aID = {$aID}";
+        mysqli_query($conn,$sql);
+
         return finish_article_select_exactly($aID,$result,$conn);
     }
 
