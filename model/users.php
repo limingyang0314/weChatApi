@@ -173,6 +173,11 @@ function recent_similar($openID,$conn,$latitude,$longitude){
  * 最近浏览的五篇文章的相同标签
  */
 function recent_labels($openID,$conn){
+    $sql = "SELECT COUNT(*) FROM articles_records WHERE openID = '{$openID}'";
+    $result = getDataAsArray(mysqli_query($conn,$sql));
+    //var_dump($result);
+    //exit;
+    //if()
     //echo "nb1";
     $sql = "SELECT AR.aID,A.Labels 
     FROM article_records AR, articles A 
@@ -180,7 +185,7 @@ function recent_labels($openID,$conn){
     AND A.aID = AR.aID 
     AND Labels IS NOT NULL
     ORDER BY AR.time DESC
-    LIMIT 0,5";
+    LIMIT 0,10";
     //echo $sql;
     $result = mysqli_query($conn, $sql);
     $result = getDataAsArray($result);
@@ -191,7 +196,7 @@ function recent_labels($openID,$conn){
         $tempCount = count($tempLabelArray);
         for($j = 0 ; $j < $tempCount ; ++ $j){
             //echo "nb";
-            if(!in_array($tempLabelArray[$j],$result) && $tempLabelArray[$j] != ""){
+            if(!in_array($tempLabelArray[$j],$temp) && $tempLabelArray[$j] != ""){
                 //echo "nb";
                 $temp [] = $tempLabelArray[$j];
             }

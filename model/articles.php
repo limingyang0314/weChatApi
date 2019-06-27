@@ -131,6 +131,8 @@ require_once 'mysql.php';
     **按文章的ID具体返回一篇文章
     */
     function select_article_by_id($aID, $conn, $openID = null){
+        $sql = "UPDATE articles SET hot = hot + 1 WHERE aID = {$aID}";
+        mysqli_query($conn,$sql);
 
         //echo $_SESSION['openID'];
         $sql = "SELECT A.aid AS ID, 
@@ -184,8 +186,7 @@ require_once 'mysql.php';
             $result[0]->is_collection = false;
         }
 
-        $sql = "UPDATE articles SET hot = hot + 1 WHERE aID = {$aID}";
-        mysqli_query($conn,$sql);
+        
 
         return finish_article_select_exactly($aID,$result,$conn);
     }
