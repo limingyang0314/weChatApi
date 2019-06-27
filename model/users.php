@@ -173,6 +173,70 @@ function recent_similar($openID,$conn,$latitude,$longitude){
  * 最近浏览的五篇文章的相同标签
  */
 function recent_labels($openID,$conn){
+    $sql = "SELECT COUNT(*) AS num FROM article_records WHERE openID = '{$openID}'";
+    $result = getDataAsArray(mysqli_query($conn,$sql));
+    //echo $sql;
+    //var_dump($result);
+    //exit;
+    
+    //echo "nb1";
+    $sql = "SELECT AR.aID,A.Labels 
+    FROM article_records AR, articles A 
+    WHERE AR.openID = '$openID' 
+    AND A.aID = AR.aID 
+    AND Labels IS NOT NULL
+    ORDER BY AR.time DESC
+    LIMIT 0,10";
+    //echo $sql;
+    $result = mysqli_query($conn, $sql);
+    $result = getDataAsArray($result);
+    $temp = [];
+    foreach($result as $value){
+        $tempLabels = $value->Labels;
+        $tempLabelArray = explode(",",$tempLabels);
+        $tempCount = count($tempLabelArray);
+        for($j = 0 ; $j < $tempCount ; ++ $j){
+            //echo "nb";
+            if(!in_array($tempLabelArray[$j],$temp) && $tempLabelArray[$j] != ""){
+                //echo "nb";
+                $temp [] = $tempLabelArray[$j];
+            }
+        }
+    }
+
+    if($result[0]->num == 0 || count($temp) == 0){
+        //没有浏览过帖子，或者最近浏览的帖子没有标签
+        $sql = "SELECT AR.aID,A.Labels 
+        FROM article_records AR, articles A 
+        WHERE A.aID = AR.aID 
+        AND Labels IS NOT NULL
+        ORDER BY AR.time DESC
+        LIMIT 0,10";
+        //echo $sql;
+        $result = mysqli_query($conn, $sql);
+        $result = getDataAsArray($result);
+        $temp = [];
+        foreach($result as $value){
+            $tempLabels = $value->Labels;
+            $tempLabelArray = explode(",",$tempLabels);
+            $tempCount = count($tempLabelArray);
+            for($j = 0 ; $j < $tempCount ; ++ $j){
+                //echo "nb";
+                if(!in_array($tempLabelArray[$j],$temp) && $tempLabelArray[$j] != ""){
+                    //echo "nb";
+                    $temp [] = $tempLabelArray[$j];
+                }
+            }
+        }
+
+    }
+    return $temp;
+}
+
+/**
+ * 最近浏览的五个商品的相同标签
+ */
+function recent_item_labels($openID,$conn){
     $sql = "SELECT COUNT(*) FROM articles_records WHERE openID = '{$openID}'";
     $result = getDataAsArray(mysqli_query($conn,$sql));
     //var_dump($result);
