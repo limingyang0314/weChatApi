@@ -176,8 +176,9 @@ function recent_labels($openID,$conn){
     $sql = "SELECT COUNT(*) AS num FROM article_records WHERE openID = '{$openID}'";
     $result = getDataAsArray(mysqli_query($conn,$sql));
     //echo $sql;
-    //var_dump($result);
-    //exit;
+    $num = $result[0]->num;
+    var_dump($result);
+    exit;
     
     //echo "nb1";
     $sql = "SELECT AR.aID,A.Labels 
@@ -204,7 +205,7 @@ function recent_labels($openID,$conn){
         }
     }
 
-    if($result[0]->num == 0 || count($temp) == 0){
+    if($num == 0 || count($temp) == 0){
         //没有浏览过帖子，或者最近浏览的帖子没有标签
         $sql = "SELECT AR.aID,A.Labels 
         FROM article_records AR, articles A 
