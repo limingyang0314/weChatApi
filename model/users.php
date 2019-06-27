@@ -71,8 +71,9 @@ function is_select_school($openID,$conn){
 /**
  * 最近浏览的五篇文章的相同标签的文章
  */
-function recent_similar($openID,$conn){
+function recent_similar($openID,$conn,$latitude,$longitude){
     //echo "nb1";
+    $temp = $latitude * $latitude + $longitude * $longitude;
     $sql = "SELECT AR.aID,A.Labels 
     FROM article_records AR, articles A 
     WHERE AR.openID = '$openID' 
@@ -129,6 +130,7 @@ function recent_similar($openID,$conn){
         $sql = "SELECT A.aid AS ID, 
         A.content, 
         A.comment_num,
+        A.type_id,
         T.type_name, 
         A.hot, 
         U.username, 
@@ -142,7 +144,8 @@ function recent_similar($openID,$conn){
         A.latitude,
         A.longitude,
         A.address,
-        A.labels
+        A.labels,
+        (((A.latitude * A.latitude) + (A.longitude * A.longitude)) - {$temp}) AS distance
        FROM articles A, users U, article_types T ,schools S
        WHERE T.type_id = A.type_id 
        AND U.openID = A.openID 

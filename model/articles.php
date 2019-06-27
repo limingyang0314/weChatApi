@@ -88,7 +88,7 @@ require_once 'mysql.php';
         A.longitude,
         A.address,
         A.labels,
-        ((A.latitude * A.latitude) + (A.longitude * A.longitude)) - {$temp}
+        (((A.latitude * A.latitude) + (A.longitude * A.longitude)) - {$temp}) AS distance
         FROM articles A, users U, article_types T ,schools S $tableCase
         WHERE $type_condition T.type_id = A.type_id 
         AND U.openID = A.openID 

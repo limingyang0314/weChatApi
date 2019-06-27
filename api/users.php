@@ -21,7 +21,7 @@ require_once "api.php";
         login($_GET['openID']);
         break;
     case 'recent_similar':
-        echo json_encode(error_code(recent_similar($_GET['openID'],$conn)));
+        echo json_encode(error_code(recent_similar($_GET['openID'],$conn,$_GET['latitude'],$_GET['longitude'])));
         break;
     case 'recent_labels':
         echo json_encode(error_code(recent_labels($_GET['openID'],$conn)));
