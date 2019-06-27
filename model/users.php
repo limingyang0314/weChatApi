@@ -135,7 +135,7 @@ function recent_similar($openID,$conn,$latitude,$longitude){
         A.hot, 
         U.username, 
         U.avatar, 
-        U.account
+        U.account_type,
         A.time, 
         U.openID,
         A.comment_num, 
@@ -153,7 +153,7 @@ function recent_similar($openID,$conn,$latitude,$longitude){
        AND {$condition}
        ORDER BY A.hot DESC 
        LIMIT 0,10";
-    //    echo $sql;
+        echo $sql;
        $result = mysqli_query($conn,$sql);
        $result = getDataAsArray($result);
     }else{
