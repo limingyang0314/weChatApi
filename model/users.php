@@ -3,7 +3,7 @@ require_once "mysql.php";
 $appID = "wxc24a817201be0ebc";
 
 function getAccessToken(){
-    $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxc24a817201be0ebc&secret=17b371bd3f834c1c782afeafb7bc3575";
+    $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx5605c20f0f64066e&secret=9b1e69c2a8b1a6ccfb5ee23a37b82e9a";
 
     require_once("../curl.php");
     $result = getToken($url);
@@ -13,7 +13,7 @@ function getAccessToken(){
 }
 
 function getUserAccessToken($code){
-    $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxc24a817201be0ebc&secret=17b371bd3f834c1c782afeafb7bc3575&code=$code&grant_type=authorization_code";
+    $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx5605c20f0f64066e&secret=9b1e69c2a8b1a6ccfb5ee23a37b82e9a&code=$code&grant_type=authorization_code";
     require_once("../curl.php");
     $result = getToken($url);
     session_start();
@@ -22,7 +22,7 @@ function getUserAccessToken($code){
 }
 
 function get_openID($js_code){
-    $url = "https://api.weixin.qq.com/sns/jscode2session?appid=wxc24a817201be0ebc&secret=17b371bd3f834c1c782afeafb7bc3575&js_code={$js_code}&grant_type=authorization_code";
+    $url = "https://api.weixin.qq.com/sns/jscode2session?appid=wx5605c20f0f64066e&secret=9b1e69c2a8b1a6ccfb5ee23a37b82e9a&js_code={$js_code}&grant_type=authorization_code";
     require_once("../curl.php");
     $result = getToken($url);
     session_start();
